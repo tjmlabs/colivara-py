@@ -20,16 +20,19 @@ Usage instructions go here.
 ## Development
 
 To contribute to this library, first checkout the code. Then create a new virtual environment:
+
+We use uv, but you can use the pip interface if you prefer:
+
 ```bash
 cd colivara-py
-python -m venv venv
+uv venv
 source venv/bin/activate
 ```
 Now install the dependencies and test dependencies:
 ```bash
-python -m pip install -e '.[test]'
+uv sync --extra dev-dependencies
 ```
 To run the tests:
 ```bash
-python -m pytest
+pytest
 ```

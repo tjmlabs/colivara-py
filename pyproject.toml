@@ -10,7 +10,8 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License"
 ]
 dependencies = [
-
+    "httpx==0.27.2",
+    "pydantic==2.9.2",
 ]
 
 [build-system]
@@ -20,6 +21,9 @@ build-backend = "setuptools.build_meta"
 [tool.uv.workspace]
 members = ["colivara-py"]
 
+[tool.uv]
+dev-dependencies = ["pytest", "mypy", "ruff", "pytest-asyncio", "responses", "aresponses"]
+
 [project.urls]
 Homepage = "https://github.com/tjmlabs/colivara-py"
 Changelog = "https://github.com/tjmlabs/colivara-py/releases"
@@ -27,5 +31,3 @@ Issues = "https://github.com/tjmlabs/colivara-py/issues"
 CI = "https://github.com/tjmlabs/colivara-py/actions"
 
 
-[project.optional-dependencies]
-test = ["pytest"]
