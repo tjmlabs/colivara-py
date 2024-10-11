@@ -1,0 +1,31 @@
+[project]
+name = "colivara-py"
+version = "0.1"
+description = "The official Python SDK for the ColiVara API"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{name = "tjmlabs"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv.workspace]
+members = ["colivara-py"]
+
+[project.urls]
+Homepage = "https://github.com/tjmlabs/colivara-py"
+Changelog = "https://github.com/tjmlabs/colivara-py/releases"
+Issues = "https://github.com/tjmlabs/colivara-py/issues"
+CI = "https://github.com/tjmlabs/colivara-py/actions"
+
+
+[project.optional-dependencies]
+test = ["pytest"]
