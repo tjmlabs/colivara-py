@@ -23,6 +23,7 @@ jobs:
       run: |
         pip install uv
         uv sync --extra dev-dependencies
+        source .venv/bin/activate 
     - name: Run tests
       run: |
         python -m pytest
