@@ -25,5 +25,5 @@ jobs:
         uv sync --extra dev-dependencies
     - name: Run tests
       run: |
-        pytest
+        python -m pytest
 
