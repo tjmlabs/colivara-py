@@ -5,6 +5,17 @@ from .models import CollectionIn, CollectionOut, GenericError, PatchCollectionIn
 
 class Colivara:
     def __init__(self, base_url: Optional[str] = None, api_key: Optional[str] = None):
+        """
+        Initializes the Colivara client.
+
+        Args:
+            base_url: The base URL for the API (optional).
+            api_key: The API key for authentication (optional).
+
+        Raises:
+            ValueError: If the API key is not provided.
+        """
+
         self.base_url = base_url or "https://api.colivara.com"  
         self.api_key = api_key or os.getenv("COLIVARA_API_KEY")
         if not self.api_key:
@@ -15,6 +26,20 @@ class Colivara:
         }
 
     def create_collection(self, name: str, metadata: Optional[Dict[str, Any]] = {}) -> CollectionOut:
+        """
+        Creates a new collection.
+
+        Args:
+            name: The name of the new collection.
+            metadata: The metadata for the new collection (optional).
+
+        Returns:
+            The created CollectionOut object.
+
+        Raises:
+            Exception: If there's a conflict or an unexpected error occurs.
+        """
+
         url = f"{self.base_url}/v1/collections/"
         payload = CollectionIn(name=name, metadata=metadata).model_dump()
         response = requests.post(url, json=payload, headers=self.headers)
@@ -28,6 +53,17 @@ class Colivara:
 
 
     def list_collections(self) -> List[CollectionOut]:
+        """
+        Lists all collections.
+
+        Returns:
+            A list of CollectionOut objects.
+
+        Raises:
+            ValueError: If the response format is unexpected.
+            Exception: If an unexpected error occurs.
+        """
+
         url = f"{self.base_url}/v1/collections/"
         response = requests.get(url, headers=self.headers)
         response.raise_for_status() 
@@ -44,6 +80,19 @@ class Colivara:
 
 
     def get_collection(self, collection_name: str) -> CollectionOut:
+        """
+        Gets a specific collection.
+
+        Args:
+            collection_name: The name of the collection to get.
+
+        Returns:
+            The requested CollectionOut object.
+
+        Raises:
+            Exception: If the collection is not found or an unexpected error occurs.
+        """
+
         url = f"{self.base_url}/v1/collections/{collection_name}/"
         response = requests.get(url, headers=self.headers)
         if response.status_code == 200:
@@ -86,6 +135,16 @@ class Colivara:
             response.raise_for_status()
 
     def delete_collection(self, collection_name: str) -> None:
+        """
+        Deletes a specific collection.
+
+        Args:
+            collection_name: The name of the collection to delete.
+
+        Raises:
+            Exception: If the collection is not found or an unexpected error occurs.
+        """
+
         url = f"{self.base_url}/v1/collections/{collection_name}/"
         response = requests.delete(url, headers=self.headers)
         if response.status_code == 204:
