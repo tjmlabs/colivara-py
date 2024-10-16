@@ -2,7 +2,7 @@
 import os
 import pytest
 from colivara_py import Colivara
-from colivara_py.models import CollectionOut
+from colivara_py.models import CollectionOut, DocumentOut
 import responses
 
 @pytest.fixture
@@ -302,3 +302,100 @@ def test_delete_collection_not_found_sync(api_key):
         client.delete_collection(collection_name="test_collection")
     assert "Collection 'test_collection' not found." in str(exc_info.value)
 
+@responses.activate
+def test_upsert_document_sync(api_key, tmp_path):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+    
+    expected_out = {
+        "id": 1,
+        "name": "test_document",
+        "metadata": {"description": "A test document"},
+        "collection_name": "default collection",
+        "url": None,
+        "base64": "dGVzdCBkb2N1bWVudCBjb250ZW50",
+        "num_pages": 1
+    }
+    
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/documents/upsert-document/",
+        json=expected_out,
+        status=201
+    )
+    
+    # Test with base64 content
+    document = client.upsert_document(
+        name="test_document",
+        metadata={"description": "A test document"},
+        document_base64="dGVzdCBkb2N1bWVudCBjb250ZW50"
+    )
+    assert isinstance(document, DocumentOut)
+    assert document.id == 1
+    assert document.name == "test_document"
+    assert document.metadata == {"description": "A test document"}
+    assert document.collection_name == "default collection"
+    assert document.base64 == "dGVzdCBkb2N1bWVudCBjb250ZW50"
+    assert document.num_pages == 1
+
+    # Test with file path
+    test_file = tmp_path / "test_document.txt"
+    test_file.write_text("test document content")
+    
+    document = client.upsert_document(
+        name="test_document_from_file",
+        metadata={"description": "A test document from file"},
+        document_path=str(test_file)
+    )
+    assert isinstance(document, DocumentOut)
+    assert document.id == 1
+    assert document.name == "test_document"
+    assert document.metadata == {"description": "A test document"}
+    assert document.collection_name == "default collection"
+    assert document.base64 == "dGVzdCBkb2N1bWVudCBjb250ZW50"
+    assert document.num_pages == 1
+
+    # Test with URL
+    document = client.upsert_document(
+        name="test_document_from_url",
+        metadata={"description": "A test document from URL"},
+        document_url="https://pdfobject.com/pdf/sample.pdf"
+    )
+    assert isinstance(document, DocumentOut)
+    assert document.id == 1
+    assert document.name == "test_document"
+    assert document.metadata == {"description": "A test document"}
+    assert document.collection_name == "default collection"
+    assert document.base64 == "dGVzdCBkb2N1bWVudCBjb250ZW50"
+    assert document.num_pages == 1
+
+@responses.activate
+def test_upsert_document_sync_error(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+    
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/documents/upsert-document/",
+        json={"detail": "Bad request error"},
+        status=400
+    )
+    
+    with pytest.raises(ValueError, match="Bad request: Bad request error"):
+        client.upsert_document(
+            name="test_document",
+            document_base64="invalid_base64"
+        )
+
+@pytest.mark.parametrize("input_data", [
+    {"name": "test_document"},
+    {"name": "test_document", "document_url": None, "document_base64": None, "document_path": None},
+])
+def test_upsert_document_sync_invalid_input(api_key, input_data):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    client = Colivara(base_url="https://api.test.com")
+    
+    with pytest.raises(ValueError, match="Either document_url, document_base64, or document_path must be provided."):
+        client.upsert_document(**input_data)

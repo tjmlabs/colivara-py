@@ -1,7 +1,9 @@
 import os
 import requests
-from typing import Optional, Dict, Any, List
-from .models import CollectionIn, CollectionOut, GenericError, PatchCollectionIn
+from typing import Optional, Dict, Any, List, Union
+from .models import CollectionIn, CollectionOut, GenericError, PatchCollectionIn, DocumentIn, DocumentOut, DocumentInPatch
+import base64
+from pathlib import Path
 
 class Colivara:
     def __init__(self, base_url: Optional[str] = None, api_key: Optional[str] = None):
@@ -151,5 +153,72 @@ class Colivara:
             return
         elif response.status_code == 404:
             raise Exception(f"Collection '{collection_name}' not found.")
+        else:
+            response.raise_for_status()
+    
+    
+    def upsert_document(self, 
+                        name: str, 
+                        metadata: Optional[Dict[str, Any]] = None, 
+                        collection_name: str = "default collection", 
+                        document_url: Optional[str] = None, 
+                        document_base64: Optional[str] = None,
+                        document_path: Optional[Union[str, Path]] = None
+                        ) -> DocumentOut:
+        """
+        Create or update a document in a collection.
+
+        This method allows you to upsert (insert or update) a document in the specified collection.
+        You can provide either a URL or a base64-encoded string of the document content.
+
+        Args:
+            name (str): The name of the document.
+            metadata (Optional[Dict[str, Any]]): Additional metadata for the document.
+            collection_name (str): The name of the collection to add the document to. Defaults to "default collection".
+            document_url (Optional[str]): The URL of the document, if available.
+            document_base64 (Optional[str]): The base64-encoded string of the document content, if available.
+            document_path (Optional[str]): The path to the document file to be uploaded.
+        Returns:
+            DocumentOut: The created or updated document with its details.
+
+        Raises:
+            ValueError: If no valid document source is provided or if the file path is invalid.
+            FileNotFoundError: If the specified file path does not exist.
+            PermissionError: If there's no read permission for the specified file.
+            requests.HTTPError: If the API request fails.
+        """
+        # if user sent us a document_path, we will read the file and convert it to base64
+        if document_path:
+            try:
+                path = Path(document_path).resolve()
+                if not path.is_file():
+                    raise ValueError(f"The specified path is not a file: {path}")
+                if not os.access(path, os.R_OK):
+                    raise PermissionError(f"No read permission for file: {path}")
+                with open(path, "rb") as file:
+                    document_base64 = base64.b64encode(file.read()).decode("utf-8")
+            except FileNotFoundError:
+                raise FileNotFoundError(f"The specified file does not exist: {document_path}")
+            except Exception as e:
+                raise ValueError(f"Error reading file: {str(e)}")
+        if not document_url and not document_base64:
+            raise ValueError("Either document_url, document_base64, or document_path must be provided.")
+
+        request_url = f"{self.base_url}/v1/documents/upsert-document/"
+        payload = DocumentIn(
+            name=name,
+            metadata=metadata or {},
+            collection_name=collection_name,
+            url=document_url,
+            base64=document_base64
+        ).model_dump()
+
+        response = requests.post(request_url, json=payload, headers=self.headers)
+
+        if response.status_code == 201:
+            return DocumentOut(**response.json())
+        elif response.status_code == 400:
+            error = GenericError(**response.json())
+            raise ValueError(f"Bad request: {error.detail}")
         else:
             response.raise_for_status()
