@@ -454,7 +454,7 @@ class Colivara:
             except ValidationError as e:
                 raise ValueError(f"Invalid query_filter: {str(e)}")
 
-        query_in = QueryIn(**payload)
+        query_in = QueryIn(**payload)  # type: ignore
 
         response = requests.post(
             request_url, json=query_in.model_dump(), headers=self.headers

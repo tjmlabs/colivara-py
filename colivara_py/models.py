@@ -142,7 +142,7 @@ class QueryFilter(BaseModel):
 
 class QueryIn(BaseModel):
     query: str
-    collection_name: Optional[str] = "default collection"
+    collection_name: Optional[str] = "all"
     top_k: Optional[int] = 3
     query_filter: Optional[QueryFilter] = None
 
