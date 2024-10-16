@@ -10,3 +10,4 @@ venv
 dist
 build
 colivara_py.egg-info/
+uv.lock
