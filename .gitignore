@@ -13,3 +13,4 @@ colivara_py.egg-info/
 uv.lock
 .mypy_cache/
 .ruff_cache/
+coverage.xml

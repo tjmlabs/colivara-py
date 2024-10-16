@@ -1,6 +1,7 @@
-from typing import Optional, List
+from typing import Optional, List, Union
 from pydantic import BaseModel, model_validator, Field
 from typing_extensions import Self
+from enum import Enum
 
 
 class CollectionIn(BaseModel):
@@ -93,3 +94,72 @@ class DocumentInPatch(BaseModel):
         if self.url and self.base64:
             raise ValueError("Only one of 'url' or 'base64' should be provided.")
         return self
+
+
+class QueryFilter(BaseModel):
+    class onEnum(str, Enum):
+        document = "document"
+        collection = "collection"
+
+    class lookupEnum(str, Enum):
+        key_lookup = "key_lookup"
+        contains = "contains"
+        contained_by = "contained_by"
+        has_key = "has_key"
+        has_keys = "has_keys"
+        has_any_keys = "has_any_keys"
+
+    on: onEnum = onEnum.document
+    # key is a str or a list of str
+    key: Union[str, List[str]]
+    # value can be any - we can accept int, float, str, bool
+    value: Optional[Union[str, int, float, bool]] = None
+    lookup: lookupEnum = lookupEnum.key_lookup
+
+    # validation rules:
+    # 1. if looks up is contains or contained_by, value must be a string, and key must be a string
+    # 2. if lookup is has_keys, or has_any_keys, key must be a list of strings - we can transform automatically - value must be None
+    # 3. if lookup is has_key, key must be a string, value must be None
+    @model_validator(mode="after")
+    def validate_filter(self) -> Self:
+        if self.lookup in ["contains", "contained_by", "key_lookup"]:
+            if not isinstance(self.key, str):
+                raise ValueError("Key must be a string.")
+            if self.value is None:
+                raise ValueError("Value must be provided.")
+        if self.lookup in ["has_key"]:
+            if not isinstance(self.key, str):
+                raise ValueError("Key must be a string.")
+            if self.value is not None:
+                raise ValueError("Value must be None.")
+        if self.lookup in ["has_keys", "has_any_keys"]:
+            if not isinstance(self.key, list):
+                raise ValueError("Key must be a list of strings.")
+            if self.value is not None:
+                raise ValueError("Value must be None.")
+        return self
+
+
+class QueryIn(BaseModel):
+    query: str
+    collection_name: Optional[str] = "all"
+    top_k: Optional[int] = 3
+    query_filter: Optional[QueryFilter] = None
+
+
+class PageOutQuery(BaseModel):
+    collection_name: str
+    collection_id: int
+    collection_metadata: Optional[dict] = {}
+    document_name: str
+    document_id: int
+    document_metadata: Optional[dict] = {}
+    page_number: int
+    raw_score: float
+    normalized_score: float
+    img_base64: str
+
+
+class QueryOut(BaseModel):
+    query: str
+    results: List[PageOutQuery]

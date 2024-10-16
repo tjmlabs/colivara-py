@@ -1,7 +1,7 @@
 import os
 import pytest
 from colivara_py import Colivara
-from colivara_py.models import CollectionOut, DocumentOut
+from colivara_py.models import CollectionOut, DocumentOut, QueryOut, PageOutQuery
 import responses
 
 
@@ -579,3 +579,136 @@ def test_delete_document_error(api_key):
 
     with pytest.raises(ValueError, match="Deletion failed: Document not found"):
         client.delete_document("non_existent_document")
+
+
+@responses.activate
+def test_search_simple(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    expected_out = {
+        "query": "what is 1+1?",
+        "results": [
+            {
+                "collection_name": "default",
+                "collection_id": 1,
+                "document_name": "math_doc",
+                "document_id": 1,
+                "page_number": 1,
+                "raw_score": 0.9,
+                "normalized_score": 0.95,
+                "img_base64": "base64_encoded_image",
+            }
+        ],
+    }
+
+    responses.add(
+        responses.POST, f"{client.base_url}/v1/search/", json=expected_out, status=200
+    )
+
+    result = client.search("what is 1+1?")
+    assert isinstance(result, QueryOut)
+    assert result.query == "what is 1+1?"
+    assert len(result.results) == 1
+    assert isinstance(result.results[0], PageOutQuery)
+    assert result.results[0].document_name == "math_doc"
+
+
+@responses.activate
+def test_search_with_collection(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    expected_out = {
+        "query": "what is 1+1?",
+        "results": [
+            {
+                "collection_name": "my_collection",
+                "collection_id": 2,
+                "document_name": "math_doc",
+                "document_id": 1,
+                "page_number": 1,
+                "raw_score": 0.9,
+                "normalized_score": 0.95,
+                "img_base64": "base64_encoded_image",
+            }
+        ],
+    }
+
+    responses.add(
+        responses.POST, f"{client.base_url}/v1/search/", json=expected_out, status=200
+    )
+
+    result = client.search("what is 1+1?", collection_name="my_collection")
+    assert isinstance(result, QueryOut)
+    assert result.results[0].collection_name == "my_collection"
+
+
+@responses.activate
+def test_search_with_filter(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    expected_out = {
+        "query": "what is 1+1?",
+        "results": [
+            {
+                "collection_name": "default",
+                "collection_id": 1,
+                "document_name": "math_doc",
+                "document_id": 1,
+                "page_number": 1,
+                "raw_score": 0.9,
+                "normalized_score": 0.95,
+                "img_base64": "base64_encoded_image",
+                "document_metadata": {"category": "AI"},
+            }
+        ],
+    }
+
+    responses.add(
+        responses.POST, f"{client.base_url}/v1/search/", json=expected_out, status=200
+    )
+
+    query_filter = {
+        "on": "document",
+        "key": "category",
+        "value": "AI",
+        "lookup": "contains",
+    }
+    result = client.search("what is 1+1?", query_filter=query_filter)
+    assert isinstance(result, QueryOut)
+    assert result.results[0].document_metadata["category"] == "AI"
+
+
+@responses.activate
+def test_search_service_unavailable(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    error_response = {"detail": "Service is temporarily unavailable"}
+
+    responses.add(
+        responses.POST, f"{client.base_url}/v1/search/", json=error_response, status=503
+    )
+
+    with pytest.raises(ValueError) as exc_info:
+        client.search("what is 1+1?")
+
+    assert "Service unavailable" in str(exc_info.value)
+
+
+@responses.activate
+def test_search_invalid_filter(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    with pytest.raises(ValueError) as exc_info:
+        client.search("what is 1+1?", query_filter={"invalid": "filter"})
+
+    assert "Invalid query_filter" in str(exc_info.value)
