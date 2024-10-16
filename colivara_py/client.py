@@ -9,9 +9,13 @@ from .models import (
     DocumentIn,
     DocumentOut,
     DocumentInPatch,
+    QueryIn,
+    QueryOut,
+    QueryFilter,
 )
 import base64
 from pathlib import Path
+from pydantic import ValidationError
 
 
 class Colivara:
@@ -379,5 +383,87 @@ class Colivara:
         elif response.status_code in [404, 409]:
             error = GenericError(**response.json())
             raise ValueError(f"Deletion failed: {error.detail}")
+        else:
+            response.raise_for_status()
+
+    def search(
+        self,
+        query: str,
+        collection_name: str = "all",
+        top_k: int = 3,
+        query_filter: Optional[Dict[str, Any]] = None,
+    ) -> QueryOut:
+        """
+        Search for pages similar to a given query.
+
+        This method allows you to search for pages similar to a given query across all documents
+        in the specified collection.
+
+        Args:
+            query (str): The search query string.
+            collection_name (str): The name of the collection to search in. Defaults to "all".
+            top_k (int): The number of top results to return. Defaults to 3.
+            query_filter (Optional[Dict[str, Any]]): An optional filter to apply to the search results.
+                The filter can be used to narrow down the search based on specific criteria.
+                It should be a dictionary with the following possible keys:
+                - "on": "document" or "collection"
+                - "key": str or List[str]
+                - "value": Optional[Union[str, int, float, bool]]
+                - "lookup": One of "key_lookup", "contains", "contained_by", "has_key", "has_keys", "has_any_keys"
+
+        Returns:
+            QueryOut: The search results, including the query and a list of similar pages.
+
+        Raises:
+            ValueError: If the query is invalid, the collection does not exist, or the query_filter is invalid.
+            requests.HTTPError: If the API request fails.
+
+        Examples:
+            # Simple search
+            results = client.search("what is 1+1?")
+
+            # search with a specific collection
+            results = client.search("what is 1+1?", collection_name="my_collection")
+
+            # Search with a filter on document metadata
+            results = client.search("what is 1+1?", query_filter={
+                "on": "document",
+                "key": "category",
+                "value": "AI",
+                "lookup": "contains"
+            })
+
+            # Search with a filter on collection metadata
+            results = client.search("what is 1+1?", query_filter={
+                "on": "collection",
+                "key": ["tag1", "tag2"],
+                "lookup": "has_any_keys"
+            })
+        """
+        request_url = f"{self.base_url}/v1/search/"
+        payload = {
+            "query": query,
+            "collection_name": collection_name,
+            "top_k": top_k,
+        }
+        filter_obj = None
+        if query_filter:
+            try:
+                filter_obj = QueryFilter(**query_filter)
+                payload["query_filter"] = filter_obj.model_dump()
+            except ValidationError as e:
+                raise ValueError(f"Invalid query_filter: {str(e)}")
+
+        query_in = QueryIn(**payload)
+
+        response = requests.post(
+            request_url, json=query_in.model_dump(), headers=self.headers
+        )
+
+        if response.status_code == 200:
+            return QueryOut(**response.json())
+        elif response.status_code == 503:
+            error = GenericError(**response.json())
+            raise ValueError(f"Service unavailable: {error.detail}")
         else:
             response.raise_for_status()
