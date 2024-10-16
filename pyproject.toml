@@ -1,6 +1,6 @@
 [project]
 name = "colivara-py"
-version = "0.1"
+version = "0.0.1"
 description = "The official Python SDK for the ColiVara API"
 readme = "README.md"
 requires-python = ">=3.8"
