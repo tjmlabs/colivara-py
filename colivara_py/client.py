@@ -1,9 +1,18 @@
 import os
 import requests
 from typing import Optional, Dict, Any, List, Union
-from .models import CollectionIn, CollectionOut, GenericError, PatchCollectionIn, DocumentIn, DocumentOut, DocumentInPatch
+from .models import (
+    CollectionIn,
+    CollectionOut,
+    GenericError,
+    PatchCollectionIn,
+    DocumentIn,
+    DocumentOut,
+    DocumentInPatch,
+)
 import base64
 from pathlib import Path
+
 
 class Colivara:
     def __init__(self, base_url: Optional[str] = None, api_key: Optional[str] = None):
@@ -18,16 +27,20 @@ class Colivara:
             ValueError: If the API key is not provided.
         """
 
-        self.base_url = base_url or "https://api.colivara.com"  
+        self.base_url = base_url or "https://api.colivara.com"
         self.api_key = api_key or os.getenv("COLIVARA_API_KEY")
         if not self.api_key:
-            raise ValueError("API key must be provided either through parameter or COLIVARA_API_KEY environment variable.")
+            raise ValueError(
+                "API key must be provided either through parameter or COLIVARA_API_KEY environment variable."
+            )
         self.headers = {
             "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
 
-    def create_collection(self, name: str, metadata: Optional[Dict[str, Any]] = {}) -> CollectionOut:
+    def create_collection(
+        self, name: str, metadata: Optional[Dict[str, Any]] = {}
+    ) -> CollectionOut:
         """
         Creates a new collection.
 
@@ -53,7 +66,6 @@ class Colivara:
         else:
             response.raise_for_status()
 
-
     def list_collections(self) -> List[CollectionOut]:
         """
         Lists all collections.
@@ -68,8 +80,8 @@ class Colivara:
 
         url = f"{self.base_url}/v1/collections/"
         response = requests.get(url, headers=self.headers)
-        response.raise_for_status() 
-        
+        response.raise_for_status()
+
         if response.status_code == 200:
             collections_data = response.json()
             # Handle potential empty list
@@ -79,7 +91,6 @@ class Colivara:
                 raise ValueError(f"Unexpected response format: {collections_data}")
         else:
             response.raise_for_status()
-
 
     def get_collection(self, collection_name: str) -> CollectionOut:
         """
@@ -104,8 +115,12 @@ class Colivara:
         else:
             response.raise_for_status()
 
-
-    def partial_update_collection(self, collection_name: str, name: Optional[str] = None, metadata: Optional[Dict[str, Any]] = None) -> CollectionOut:
+    def partial_update_collection(
+        self,
+        collection_name: str,
+        name: Optional[str] = None,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> CollectionOut:
         """
         Partially updates a collection.
 
@@ -122,11 +137,11 @@ class Colivara:
         """
 
         url = f"{self.base_url}/v1/collections/{collection_name}/"
-        
+
         # Create a CollectionIn object with sane defaults and only updated fields
         updated_data = PatchCollectionIn(name=name, metadata=metadata)
 
-        payload = updated_data.model_dump() 
+        payload = updated_data.model_dump()
         response = requests.patch(url, json=payload, headers=self.headers)
 
         if response.status_code == 200:
@@ -155,16 +170,16 @@ class Colivara:
             raise Exception(f"Collection '{collection_name}' not found.")
         else:
             response.raise_for_status()
-    
-    
-    def upsert_document(self, 
-                        name: str, 
-                        metadata: Optional[Dict[str, Any]] = None, 
-                        collection_name: str = "default collection", 
-                        document_url: Optional[str] = None, 
-                        document_base64: Optional[str] = None,
-                        document_path: Optional[Union[str, Path]] = None
-                        ) -> DocumentOut:
+
+    def upsert_document(
+        self,
+        name: str,
+        metadata: Optional[Dict[str, Any]] = None,
+        collection_name: str = "default collection",
+        document_url: Optional[str] = None,
+        document_base64: Optional[str] = None,
+        document_path: Optional[Union[str, Path]] = None,
+    ) -> DocumentOut:
         """
         Create or update a document in a collection.
 
@@ -198,11 +213,15 @@ class Colivara:
                 with open(path, "rb") as file:
                     document_base64 = base64.b64encode(file.read()).decode("utf-8")
             except FileNotFoundError:
-                raise FileNotFoundError(f"The specified file does not exist: {document_path}")
+                raise FileNotFoundError(
+                    f"The specified file does not exist: {document_path}"
+                )
             except Exception as e:
                 raise ValueError(f"Error reading file: {str(e)}")
         if not document_url and not document_base64:
-            raise ValueError("Either document_url, document_base64, or document_path must be provided.")
+            raise ValueError(
+                "Either document_url, document_base64, or document_path must be provided."
+            )
 
         request_url = f"{self.base_url}/v1/documents/upsert-document/"
         payload = DocumentIn(
@@ -210,7 +229,7 @@ class Colivara:
             metadata=metadata or {},
             collection_name=collection_name,
             url=document_url,
-            base64=document_base64
+            base64=document_base64,
         ).model_dump()
 
         response = requests.post(request_url, json=payload, headers=self.headers)
@@ -220,5 +239,145 @@ class Colivara:
         elif response.status_code == 400:
             error = GenericError(**response.json())
             raise ValueError(f"Bad request: {error.detail}")
+        else:
+            response.raise_for_status()
+
+    def get_document(
+        self,
+        document_name: str,
+        collection_name: str = "default collection",
+        expand: Optional[str] = None,
+    ) -> DocumentOut:
+        """
+        Retrieve a specific document from the user documents.
+
+        Args:
+            document_name (str): The name of the document to retrieve.
+            collection_name (str): The name of the collection containing the document.
+                                   Defaults to "default collection".
+            expand (Optional[str]): A comma-separated list of fields to expand in the response.
+                                    Currently, only "pages" is supported, the document's pages will be included if provided.
+
+        Returns:
+            DocumentOut: The retrieved document with its details.
+
+        Raises:
+            requests.HTTPError: If the API request fails.
+            ValueError: If the document or collection is not found.
+        """
+        request_url = f"{self.base_url}/v1/documents/{document_name}/"
+        params = {"collection_name": collection_name, "expand": expand}
+
+        response = requests.get(request_url, params=params, headers=self.headers)
+
+        if response.status_code == 200:
+            return DocumentOut(**response.json())
+        elif response.status_code == 404:
+            error = GenericError(**response.json())
+            raise ValueError(f"Document not found: {error.detail}")
+        else:
+            response.raise_for_status()
+
+    def partial_update_document(
+        self,
+        document_name: str,
+        name: Optional[str] = None,
+        metadata: Optional[Dict[str, Any]] = None,
+        collection_name: Optional[str] = None,
+        document_url: Optional[str] = None,
+        document_base64: Optional[str] = None,
+    ) -> DocumentOut:
+        """
+        Partially update a document.
+
+        This method allows for partial updates to a document's details. Only the fields provided will be updated.
+
+        Args:
+            document_name (str): The name of the document to be updated.
+            name (Optional[str]): The new name for the document, if changing.
+            metadata (Optional[Dict[str, Any]]): Updated metadata for the document.
+            collection_name (Optional[str]): The name of the collection to move the document to, if changing.
+            document_url (Optional[str]): The new URL of the document, if changing.
+            document_base64 (Optional[str]): The new base64-encoded string of the document content, if changing.
+
+        Returns:
+            DocumentOut: The updated document with its details.
+
+        Raises:
+            requests.HTTPError: If the API request fails.
+            ValueError: If the document is not found or the update is invalid.
+        """
+        request_url = f"{self.base_url}/v1/documents/{document_name}/"
+        payload = DocumentInPatch(
+            name=name,
+            metadata=metadata,
+            collection_name=collection_name,
+            url=document_url,
+            base64=document_base64,
+        ).model_dump(exclude_none=True)
+
+        response = requests.patch(request_url, json=payload, headers=self.headers)
+
+        if response.status_code == 200:
+            return DocumentOut(**response.json())
+        elif response.status_code in [404, 409]:
+            error = GenericError(**response.json())
+            raise ValueError(f"Update failed: {error.detail}")
+        else:
+            response.raise_for_status()
+
+    def list_documents(
+        self, collection_name: str = "default collection", expand: Optional[str] = None
+    ) -> List[DocumentOut]:
+        """
+        Fetch a list of documents for a given collection.
+
+        Args:
+            collection_name (str): The name of the collection to fetch documents from.
+                                   Defaults to "default collection". Use "all" to fetch documents from all collections.
+            expand (Optional[str]): A comma-separated string specifying additional fields to include in the response.
+                                    If "pages" is included, the pages of each document will be included.
+
+        Returns:
+            List[DocumentOut]: A list of documents with their details.
+
+        Raises:
+            requests.HTTPError: If the API request fails.
+        """
+        request_url = f"{self.base_url}/v1/documents/"
+        params = {"collection_name": collection_name, "expand": expand}
+
+        response = requests.get(request_url, params=params, headers=self.headers)
+
+        if response.status_code == 200:
+            return [DocumentOut(**doc) for doc in response.json()]
+        else:
+            response.raise_for_status()
+
+    def delete_document(
+        self, document_name: str, collection_name: str = "default collection"
+    ) -> None:
+        """
+        Delete a document by its name.
+
+        Args:
+            document_name (str): The name of the document to be deleted.
+            collection_name (str): The name of the collection containing the document.
+                                   Defaults to "default collection". Use "all" to access all collections belonging to the user.
+
+        Raises:
+            requests.HTTPError: If the API request fails.
+            ValueError: If the document does not exist or does not belong to the authenticated user.
+        """
+        request_url = f"{self.base_url}/v1/documents/delete-document/{document_name}/"
+        params = {"collection_name": collection_name}
+
+        response = requests.delete(request_url, params=params, headers=self.headers)
+
+        if response.status_code == 204:
+            return
+        elif response.status_code in [404, 409]:
+            error = GenericError(**response.json())
+            raise ValueError(f"Deletion failed: {error.detail}")
         else:
             response.raise_for_status()

@@ -1,7 +1,7 @@
-
 from typing import Optional, List
 from pydantic import BaseModel, model_validator, Field
 from typing_extensions import Self
+
 
 class CollectionIn(BaseModel):
     name: str
@@ -12,6 +12,7 @@ class CollectionIn(BaseModel):
         if self.name.lower() == "all":
             raise ValueError("Collection name 'all' is not allowed.")
         return self
+
 
 class PatchCollectionIn(BaseModel):
     name: Optional[str] = None
@@ -27,7 +28,6 @@ class PatchCollectionIn(BaseModel):
         if not any([self.name, self.metadata]):
             raise ValueError("At least one field must be provided to update.")
         return self
-
 
 
 class CollectionOut(BaseModel):
@@ -49,7 +49,6 @@ class DocumentIn(BaseModel):
     )
     url: Optional[str] = None
     base64: Optional[str] = None
-
 
     @model_validator(mode="after")
     def base64_or_url(self) -> Self:

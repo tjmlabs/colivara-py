@@ -1,0 +1,13 @@
+default_language_version:
+  python: python3.12
+
+repos:
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+        stages: [pre-commit]
+      - id: ruff-format
+        stages: [pre-commit]
