@@ -17,10 +17,19 @@ pip install colivara-py
 
 Please see the [ColiVara API documentation](https://docs.colivara.com) for more information on how to use this library.
 
-```python
-from colivara import ColiVara
+You will need to either self-host the API or use the hosted version at `https://colivara.com`. You will also need an API key, which you can obtain by signing up at [ColiVara](https://colivara.com) or from your hosted API.
 
-rag_client = ColiVara(api_key='your-api-key')
+```python
+import os
+from colivara_py import ColiVara
+
+
+rag_client = ColiVara(
+     # This is the default and can be omitted
+    api_key=os.environ.get("COLIVARA_API_KEY"),
+    # This is the default and can be omitted
+    base_url="https://api.colivara.com"
+)
 # Create a new collection
 new_collection = rag_client.create_collection(name="my_collection", metadata={"description": "A sample collection"})
 print(f"Created collection: {new_collection.name}")
