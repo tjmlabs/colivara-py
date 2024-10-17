@@ -1,9 +1,9 @@
 # colivara-py
 
 [![PyPI](https://img.shields.io/pypi/v/colivara-py.svg)](https://pypi.org/project/colivara-py/)
-[![Tests](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml/badge.svg)](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml)
 [![Changelog](https://img.shields.io/github/v/release/tjmlabs/colivara-py?include_prereleases&label=changelog)](https://github.com/tjmlabs/colivara-py/releases)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/tjmlabs/colivara-py/blob/main/LICENSE)
+[![Tests](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml/badge.svg)](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml)
 
 The official Python SDK for the ColiVara API
 

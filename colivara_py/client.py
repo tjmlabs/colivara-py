@@ -12,6 +12,10 @@ from .models import (
     QueryIn,
     QueryOut,
     QueryFilter,
+    FileOut,
+    EmbeddingsOut,
+    TaskEnum,
+    EmbeddingsIn,
 )
 import base64
 from pathlib import Path
@@ -465,5 +469,105 @@ class Colivara:
         elif response.status_code == 503:
             error = GenericError(**response.json())
             raise ValueError(f"Service unavailable: {error.detail}")
+        else:
+            response.raise_for_status()
+
+    def file_to_imgbase64(self, file_path: str) -> List[FileOut]:
+        """
+        Converts a file to a list of base64 encoded images.
+
+        Args:
+            file_path: The path to the file to be converted.
+
+        Returns:
+            A list of FileOut objects containing the base64 encoded strings of the images.
+
+        Raises:
+            Exception: If there's an error during the file conversion process.
+        """
+        url = f"{self.base_url}/v1/helpers/file-to-imgbase64/"
+
+        with open(file_path, "rb") as file:
+            files = {"file": file}
+            response = requests.post(
+                url, files=files, headers={"Authorization": f"Bearer {self.api_key}"}
+            )
+
+        if response.status_code == 200:
+            return [FileOut(**item) for item in response.json()]
+        else:
+            response.raise_for_status()
+
+    def file_to_base64(self, file_path: str) -> str:
+        """
+        Converts a file to a base64 encoded string.
+
+        Args:
+            file_path: The path to the file to be converted.
+
+        Returns:
+            A base64 encoded string of the file.
+
+        Raises:
+            Exception: If there's an error during the file conversion process.
+        """
+        # Read the file
+        with open(file_path, "rb") as file:
+            file_content = file.read()
+        # Encode the file content to base64
+        base64_content = base64.b64encode(file_content).decode("utf-8")
+        return base64_content
+
+    def create_embedding(
+        self,
+        input_data: Union[str, List[str]],
+        task: Union[str, TaskEnum] = TaskEnum.query,
+    ) -> EmbeddingsOut:
+        """
+        Creates embeddings for the given input data.
+
+        Args:
+            input_data: A string or list of strings to create embeddings for.
+            task: The task type for embedding creation. Can be "query" or "image". Defaults to "query".
+
+        Returns:
+            An EmbeddingsOut object containing the embeddings, model information, and usage data.
+
+        Raises:
+            ValueError: If an invalid task is provided.
+            Exception: If there's an unexpected error from the API.
+
+        Example:
+            client.create_embedding("what is 1+1?", task="query")
+            client.create_embedding(["image1.jpg", "image2.jpg"], task="image")
+        """
+        url = f"{self.base_url}/v1/embeddings/"
+
+        # Ensure input_data is a list
+        if isinstance(input_data, str):
+            input_data = [input_data]
+
+        # Validate and convert task to TaskEnum
+        if isinstance(task, str):
+            try:
+                task = TaskEnum(task.lower())
+            except ValueError:
+                raise ValueError(f"Invalid task: {task}. Must be 'query' or 'image'.")
+        elif not isinstance(task, TaskEnum):
+            raise ValueError("Task must be a string or TaskEnum.")
+
+        try:
+            payload = EmbeddingsIn(input_data=input_data, task=task).model_dump()
+        except ValidationError as e:
+            raise ValueError(f"Invalid input data: {str(e)}")
+
+        response = requests.post(url, json=payload, headers=self.headers)
+
+        if response.status_code == 200:
+            data = response.json()
+            return EmbeddingsOut(**data)
+        elif response.status_code == 503:
+            error = GenericError(**response.json())
+            raise Exception(f"Service Unavailable: {error.detail}")
         else:
             response.raise_for_status()

@@ -32,3 +32,13 @@ jobs:
       run: |
         source .venv/bin/activate
         mypy .
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+          fail_ci_if_error: true
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
