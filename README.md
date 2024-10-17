@@ -17,7 +17,7 @@ pip install colivara-py
 
 Please see the [ColiVara API documentation](https://docs.colivara.com) for more information on how to use this library.
 
-You will need to either self-host the API or use the hosted version at `https://colivara.com`. You will also need an API key, which you can obtain by signing up at [ColiVara](https://colivara.com) or from your hosted API.
+You will need to either self-host the API (see the [ColiVara API repo](https://github.com/tjmlabs/ColiVara)) or use the hosted version at https://colivara.com. You will also need an API key, which you can obtain by signing up at [ColiVara](https://colivara.com) or from your self-hosted API.
 
 ```python
 import os
