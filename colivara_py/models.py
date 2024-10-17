@@ -163,3 +163,8 @@ class PageOutQuery(BaseModel):
 class QueryOut(BaseModel):
     query: str
     results: List[PageOutQuery]
+
+
+class FileOut(BaseModel):
+    img_base64: str
+    page_number: int

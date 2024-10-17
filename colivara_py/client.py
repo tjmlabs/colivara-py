@@ -12,6 +12,7 @@ from .models import (
     QueryIn,
     QueryOut,
     QueryFilter,
+    FileOut,
 )
 import base64
 from pathlib import Path
@@ -467,3 +468,49 @@ class Colivara:
             raise ValueError(f"Service unavailable: {error.detail}")
         else:
             response.raise_for_status()
+
+    def file_to_imgbase64(self, file_path: str) -> List[FileOut]:
+        """
+        Converts a file to a list of base64 encoded images.
+
+        Args:
+            file_path: The path to the file to be converted.
+
+        Returns:
+            A list of FileOut objects containing the base64 encoded strings of the images.
+
+        Raises:
+            Exception: If there's an error during the file conversion process.
+        """
+        url = f"{self.base_url}/v1/helpers/file-to-imgbase64/"
+
+        with open(file_path, "rb") as file:
+            files = {"file": file}
+            response = requests.post(
+                url, files=files, headers={"Authorization": f"Bearer {self.api_key}"}
+            )
+
+        if response.status_code == 200:
+            return [FileOut(**item) for item in response.json()]
+        else:
+            response.raise_for_status()
+
+    def file_to_base64(self, file_path: str) -> str:
+        """
+        Converts a file to a base64 encoded string.
+
+        Args:
+            file_path: The path to the file to be converted.
+
+        Returns:
+            A base64 encoded string of the file.
+
+        Raises:
+            Exception: If there's an error during the file conversion process.
+        """
+        # Read the file
+        with open(file_path, "rb") as file:
+            file_content = file.read()
+        # Encode the file content to base64
+        base64_content = base64.b64encode(file_content).decode("utf-8")
+        return base64_content

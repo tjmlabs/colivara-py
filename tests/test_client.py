@@ -1,7 +1,14 @@
 import os
 import pytest
+import base64
 from colivara_py import Colivara
-from colivara_py.models import CollectionOut, DocumentOut, QueryOut, PageOutQuery
+from colivara_py.models import (
+    CollectionOut,
+    DocumentOut,
+    QueryOut,
+    PageOutQuery,
+    FileOut,
+)
 import responses
 
 
@@ -712,3 +719,62 @@ def test_search_invalid_filter(api_key):
         client.search("what is 1+1?", query_filter={"invalid": "filter"})
 
     assert "Invalid query_filter" in str(exc_info.value)
+
+
+@pytest.fixture
+def test_file_path(tmp_path):
+    file_content = b"Test file content"
+    file_path = tmp_path / "test_file.txt"
+    with open(file_path, "wb") as f:
+        f.write(file_content)
+    return str(file_path)
+
+
+@responses.activate
+def test_file_to_imgbase64(api_key, test_file_path):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    expected_out = [
+        {"img_base64": base64.b64encode(b"Test image 1").decode(), "page_number": 1},
+        {"img_base64": base64.b64encode(b"Test image 2").decode(), "page_number": 2},
+    ]
+
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/helpers/file-to-imgbase64/",
+        json=expected_out,
+        status=200,
+    )
+
+    result = client.file_to_imgbase64(test_file_path)
+
+    assert isinstance(result, list)
+    assert len(result) == 2
+    assert all(isinstance(item, FileOut) for item in result)
+    assert result[0].img_base64 == expected_out[0]["img_base64"]
+    assert result[0].page_number == 1
+    assert result[1].img_base64 == expected_out[1]["img_base64"]
+    assert result[1].page_number == 2
+
+
+@responses.activate
+def test_file_to_base64(api_key, test_file_path):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    expected_out = base64.b64encode(b"Test file content").decode()
+
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/helpers/file-to-base64/",
+        body=expected_out,
+        status=200,
+    )
+
+    result = client.file_to_base64(test_file_path)
+
+    assert isinstance(result, str)
+    assert result == expected_out
