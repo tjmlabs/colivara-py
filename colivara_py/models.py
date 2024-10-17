@@ -168,3 +168,20 @@ class QueryOut(BaseModel):
 class FileOut(BaseModel):
     img_base64: str
     page_number: int
+
+
+class TaskEnum(str, Enum):
+    image = "image"
+    query = "query"
+
+
+class EmbeddingsIn(BaseModel):
+    input_data: List[str]
+    task: TaskEnum
+
+
+class EmbeddingsOut(BaseModel):
+    _object: str
+    data: List[dict]
+    model: str
+    usage: dict

@@ -8,6 +8,7 @@ from colivara_py.models import (
     QueryOut,
     PageOutQuery,
     FileOut,
+    EmbeddingsOut,
 )
 import responses
 
@@ -778,3 +779,78 @@ def test_file_to_base64(api_key, test_file_path):
 
     assert isinstance(result, str)
     assert result == expected_out
+
+
+@responses.activate
+def test_create_embedding(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    expected_out = {
+        "data": [
+            {
+                "embedding": [[0.10986328125, -0.08251953125, 0.005767822265625]],
+                "index": 0,
+                "object": "embedding",
+            }
+        ],
+        "model": "vidore/colQwen-v1.2",
+        "usage": {"prompt_tokens": 24, "total_tokens": 24},
+    }
+
+    responses.add(
+        responses.POST, f"{base_url}/v1/embeddings/", json=expected_out, status=200
+    )
+
+    # Test with a single string input
+    embedding_result = client.create_embedding("what is 1+1?", task="query")
+
+    assert isinstance(embedding_result, EmbeddingsOut)
+    assert len(embedding_result.data) == 1
+    assert embedding_result.data[0]["embedding"] == [
+        [0.10986328125, -0.08251953125, 0.005767822265625]
+    ]
+    assert embedding_result.data[0]["index"] == 0
+    assert embedding_result.data[0]["object"] == "embedding"
+    assert embedding_result.model == "vidore/colQwen-v1.2"
+    assert embedding_result.usage == {"prompt_tokens": 24, "total_tokens": 24}
+
+    # Test with a list of strings input
+    responses.add(
+        responses.POST, f"{base_url}/v1/embeddings/", json=expected_out, status=200
+    )
+
+    embedding_result = client.create_embedding(
+        ["base64string_1", "base64string_1"], task="image"
+    )
+
+    assert isinstance(embedding_result, EmbeddingsOut)
+    assert (
+        len(embedding_result.data) == 1
+    )  # In this case, we're using the same mock response
+    assert embedding_result.data[0]["embedding"] == [
+        [0.10986328125, -0.08251953125, 0.005767822265625]
+    ]
+    assert embedding_result.model == "vidore/colQwen-v1.2"
+
+    # Test error handling
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/embeddings/",
+        json={"detail": "Service is temporarily unavailable"},
+        status=503,
+    )
+
+    with pytest.raises(Exception) as exc_info:
+        client.create_embedding("error test", task="query")
+
+    assert (
+        str(exc_info.value) == "Service Unavailable: Service is temporarily unavailable"
+    )
+
+    # Test invalid task
+    with pytest.raises(ValueError) as exc_info:
+        client.create_embedding("invalid task test", task="invalid")
+
+    assert str(exc_info.value) == "Invalid task: invalid. Must be 'query' or 'image'."
