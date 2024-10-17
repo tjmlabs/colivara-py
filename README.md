@@ -1,9 +1,9 @@
 # colivara-py
 
 [![PyPI](https://img.shields.io/pypi/v/colivara-py.svg)](https://pypi.org/project/colivara-py/)
-[![Tests](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml/badge.svg)](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml)
 [![Changelog](https://img.shields.io/github/v/release/tjmlabs/colivara-py?include_prereleases&label=changelog)](https://github.com/tjmlabs/colivara-py/releases)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/tjmlabs/colivara-py/blob/main/LICENSE)
+[![Tests](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml/badge.svg)](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/tjmlabs/ColiVara/branch/main/graph/badge.svg)](https://codecov.io/gh/tjmlabs/ColiVara)
 
 The official Python SDK for the ColiVara API
 
@@ -15,7 +15,50 @@ pip install colivara-py
 ```
 ## Usage
 
-Usage instructions go here.
+Please see the [ColiVara API documentation](https://docs.colivara.com) for more information on how to use this library.
+
+```python
+from colivara import ColiVara
+
+rag_client = ColiVara(api_key='your-api-key')
+# Create a new collection
+new_collection = rag_client.create_collection(name="my_collection", metadata={"description": "A sample collection"})
+print(f"Created collection: {new_collection.name}")
+
+# Upload a document to the collection
+document = rag_client.upsert_document(
+    name="sample_document",
+    collection_name="my_collection",
+    url="https://example.com/sample.pdf",
+    metadata={"author": "John Doe"}
+)
+print(f"Uploaded document: {document.name}")
+
+# Search for documents
+search_results = rag_client.search(
+    query="machine learning",
+    collection_name="my_collection",
+    top_k=3
+)
+for result in search_results.results:
+    print(f"Page {result.page_number} of {result.document_name}: Score {result.normalized_score}")
+
+# List documents in a collection
+documents = client.list_documents(collection_name="my_collection")
+for doc in documents:
+    print(f"Document: {doc.name}, Pages: {doc.num_pages}")
+
+# Generate embeddings
+embeddings = rag_client.create_embedding(
+    input_data=["This is a sample text for embedding"],
+    task="query"
+)
+print(f"Generated {len(embeddings.data)} embeddings")
+
+# Delete a document
+rag_client.delete_document("sample_document", collection_name="my_collection")
+print("Document deleted")
+```
 
 ## Development
 
