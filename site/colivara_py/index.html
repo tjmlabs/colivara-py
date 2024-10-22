@@ -1,0 +1,2610 @@
+<!doctype html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+  
+  <title>colivara_py API documentation</title>
+  <meta name="description" content="" />
+
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+  
+  <style type="text/css">
+* {
+  box-sizing: border-box;
+}
+/*! normalize.css v1.1.1 | MIT License | git.io/normalize */
+
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/**
+ * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+
+audio,
+canvas,
+video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+/**
+ * Address styling not present in IE 7/8/9, Firefox 3, and Safari 4.
+ * Known issue: no IE 6 support.
+ */
+
+[hidden] {
+    display: none;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+/**
+ * 1. Prevent system color scheme's background color being used in Firefox, IE,
+ *    and Opera.
+ * 2. Prevent system color scheme's text color being used in Firefox, IE, and
+ *    Opera.
+ * 3. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
+ *    `em` units.
+ * 4. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+    background: #fff; /* 1 */
+    color: #000; /* 2 */
+    font-size: 100%; /* 3 */
+    -webkit-text-size-adjust: 100%; /* 4 */
+    -ms-text-size-adjust: 100%; /* 4 */
+}
+
+/**
+ * Address `font-family` inconsistency between `textarea` and other form
+ * elements.
+ */
+
+html,
+button,
+input,
+select,
+textarea {
+    font-family: sans-serif;
+}
+
+/**
+ * Address margins handled incorrectly in IE 6/7.
+ */
+
+body {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+
+a:focus {
+    outline: thin dotted;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+/**
+ * Address font sizes and margins set differently in IE 6/7.
+ * Address font sizes within `section` and `article` in Firefox 4+, Safari 5,
+ * and Chrome.
+ */
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+}
+
+h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+}
+
+h4 {
+    font-size: 1em;
+    margin: 1.33em 0;
+}
+
+h5 {
+    font-size: 0.83em;
+    margin: 1.67em 0;
+}
+
+h6 {
+    font-size: 0.67em;
+    margin: 2.33em 0;
+}
+
+/**
+ * Address styling not present in IE 7/8/9, Safari 5, and Chrome.
+ */
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
+ */
+
+b,
+strong {
+    font-weight: bold;
+}
+
+blockquote {
+    margin: 1em 40px;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+
+dfn {
+    font-style: italic;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ * Known issue: no IE 6/7 normalization.
+ */
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+}
+
+/**
+ * Address styling not present in IE 6/7/8/9.
+ */
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+/**
+ * Address margins set differently in IE 6/7.
+ */
+
+p,
+pre {
+    margin: 1em 0;
+}
+
+/**
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, serif;
+    _font-family: 'courier new', monospace;
+    font-size: 1em;
+}
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/**
+ * Address CSS quotes not supported in IE 6/7.
+ */
+
+q {
+    quotes: none;
+}
+
+/**
+ * Address `quotes` property not supported in Safari 4.
+ */
+
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+    font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+
+/**
+ * Address margins set differently in IE 6/7.
+ */
+
+dl,
+menu,
+ol,
+ul {
+    margin: 1em 0;
+}
+
+dd {
+    margin: 0 0 0 40px;
+}
+
+/**
+ * Address paddings set differently in IE 6/7.
+ */
+
+menu,
+ol,
+ul {
+    padding: 0 0 0 40px;
+}
+
+/**
+ * Correct list images handled incorrectly in IE 7.
+ */
+
+nav ul,
+nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+
+/**
+ * 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
+ * 2. Improve image quality when scaled in IE 7.
+ */
+
+img {
+    border: 0; /* 1 */
+    -ms-interpolation-mode: bicubic; /* 2 */
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
+ */
+
+figure {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+/**
+ * Correct margin displayed oddly in IE 6/7.
+ */
+
+form {
+    margin: 0;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct color not being inherited in IE 6/7/8/9.
+ * 2. Correct text not wrapping in Firefox 3.
+ * 3. Correct alignment displayed oddly in IE 6/7.
+ */
+
+legend {
+    border: 0; /* 1 */
+    padding: 0;
+    white-space: normal; /* 2 */
+    *margin-left: -7px; /* 3 */
+}
+
+/**
+ * 1. Correct font size not being inherited in all browsers.
+ * 2. Address margins set differently in IE 6/7, Firefox 3+, Safari 5,
+ *    and Chrome.
+ * 3. Improve appearance and consistency in all browsers.
+ */
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%; /* 1 */
+    margin: 0; /* 2 */
+    vertical-align: baseline; /* 3 */
+    *vertical-align: middle; /* 3 */
+}
+
+/**
+ * Address Firefox 3+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+    line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
+ *    Known issue: inner spacing remains in IE 6.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+    *overflow: visible;  /* 4 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+/**
+ * 1. Address box sizing set to content-box in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ * 3. Remove excess padding in IE 7.
+ *    Known issue: excess padding remains in IE 6.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+    *height: 13px; /* 3 */
+    *width: 13px; /* 3 */
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/**
+ * Remove inner padding and border in Firefox 3+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * 1. Remove default vertical scrollbar in IE 6/7/8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+
+textarea {
+    overflow: auto; /* 1 */
+    vertical-align: top; /* 2 */
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+</style>
+  <style type="text/css">
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+  body {
+    background: #fff;
+    font-family: "Source Sans Pro", "Helvetica Neueue", Helvetica, sans;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6em;
+  }
+  #content {
+    width: 70%;
+    max-width: 850px;
+    float: left;
+    padding: 30px 60px;
+    border-left: 1px solid #ddd;
+  }
+  #sidebar {
+    width: 25%;
+    float: left;
+    padding: 30px;
+    overflow: hidden;
+  }
+  #nav {
+    font-size: 130%;
+    margin: 0 0 15px 0;
+  }
+
+  #top {
+    display: block;
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    font-size: .85em;
+    text-transform: uppercase;
+  }
+
+  #footer {
+    font-size: .75em;
+    padding: 5px 30px;
+    border-top: 1px solid #ddd;
+    text-align: right;
+  }
+    #footer p {
+      margin: 0 0 0 30px;
+      display: inline-block;
+    }
+
+  h1, h2, h3, h4, h5 {
+    font-weight: 300;
+  }
+  h1 {
+    font-size: 2.5em;
+    line-height: 1.1em;
+    margin: 0 0 .50em 0;
+  }
+
+  h2 {
+    font-size: 1.75em;
+    margin: 1em 0 .50em 0;
+  }
+
+  h3 {
+    margin: 25px 0 10px 0;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 105%;
+  }
+
+  a {
+    color: #058;
+    text-decoration: none;
+    transition: color .3s ease-in-out;
+  }
+
+  a:hover {
+    color: #e08524;
+    transition: color .3s ease-in-out;
+  }
+
+  pre, code, .mono, .name {
+    font-family: "Ubuntu Mono", "Cousine", "DejaVu Sans Mono", monospace;
+  }
+
+  .title .name {
+    font-weight: bold;
+  }
+  .section-title {
+    margin-top: 2em;
+  }
+  .ident {
+    color: #900;
+  }
+
+  code {
+    background: #f9f9f9;
+  } 
+
+  pre {
+    background: #fefefe;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 0 #f3f3f3;
+    margin: 0 30px;
+    padding: 15px 30px;
+  }
+
+  .codehilite {
+    margin: 0 30px 10px 30px;
+  }
+
+    .codehilite pre {
+      margin: 0;
+    }
+    .codehilite .err { background: #ff3300; color: #fff !important; } 
+
+  table#module-list {
+    font-size: 110%;
+  }
+
+    table#module-list tr td:first-child {
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+
+    table#module-list td {
+      vertical-align: top;
+      padding-bottom: 8px;
+    }
+
+      table#module-list td p {
+        margin: 0 0 7px 0;
+      }
+
+  .def {
+    display: table;
+  }
+
+    .def p {
+      display: table-cell;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .def p:first-child {
+      white-space: nowrap;
+    }
+
+    .def p:last-child {
+      width: 100%;
+    }
+
+
+  #index {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+    ul#index .class_name {
+      /* font-size: 110%; */
+      font-weight: bold;
+    }
+    #index ul {
+      margin: 0;
+    }
+
+  .item {
+    margin: 0 0 15px 0;
+  }
+
+    .item .class {
+      margin: 0 0 25px 30px;
+    }
+
+      .item .class ul.class_list {
+        margin: 0 0 20px 0;
+      }
+
+    .item .name {
+      background: #fafafa;
+      margin: 0;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 3px;
+      display: inline-block;
+      min-width: 40%;
+    }
+      .item .name:hover {
+        background: #f6f6f6;
+      }
+
+    .item .empty_desc {
+      margin: 0 0 5px 0;
+      padding: 0;
+    }
+
+    .item .inheritance {
+      margin: 3px 0 0 30px;
+    }
+
+    .item .inherited {
+      color: #666;
+    }
+
+    .item .desc {
+      padding: 0 8px;
+      margin: 0;
+    }
+
+      .item .desc p {
+        margin: 0 0 10px 0;
+      }
+
+    .source_cont {
+      margin: 0;
+      padding: 0;
+    }
+
+    .source_link a {
+      background: #ffc300;
+      font-weight: 400;
+      font-size: .75em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 1px 1px 0 #f4b700;
+      
+      padding: 3px 8px;
+      border-radius: 2px;
+      transition: background .3s ease-in-out;
+    }
+      .source_link a:hover {
+        background: #FF7200;
+        text-shadow: none;
+        transition: background .3s ease-in-out;
+      }
+
+    .source {
+      display: none;
+      max-height: 600px;
+      overflow-y: scroll;
+      margin-bottom: 15px;
+    }
+
+      .source .codehilite {
+        margin: 0;
+      }
+
+  .desc h1, .desc h2, .desc h3 {
+    font-size: 100% !important;
+  }
+  .clear {
+    clear: both;
+  }
+
+  @media all and (max-width: 950px) {
+    #sidebar {
+      width: 35%;
+    }
+    #content {
+      width: 65%;
+    }
+  }
+  @media all and (max-width: 650px) {
+    #top {
+      display: none;
+    }
+    #sidebar {
+      float: none;
+      width: auto;
+    }
+    #content {
+      float: none;
+      width: auto;
+      padding: 30px;
+    }
+
+    #index ul {
+      padding: 0;
+      margin-bottom: 15px;
+    }
+    #index ul li {
+      display: inline-block;
+      margin-right: 30px;
+    }
+    #footer {
+      text-align: left;
+    }
+    #footer p {
+      display: block;
+      margin: inherit;
+    }
+  }
+
+  /*****************************/
+</style>
+  <style type="text/css">
+  pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #FF0000 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #0044DD } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #880000 } /* Name.Constant */
+.codehilite .nd { color: #AA22FF } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #0000FF } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #bbbbbb } /* Text.Whitespace */
+.codehilite .mb { color: #666666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #0000FF } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666666 } /* Literal.Number.Integer.Long */
+  </style>
+  <style type="text/css">
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+  <script type="text/javascript">
+  function toggle(id, $link) {
+    $node = document.getElementById(id);
+    if (!$node)
+    return;
+    if (!$node.style.display || $node.style.display == 'none') {
+    $node.style.display = 'block';
+    $link.innerHTML = 'Hide source &nequiv;';
+    } else {
+    $node.style.display = 'none';
+    $link.innerHTML = 'Show source &equiv;';
+    }
+  }
+  </script>
+</head>
+<body>
+<a href="#" id="top">Top</a>
+<div id="container">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div id="sidebar">
+    <h1>Index</h1>
+    <ul id="index">
+
+
+    <li class="set"><h3><a href="#header-classes">Classes</a></h3>
+      <ul>
+        <li class="mono">
+        <span class="class_name"><a href="#colivara_py.AsyncColivara">AsyncColivara</a></span>
+        
+        </li>
+        <li class="mono">
+        <span class="class_name"><a href="#colivara_py.Colivara">Colivara</a></span>
+        
+          
+  <ul>
+    <li class="mono"><a href="#colivara_py.Colivara.create_collection">create_collection</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.create_embedding">create_embedding</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.delete_collection">delete_collection</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.delete_document">delete_document</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.file_to_base64">file_to_base64</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.file_to_imgbase64">file_to_imgbase64</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.get_collection">get_collection</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.get_document">get_document</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.list_collections">list_collections</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.list_documents">list_documents</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.partial_update_collection">partial_update_collection</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.partial_update_document">partial_update_document</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.search">search</a></li>
+    <li class="mono"><a href="#colivara_py.Colivara.upsert_document">upsert_document</a></li>
+  </ul>
+
+        </li>
+      </ul>
+    </li>
+
+    <li class="set"><h3><a href="#header-submodules">Sub-modules</a></h3>
+      <ul>
+        <li class="mono"><a href="async_client.html">colivara_py.async_client</a></li>
+        <li class="mono"><a href="client.html">colivara_py.client</a></li>
+        <li class="mono"><a href="models.html">colivara_py.models</a></li>
+      </ul>
+    </li>
+    </ul>
+  </div>
+
+<article id="content">
+  
+
+  
+
+
+  <header id="section-intro">
+  <h1 class="title"><span class="name">colivara_py</span> module</h1>
+  
+  
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py" class="source">
+    <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">.client</span> <span class="kn">import</span> <span class="n">Colivara</span>
+<span class="kn">from</span> <span class="nn">.async_client</span> <span class="kn">import</span> <span class="n">AsyncColivara</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Colivara&quot;</span><span class="p">,</span> <span class="s2">&quot;AsyncColivara&quot;</span><span class="p">]</span>
+</pre></div>
+
+  </div>
+
+  </header>
+
+  <section id="section-items">
+
+
+    <h2 class="section-title" id="header-classes">Classes</h2>
+      
+      <div class="item">
+      <p id="colivara_py.AsyncColivara" class="name">class <span class="ident">AsyncColivara</span></p>
+      
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.AsyncColivara', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.AsyncColivara" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">AsyncColivara</span><span class="p">:</span>
+    <span class="c1"># not implemented yet</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;AsyncColivara is not implemented yet.&quot;</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+
+      <div class="class">
+      </div>
+      </div>
+      
+      <div class="item">
+      <p id="colivara_py.Colivara" class="name">class <span class="ident">Colivara</span></p>
+      
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Colivara</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the Colivara client.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            base_url: The base URL for the API (optional).</span>
+<span class="sd">            api_key: The API key for authentication (optional).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the API key is not provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="n">base_url</span> <span class="ow">or</span> <span class="s2">&quot;https://api.colivara.com&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">api_key</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;COLIVARA_API_KEY&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;API key must be provided either through parameter or COLIVARA_API_KEY environment variable.&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">create_collection</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CollectionOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the new collection.</span>
+<span class="sd">            metadata: The metadata for the new collection (optional).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The created CollectionOut object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If there&#39;s a conflict or an unexpected error occurs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/&quot;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">CollectionIn</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">409</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conflict error: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">list_collections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">CollectionOut</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lists all collections.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of CollectionOut objects.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the response format is unexpected.</span>
+<span class="sd">            Exception: If an unexpected error occurs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">collections_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="c1"># Handle potential empty list</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collections_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">collection</span><span class="p">)</span> <span class="k">for</span> <span class="n">collection</span> <span class="ow">in</span> <span class="n">collections_data</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected response format: </span><span class="si">{</span><span class="n">collections_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CollectionOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a specific collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            collection_name: The name of the collection to get.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The requested CollectionOut object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the collection is not found or an unexpected error occurs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collection &#39;</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">partial_update_collection</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CollectionOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Partially updates a collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            collection_name: The name of the collection to update.</span>
+<span class="sd">            new_name: The new name for the collection (optional).</span>
+<span class="sd">            new_metadata: The new metadata for the collection (optional).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The updated CollectionOut object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the collection is not found or there&#39;s a problem with the update.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+
+        <span class="c1"># Create a CollectionIn object with sane defaults and only updated fields</span>
+        <span class="n">updated_data</span> <span class="o">=</span> <span class="n">PatchCollectionIn</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">updated_data</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collection &#39;</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">delete_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a specific collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            collection_name: The name of the collection to delete.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the collection is not found or an unexpected error occurs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">204</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collection &#39;</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">upsert_document</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span><span class="p">,</span>
+        <span class="n">document_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">document_base64</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">document_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create or update a document in a collection.</span>
+
+<span class="sd">        This method allows you to upsert (insert or update) a document in the specified collection.</span>
+<span class="sd">        You can provide either a URL or a base64-encoded string of the document content.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): The name of the document.</span>
+<span class="sd">            metadata (Optional[Dict[str, Any]]): Additional metadata for the document.</span>
+<span class="sd">            collection_name (str): The name of the collection to add the document to. Defaults to &quot;default collection&quot;.</span>
+<span class="sd">            document_url (Optional[str]): The URL of the document, if available.</span>
+<span class="sd">            document_base64 (Optional[str]): The base64-encoded string of the document content, if available.</span>
+<span class="sd">            document_path (Optional[str]): The path to the document file to be uploaded.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            DocumentOut: The created or updated document with its details.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no valid document source is provided or if the file path is invalid.</span>
+<span class="sd">            FileNotFoundError: If the specified file path does not exist.</span>
+<span class="sd">            PermissionError: If there&#39;s no read permission for the specified file.</span>
+<span class="sd">            requests.HTTPError: If the API request fails.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># if user sent us a document_path, we will read the file and convert it to base64</span>
+        <span class="k">if</span> <span class="n">document_path</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">document_path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The specified path is not a file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">R_OK</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">PermissionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No read permission for file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                    <span class="n">document_base64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The specified file does not exist: </span><span class="si">{</span><span class="n">document_path</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error reading file: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">document_url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">document_base64</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Either document_url, document_base64, or document_path must be provided.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/upsert-document/&quot;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">DocumentIn</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span>
+            <span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span>
+            <span class="n">url</span><span class="o">=</span><span class="n">document_url</span><span class="p">,</span>
+            <span class="n">base64</span><span class="o">=</span><span class="n">document_base64</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bad request: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_document</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">document_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span><span class="p">,</span>
+        <span class="n">expand</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve a specific document from the user documents.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            document_name (str): The name of the document to retrieve.</span>
+<span class="sd">            collection_name (str): The name of the collection containing the document.</span>
+<span class="sd">                                   Defaults to &quot;default collection&quot;.</span>
+<span class="sd">            expand (Optional[str]): A comma-separated list of fields to expand in the response.</span>
+<span class="sd">                                    Currently, only &quot;pages&quot; is supported, the document&#39;s pages will be included if provided.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DocumentOut: The retrieved document with its details.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            requests.HTTPError: If the API request fails.</span>
+<span class="sd">            ValueError: If the document or collection is not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/</span><span class="si">{</span><span class="n">document_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">,</span> <span class="s2">&quot;expand&quot;</span><span class="p">:</span> <span class="n">expand</span><span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Document not found: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">partial_update_document</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">document_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">collection_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">document_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">document_base64</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Partially update a document.</span>
+
+<span class="sd">        This method allows for partial updates to a document&#39;s details. Only the fields provided will be updated.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            document_name (str): The name of the document to be updated.</span>
+<span class="sd">            name (Optional[str]): The new name for the document, if changing.</span>
+<span class="sd">            metadata (Optional[Dict[str, Any]]): Updated metadata for the document.</span>
+<span class="sd">            collection_name (Optional[str]): The name of the collection to move the document to, if changing.</span>
+<span class="sd">            document_url (Optional[str]): The new URL of the document, if changing.</span>
+<span class="sd">            document_base64 (Optional[str]): The new base64-encoded string of the document content, if changing.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DocumentOut: The updated document with its details.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            requests.HTTPError: If the API request fails.</span>
+<span class="sd">            ValueError: If the document is not found or the update is invalid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/</span><span class="si">{</span><span class="n">document_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">DocumentInPatch</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+            <span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span>
+            <span class="n">url</span><span class="o">=</span><span class="n">document_url</span><span class="p">,</span>
+            <span class="n">base64</span><span class="o">=</span><span class="n">document_base64</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">404</span><span class="p">,</span> <span class="mi">409</span><span class="p">]:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Update failed: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">list_documents</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DocumentOut</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch a list of documents for a given collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            collection_name (str): The name of the collection to fetch documents from.</span>
+<span class="sd">                                   Defaults to &quot;default collection&quot;. Use &quot;all&quot; to fetch documents from all collections.</span>
+<span class="sd">            expand (Optional[str]): A comma-separated string specifying additional fields to include in the response.</span>
+<span class="sd">                                    If &quot;pages&quot; is included, the pages of each document will be included.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[DocumentOut]: A list of documents with their details.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            requests.HTTPError: If the API request fails.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">,</span> <span class="s2">&quot;expand&quot;</span><span class="p">:</span> <span class="n">expand</span><span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">delete_document</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">document_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a document by its name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            document_name (str): The name of the document to be deleted.</span>
+<span class="sd">            collection_name (str): The name of the collection containing the document.</span>
+<span class="sd">                                   Defaults to &quot;default collection&quot;. Use &quot;all&quot; to access all collections belonging to the user.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            requests.HTTPError: If the API request fails.</span>
+<span class="sd">            ValueError: If the document does not exist or does not belong to the authenticated user.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/delete-document/</span><span class="si">{</span><span class="n">document_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">204</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">404</span><span class="p">,</span> <span class="mi">409</span><span class="p">]:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deletion failed: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+        <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">query_filter</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search for pages similar to a given query.</span>
+
+<span class="sd">        This method allows you to search for pages similar to a given query across all documents</span>
+<span class="sd">        in the specified collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            query (str): The search query string.</span>
+<span class="sd">            collection_name (str): The name of the collection to search in. Defaults to &quot;all&quot;.</span>
+<span class="sd">            top_k (int): The number of top results to return. Defaults to 3.</span>
+<span class="sd">            query_filter (Optional[Dict[str, Any]]): An optional filter to apply to the search results.</span>
+<span class="sd">                The filter can be used to narrow down the search based on specific criteria.</span>
+<span class="sd">                It should be a dictionary with the following possible keys:</span>
+<span class="sd">                - &quot;on&quot;: &quot;document&quot; or &quot;collection&quot;</span>
+<span class="sd">                - &quot;key&quot;: str or List[str]</span>
+<span class="sd">                - &quot;value&quot;: Optional[Union[str, int, float, bool]]</span>
+<span class="sd">                - &quot;lookup&quot;: One of &quot;key_lookup&quot;, &quot;contains&quot;, &quot;contained_by&quot;, &quot;has_key&quot;, &quot;has_keys&quot;, &quot;has_any_keys&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QueryOut: The search results, including the query and a list of similar pages.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the query is invalid, the collection does not exist, or the query_filter is invalid.</span>
+<span class="sd">            requests.HTTPError: If the API request fails.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            # Simple search</span>
+<span class="sd">            results = client.search(&quot;what is 1+1?&quot;)</span>
+
+<span class="sd">            # search with a specific collection</span>
+<span class="sd">            results = client.search(&quot;what is 1+1?&quot;, collection_name=&quot;my_collection&quot;)</span>
+
+<span class="sd">            # Search with a filter on document metadata</span>
+<span class="sd">            results = client.search(&quot;what is 1+1?&quot;, query_filter={</span>
+<span class="sd">                &quot;on&quot;: &quot;document&quot;,</span>
+<span class="sd">                &quot;key&quot;: &quot;category&quot;,</span>
+<span class="sd">                &quot;value&quot;: &quot;AI&quot;,</span>
+<span class="sd">                &quot;lookup&quot;: &quot;contains&quot;</span>
+<span class="sd">            })</span>
+
+<span class="sd">            # Search with a filter on collection metadata</span>
+<span class="sd">            results = client.search(&quot;what is 1+1?&quot;, query_filter={</span>
+<span class="sd">                &quot;on&quot;: &quot;collection&quot;,</span>
+<span class="sd">                &quot;key&quot;: [&quot;tag1&quot;, &quot;tag2&quot;],</span>
+<span class="sd">                &quot;lookup&quot;: &quot;has_any_keys&quot;</span>
+<span class="sd">            })</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/search/&quot;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
+            <span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">,</span>
+            <span class="s2">&quot;top_k&quot;</span><span class="p">:</span> <span class="n">top_k</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">filter_obj</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">query_filter</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">filter_obj</span> <span class="o">=</span> <span class="n">QueryFilter</span><span class="p">(</span><span class="o">**</span><span class="n">query_filter</span><span class="p">)</span>
+                <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;query_filter&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filter_obj</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid query_filter: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">query_in</span> <span class="o">=</span> <span class="n">QueryIn</span><span class="p">(</span><span class="o">**</span><span class="n">payload</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="n">request_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">query_in</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">QueryOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">503</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Service unavailable: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">file_to_imgbase64</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">FileOut</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a file to a list of base64 encoded images.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_path: The path to the file to be converted.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of FileOut objects containing the base64 encoded strings of the images.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If there&#39;s an error during the file conversion process.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/helpers/file-to-imgbase64/&quot;</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="n">file</span><span class="p">}</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+                <span class="n">url</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">FileOut</span><span class="p">(</span><span class="o">**</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">file_to_base64</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a file to a base64 encoded string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_path: The path to the file to be converted.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A base64 encoded string of the file.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If there&#39;s an error during the file conversion process.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Read the file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file_content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="c1"># Encode the file content to base64</span>
+        <span class="n">base64_content</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base64_content</span>
+
+    <span class="k">def</span> <span class="nf">create_embedding</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">task</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TaskEnum</span><span class="p">]</span> <span class="o">=</span> <span class="n">TaskEnum</span><span class="o">.</span><span class="n">query</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EmbeddingsOut</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates embeddings for the given input data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            input_data: A string or list of strings to create embeddings for.</span>
+<span class="sd">            task: The task type for embedding creation. Can be &quot;query&quot; or &quot;image&quot;. Defaults to &quot;query&quot;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An EmbeddingsOut object containing the embeddings, model information, and usage data.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If an invalid task is provided.</span>
+<span class="sd">            Exception: If there&#39;s an unexpected error from the API.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            client.create_embedding(&quot;what is 1+1?&quot;, task=&quot;query&quot;)</span>
+<span class="sd">            client.create_embedding([&quot;image1.jpg&quot;, &quot;image2.jpg&quot;], task=&quot;image&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/embeddings/&quot;</span>
+
+        <span class="c1"># Ensure input_data is a list</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">input_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_data</span><span class="p">]</span>
+
+        <span class="c1"># Validate and convert task to TaskEnum</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="n">TaskEnum</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid task: </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2">. Must be &#39;query&#39; or &#39;image&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">TaskEnum</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Task must be a string or TaskEnum.&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">EmbeddingsIn</span><span class="p">(</span><span class="n">input_data</span><span class="o">=</span><span class="n">input_data</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid input data: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">EmbeddingsOut</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">503</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Service Unavailable: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+
+      <div class="class">
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.create_collection">
+    <p>def <span class="ident">create_collection</span>(</p><p>self, name: str, metadata: Optional[Dict[str, Any]] = {})</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Creates a new collection.</p>
+<p>Args:
+    name: The name of the new collection.
+    metadata: The metadata for the new collection (optional).</p>
+<p>Returns:
+    The created CollectionOut object.</p>
+<p>Raises:
+    Exception: If there's a conflict or an unexpected error occurs.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.create_collection', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.create_collection" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">create_collection</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CollectionOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a new collection.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        name: The name of the new collection.</span>
+<span class="sd">        metadata: The metadata for the new collection (optional).</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The created CollectionOut object.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If there&#39;s a conflict or an unexpected error occurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">CollectionIn</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">409</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conflict error: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.create_embedding">
+    <p>def <span class="ident">create_embedding</span>(</p><p>self, input_data: Union[str, List[str]], task: Union[str, colivara_py.models.TaskEnum] = &lt;TaskEnum.query: &#39;query&#39;&gt;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Creates embeddings for the given input data.</p>
+<p>Args:
+    input_data: A string or list of strings to create embeddings for.
+    task: The task type for embedding creation. Can be "query" or "image". Defaults to "query".</p>
+<p>Returns:
+    An EmbeddingsOut object containing the embeddings, model information, and usage data.</p>
+<p>Raises:
+    ValueError: If an invalid task is provided.
+    Exception: If there's an unexpected error from the API.</p>
+<p>Example:
+    client.create_embedding("what is 1+1?", task="query")
+    client.create_embedding(["image1.jpg", "image2.jpg"], task="image")</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.create_embedding', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.create_embedding" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">create_embedding</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">task</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TaskEnum</span><span class="p">]</span> <span class="o">=</span> <span class="n">TaskEnum</span><span class="o">.</span><span class="n">query</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EmbeddingsOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates embeddings for the given input data.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        input_data: A string or list of strings to create embeddings for.</span>
+<span class="sd">        task: The task type for embedding creation. Can be &quot;query&quot; or &quot;image&quot;. Defaults to &quot;query&quot;.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        An EmbeddingsOut object containing the embeddings, model information, and usage data.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If an invalid task is provided.</span>
+<span class="sd">        Exception: If there&#39;s an unexpected error from the API.</span>
+<span class="sd">    Example:</span>
+<span class="sd">        client.create_embedding(&quot;what is 1+1?&quot;, task=&quot;query&quot;)</span>
+<span class="sd">        client.create_embedding([&quot;image1.jpg&quot;, &quot;image2.jpg&quot;], task=&quot;image&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/embeddings/&quot;</span>
+    <span class="c1"># Ensure input_data is a list</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">input_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_data</span><span class="p">]</span>
+    <span class="c1"># Validate and convert task to TaskEnum</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">TaskEnum</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid task: </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2">. Must be &#39;query&#39; or &#39;image&#39;.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">TaskEnum</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Task must be a string or TaskEnum.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">EmbeddingsIn</span><span class="p">(</span><span class="n">input_data</span><span class="o">=</span><span class="n">input_data</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid input data: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">EmbeddingsOut</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">503</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Service Unavailable: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.delete_collection">
+    <p>def <span class="ident">delete_collection</span>(</p><p>self, collection_name: str)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Deletes a specific collection.</p>
+<p>Args:
+    collection_name: The name of the collection to delete.</p>
+<p>Raises:
+    Exception: If the collection is not found or an unexpected error occurs.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.delete_collection', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.delete_collection" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">delete_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a specific collection.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        collection_name: The name of the collection to delete.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If the collection is not found or an unexpected error occurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">204</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collection &#39;</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.delete_document">
+    <p>def <span class="ident">delete_document</span>(</p><p>self, document_name: str, collection_name: str = &#39;default collection&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Delete a document by its name.</p>
+<p>Args:
+    document_name (str): The name of the document to be deleted.
+    collection_name (str): The name of the collection containing the document.
+                           Defaults to "default collection". Use "all" to access all collections belonging to the user.</p>
+<p>Raises:
+    requests.HTTPError: If the API request fails.
+    ValueError: If the document does not exist or does not belong to the authenticated user.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.delete_document', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.delete_document" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">delete_document</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">document_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete a document by its name.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        document_name (str): The name of the document to be deleted.</span>
+<span class="sd">        collection_name (str): The name of the collection containing the document.</span>
+<span class="sd">                               Defaults to &quot;default collection&quot;. Use &quot;all&quot; to access all collections belonging to the user.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        requests.HTTPError: If the API request fails.</span>
+<span class="sd">        ValueError: If the document does not exist or does not belong to the authenticated user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/delete-document/</span><span class="si">{</span><span class="n">document_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">204</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">404</span><span class="p">,</span> <span class="mi">409</span><span class="p">]:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deletion failed: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.file_to_base64">
+    <p>def <span class="ident">file_to_base64</span>(</p><p>self, file_path: str)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Converts a file to a base64 encoded string.</p>
+<p>Args:
+    file_path: The path to the file to be converted.</p>
+<p>Returns:
+    A base64 encoded string of the file.</p>
+<p>Raises:
+    Exception: If there's an error during the file conversion process.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.file_to_base64', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.file_to_base64" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">file_to_base64</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a file to a base64 encoded string.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        file_path: The path to the file to be converted.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A base64 encoded string of the file.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If there&#39;s an error during the file conversion process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read the file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file_content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="c1"># Encode the file content to base64</span>
+    <span class="n">base64_content</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">base64_content</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.file_to_imgbase64">
+    <p>def <span class="ident">file_to_imgbase64</span>(</p><p>self, file_path: str)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Converts a file to a list of base64 encoded images.</p>
+<p>Args:
+    file_path: The path to the file to be converted.</p>
+<p>Returns:
+    A list of FileOut objects containing the base64 encoded strings of the images.</p>
+<p>Raises:
+    Exception: If there's an error during the file conversion process.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.file_to_imgbase64', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.file_to_imgbase64" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">file_to_imgbase64</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">FileOut</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a file to a list of base64 encoded images.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        file_path: The path to the file to be converted.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of FileOut objects containing the base64 encoded strings of the images.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If there&#39;s an error during the file conversion process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/helpers/file-to-imgbase64/&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="n">file</span><span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="n">url</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">FileOut</span><span class="p">(</span><span class="o">**</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.get_collection">
+    <p>def <span class="ident">get_collection</span>(</p><p>self, collection_name: str)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Gets a specific collection.</p>
+<p>Args:
+    collection_name: The name of the collection to get.</p>
+<p>Returns:
+    The requested CollectionOut object.</p>
+<p>Raises:
+    Exception: If the collection is not found or an unexpected error occurs.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.get_collection', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.get_collection" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CollectionOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets a specific collection.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        collection_name: The name of the collection to get.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The requested CollectionOut object.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If the collection is not found or an unexpected error occurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collection &#39;</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.get_document">
+    <p>def <span class="ident">get_document</span>(</p><p>self, document_name: str, collection_name: str = &#39;default collection&#39;, expand: Optional[str] = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Retrieve a specific document from the user documents.</p>
+<p>Args:
+    document_name (str): The name of the document to retrieve.
+    collection_name (str): The name of the collection containing the document.
+                           Defaults to "default collection".
+    expand (Optional[str]): A comma-separated list of fields to expand in the response.
+                            Currently, only "pages" is supported, the document's pages will be included if provided.</p>
+<p>Returns:
+    DocumentOut: The retrieved document with its details.</p>
+<p>Raises:
+    requests.HTTPError: If the API request fails.
+    ValueError: If the document or collection is not found.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.get_document', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.get_document" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_document</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">document_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span><span class="p">,</span>
+    <span class="n">expand</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve a specific document from the user documents.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        document_name (str): The name of the document to retrieve.</span>
+<span class="sd">        collection_name (str): The name of the collection containing the document.</span>
+<span class="sd">                               Defaults to &quot;default collection&quot;.</span>
+<span class="sd">        expand (Optional[str]): A comma-separated list of fields to expand in the response.</span>
+<span class="sd">                                Currently, only &quot;pages&quot; is supported, the document&#39;s pages will be included if provided.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        DocumentOut: The retrieved document with its details.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        requests.HTTPError: If the API request fails.</span>
+<span class="sd">        ValueError: If the document or collection is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/</span><span class="si">{</span><span class="n">document_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">,</span> <span class="s2">&quot;expand&quot;</span><span class="p">:</span> <span class="n">expand</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Document not found: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.list_collections">
+    <p>def <span class="ident">list_collections</span>(</p><p>self)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Lists all collections.</p>
+<p>Returns:
+    A list of CollectionOut objects.</p>
+<p>Raises:
+    ValueError: If the response format is unexpected.
+    Exception: If an unexpected error occurs.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.list_collections', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.list_collections" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">list_collections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">CollectionOut</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Lists all collections.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of CollectionOut objects.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the response format is unexpected.</span>
+<span class="sd">        Exception: If an unexpected error occurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">collections_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="c1"># Handle potential empty list</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collections_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">collection</span><span class="p">)</span> <span class="k">for</span> <span class="n">collection</span> <span class="ow">in</span> <span class="n">collections_data</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected response format: </span><span class="si">{</span><span class="n">collections_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.list_documents">
+    <p>def <span class="ident">list_documents</span>(</p><p>self, collection_name: str = &#39;default collection&#39;, expand: Optional[str] = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Fetch a list of documents for a given collection.</p>
+<p>Args:
+    collection_name (str): The name of the collection to fetch documents from.
+                           Defaults to "default collection". Use "all" to fetch documents from all collections.
+    expand (Optional[str]): A comma-separated string specifying additional fields to include in the response.
+                            If "pages" is included, the pages of each document will be included.</p>
+<p>Returns:
+    List[DocumentOut]: A list of documents with their details.</p>
+<p>Raises:
+    requests.HTTPError: If the API request fails.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.list_documents', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.list_documents" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">list_documents</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DocumentOut</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetch a list of documents for a given collection.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        collection_name (str): The name of the collection to fetch documents from.</span>
+<span class="sd">                               Defaults to &quot;default collection&quot;. Use &quot;all&quot; to fetch documents from all collections.</span>
+<span class="sd">        expand (Optional[str]): A comma-separated string specifying additional fields to include in the response.</span>
+<span class="sd">                                If &quot;pages&quot; is included, the pages of each document will be included.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List[DocumentOut]: A list of documents with their details.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        requests.HTTPError: If the API request fails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">,</span> <span class="s2">&quot;expand&quot;</span><span class="p">:</span> <span class="n">expand</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.partial_update_collection">
+    <p>def <span class="ident">partial_update_collection</span>(</p><p>self, collection_name: str, name: Optional[str] = None, metadata: Optional[Dict[str, Any]] = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Partially updates a collection.</p>
+<p>Args:
+    collection_name: The name of the collection to update.
+    new_name: The new name for the collection (optional).
+    new_metadata: The new metadata for the collection (optional).</p>
+<p>Returns:
+    The updated CollectionOut object.</p>
+<p>Raises:
+    Exception: If the collection is not found or there's a problem with the update.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.partial_update_collection', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.partial_update_collection" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">partial_update_collection</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CollectionOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Partially updates a collection.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        collection_name: The name of the collection to update.</span>
+<span class="sd">        new_name: The new name for the collection (optional).</span>
+<span class="sd">        new_metadata: The new metadata for the collection (optional).</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The updated CollectionOut object.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If the collection is not found or there&#39;s a problem with the update.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/collections/</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+    <span class="c1"># Create a CollectionIn object with sane defaults and only updated fields</span>
+    <span class="n">updated_data</span> <span class="o">=</span> <span class="n">PatchCollectionIn</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">updated_data</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CollectionOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collection &#39;</span><span class="si">{</span><span class="n">collection_name</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.partial_update_document">
+    <p>def <span class="ident">partial_update_document</span>(</p><p>self, document_name: str, name: Optional[str] = None, metadata: Optional[Dict[str, Any]] = None, collection_name: Optional[str] = None, document_url: Optional[str] = None, document_base64: Optional[str] = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Partially update a document.</p>
+<p>This method allows for partial updates to a document's details. Only the fields provided will be updated.</p>
+<p>Args:
+    document_name (str): The name of the document to be updated.
+    name (Optional[str]): The new name for the document, if changing.
+    metadata (Optional[Dict[str, Any]]): Updated metadata for the document.
+    collection_name (Optional[str]): The name of the collection to move the document to, if changing.
+    document_url (Optional[str]): The new URL of the document, if changing.
+    document_base64 (Optional[str]): The new base64-encoded string of the document content, if changing.</p>
+<p>Returns:
+    DocumentOut: The updated document with its details.</p>
+<p>Raises:
+    requests.HTTPError: If the API request fails.
+    ValueError: If the document is not found or the update is invalid.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.partial_update_document', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.partial_update_document" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">partial_update_document</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">document_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">document_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">document_base64</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Partially update a document.</span>
+<span class="sd">    This method allows for partial updates to a document&#39;s details. Only the fields provided will be updated.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        document_name (str): The name of the document to be updated.</span>
+<span class="sd">        name (Optional[str]): The new name for the document, if changing.</span>
+<span class="sd">        metadata (Optional[Dict[str, Any]]): Updated metadata for the document.</span>
+<span class="sd">        collection_name (Optional[str]): The name of the collection to move the document to, if changing.</span>
+<span class="sd">        document_url (Optional[str]): The new URL of the document, if changing.</span>
+<span class="sd">        document_base64 (Optional[str]): The new base64-encoded string of the document content, if changing.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        DocumentOut: The updated document with its details.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        requests.HTTPError: If the API request fails.</span>
+<span class="sd">        ValueError: If the document is not found or the update is invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/</span><span class="si">{</span><span class="n">document_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">DocumentInPatch</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+        <span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">document_url</span><span class="p">,</span>
+        <span class="n">base64</span><span class="o">=</span><span class="n">document_base64</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">404</span><span class="p">,</span> <span class="mi">409</span><span class="p">]:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Update failed: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.search">
+    <p>def <span class="ident">search</span>(</p><p>self, query: str, collection_name: str = &#39;all&#39;, top_k: int = 3, query_filter: Optional[Dict[str, Any]] = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Search for pages similar to a given query.</p>
+<p>This method allows you to search for pages similar to a given query across all documents
+in the specified collection.</p>
+<p>Args:
+    query (str): The search query string.
+    collection_name (str): The name of the collection to search in. Defaults to "all".
+    top_k (int): The number of top results to return. Defaults to 3.
+    query_filter (Optional[Dict[str, Any]]): An optional filter to apply to the search results.
+        The filter can be used to narrow down the search based on specific criteria.
+        It should be a dictionary with the following possible keys:
+        - "on": "document" or "collection"
+        - "key": str or List[str]
+        - "value": Optional[Union[str, int, float, bool]]
+        - "lookup": One of "key_lookup", "contains", "contained_by", "has_key", "has_keys", "has_any_keys"</p>
+<p>Returns:
+    QueryOut: The search results, including the query and a list of similar pages.</p>
+<p>Raises:
+    ValueError: If the query is invalid, the collection does not exist, or the query_filter is invalid.
+    requests.HTTPError: If the API request fails.</p>
+<p>Examples:
+    # Simple search
+    results = client.search("what is 1+1?")</p>
+<pre><code># search with a specific collection
+results = client.search("what is 1+1?", collection_name="my_collection")
+
+# Search with a filter on document metadata
+results = client.search("what is 1+1?", query_filter={
+    "on": "document",
+    "key": "category",
+    "value": "AI",
+    "lookup": "contains"
+})
+
+# Search with a filter on collection metadata
+results = client.search("what is 1+1?", query_filter={
+    "on": "collection",
+    "key": ["tag1", "tag2"],
+    "lookup": "has_any_keys"
+})
+</code></pre></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.search', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.search" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">query_filter</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Search for pages similar to a given query.</span>
+<span class="sd">    This method allows you to search for pages similar to a given query across all documents</span>
+<span class="sd">    in the specified collection.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        query (str): The search query string.</span>
+<span class="sd">        collection_name (str): The name of the collection to search in. Defaults to &quot;all&quot;.</span>
+<span class="sd">        top_k (int): The number of top results to return. Defaults to 3.</span>
+<span class="sd">        query_filter (Optional[Dict[str, Any]]): An optional filter to apply to the search results.</span>
+<span class="sd">            The filter can be used to narrow down the search based on specific criteria.</span>
+<span class="sd">            It should be a dictionary with the following possible keys:</span>
+<span class="sd">            - &quot;on&quot;: &quot;document&quot; or &quot;collection&quot;</span>
+<span class="sd">            - &quot;key&quot;: str or List[str]</span>
+<span class="sd">            - &quot;value&quot;: Optional[Union[str, int, float, bool]]</span>
+<span class="sd">            - &quot;lookup&quot;: One of &quot;key_lookup&quot;, &quot;contains&quot;, &quot;contained_by&quot;, &quot;has_key&quot;, &quot;has_keys&quot;, &quot;has_any_keys&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        QueryOut: The search results, including the query and a list of similar pages.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the query is invalid, the collection does not exist, or the query_filter is invalid.</span>
+<span class="sd">        requests.HTTPError: If the API request fails.</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        # Simple search</span>
+<span class="sd">        results = client.search(&quot;what is 1+1?&quot;)</span>
+<span class="sd">        # search with a specific collection</span>
+<span class="sd">        results = client.search(&quot;what is 1+1?&quot;, collection_name=&quot;my_collection&quot;)</span>
+<span class="sd">        # Search with a filter on document metadata</span>
+<span class="sd">        results = client.search(&quot;what is 1+1?&quot;, query_filter={</span>
+<span class="sd">            &quot;on&quot;: &quot;document&quot;,</span>
+<span class="sd">            &quot;key&quot;: &quot;category&quot;,</span>
+<span class="sd">            &quot;value&quot;: &quot;AI&quot;,</span>
+<span class="sd">            &quot;lookup&quot;: &quot;contains&quot;</span>
+<span class="sd">        })</span>
+<span class="sd">        # Search with a filter on collection metadata</span>
+<span class="sd">        results = client.search(&quot;what is 1+1?&quot;, query_filter={</span>
+<span class="sd">            &quot;on&quot;: &quot;collection&quot;,</span>
+<span class="sd">            &quot;key&quot;: [&quot;tag1&quot;, &quot;tag2&quot;],</span>
+<span class="sd">            &quot;lookup&quot;: &quot;has_any_keys&quot;</span>
+<span class="sd">        })</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/search/&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
+        <span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">,</span>
+        <span class="s2">&quot;top_k&quot;</span><span class="p">:</span> <span class="n">top_k</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">filter_obj</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">query_filter</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">filter_obj</span> <span class="o">=</span> <span class="n">QueryFilter</span><span class="p">(</span><span class="o">**</span><span class="n">query_filter</span><span class="p">)</span>
+            <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;query_filter&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filter_obj</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid query_filter: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">query_in</span> <span class="o">=</span> <span class="n">QueryIn</span><span class="p">(</span><span class="o">**</span><span class="n">payload</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="n">request_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">query_in</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">QueryOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">503</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Service unavailable: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.Colivara.upsert_document">
+    <p>def <span class="ident">upsert_document</span>(</p><p>self, name: str, metadata: Optional[Dict[str, Any]] = None, collection_name: str = &#39;default collection&#39;, document_url: Optional[str] = None, document_base64: Optional[str] = None, document_path: Union[str, pathlib.Path, NoneType] = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Create or update a document in a collection.</p>
+<p>This method allows you to upsert (insert or update) a document in the specified collection.
+You can provide either a URL or a base64-encoded string of the document content.</p>
+<p>Args:
+    name (str): The name of the document.
+    metadata (Optional[Dict[str, Any]]): Additional metadata for the document.
+    collection_name (str): The name of the collection to add the document to. Defaults to "default collection".
+    document_url (Optional[str]): The URL of the document, if available.
+    document_base64 (Optional[str]): The base64-encoded string of the document content, if available.
+    document_path (Optional[str]): The path to the document file to be uploaded.
+Returns:
+    DocumentOut: The created or updated document with its details.</p>
+<p>Raises:
+    ValueError: If no valid document source is provided or if the file path is invalid.
+    FileNotFoundError: If the specified file path does not exist.
+    PermissionError: If there's no read permission for the specified file.
+    requests.HTTPError: If the API request fails.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.Colivara.upsert_document', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.Colivara.upsert_document" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">upsert_document</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default collection&quot;</span><span class="p">,</span>
+    <span class="n">document_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">document_base64</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">document_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create or update a document in a collection.</span>
+<span class="sd">    This method allows you to upsert (insert or update) a document in the specified collection.</span>
+<span class="sd">    You can provide either a URL or a base64-encoded string of the document content.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): The name of the document.</span>
+<span class="sd">        metadata (Optional[Dict[str, Any]]): Additional metadata for the document.</span>
+<span class="sd">        collection_name (str): The name of the collection to add the document to. Defaults to &quot;default collection&quot;.</span>
+<span class="sd">        document_url (Optional[str]): The URL of the document, if available.</span>
+<span class="sd">        document_base64 (Optional[str]): The base64-encoded string of the document content, if available.</span>
+<span class="sd">        document_path (Optional[str]): The path to the document file to be uploaded.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        DocumentOut: The created or updated document with its details.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no valid document source is provided or if the file path is invalid.</span>
+<span class="sd">        FileNotFoundError: If the specified file path does not exist.</span>
+<span class="sd">        PermissionError: If there&#39;s no read permission for the specified file.</span>
+<span class="sd">        requests.HTTPError: If the API request fails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># if user sent us a document_path, we will read the file and convert it to base64</span>
+    <span class="k">if</span> <span class="n">document_path</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">document_path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The specified path is not a file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">R_OK</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">PermissionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No read permission for file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">document_base64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The specified file does not exist: </span><span class="si">{</span><span class="n">document_path</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error reading file: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">document_url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">document_base64</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Either document_url, document_base64, or document_path must be provided.&quot;</span>
+        <span class="p">)</span>
+    <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/v1/documents/upsert-document/&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">DocumentIn</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span>
+        <span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">document_url</span><span class="p">,</span>
+        <span class="n">base64</span><span class="o">=</span><span class="n">document_base64</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DocumentOut</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">GenericError</span><span class="p">(</span><span class="o">**</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bad request: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+      </div>
+      </div>
+
+    <h2 class="section-title" id="header-submodules">Sub-modules</h2>
+      <div class="item">
+      <p class="name"><a href="async_client.html">colivara_py.async_client</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="client.html">colivara_py.client</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="models.html">colivara_py.models</a></p>
+      
+  
+
+      </div>
+  </section>
+</article>
+  <div class="clear"> </div>
+  <footer id="footer">
+    <p>
+      Generated by <a href="https://github.com/timothycrosley/pdocs">pdocs 1.2.0</a>
+    </p>
+  </footer>
+</div>
+</body>
+</html>

@@ -22,7 +22,7 @@ build-backend = "setuptools.build_meta"
 members = ["colivara-py"]
 
 [tool.uv]
-dev-dependencies = ["pytest", "mypy", "ruff", "pytest-asyncio", "responses", "types-requests","pytest-cov"]
+dev-dependencies = ["pytest", "mypy", "ruff", "pytest-asyncio", "responses", "types-requests","pytest-cov", "pdocs"]
 
 [project.urls]
 Homepage = "https://github.com/tjmlabs/colivara-py"
