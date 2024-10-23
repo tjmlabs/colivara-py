@@ -189,7 +189,7 @@ class Colivara:
         document_base64: Optional[str] = None,
         document_path: Optional[Union[str, Path]] = None,
         wait: Optional[bool] = False,
-    ) -> DocumentOut:
+    ) -> DocumentOut | GenericMessage:
         """
         Create or update a document in a collection.
 
