@@ -41,6 +41,10 @@ class GenericError(BaseModel):
     detail: str
 
 
+class GenericMessage(BaseModel):
+    detail: str
+
+
 class DocumentIn(BaseModel):
     name: str
     metadata: dict = Field(default_factory=dict)
@@ -50,6 +54,7 @@ class DocumentIn(BaseModel):
     )
     url: Optional[str] = None
     base64: Optional[str] = None
+    wait: Optional[bool] = False
 
     @model_validator(mode="after")
     def base64_or_url(self) -> Self:

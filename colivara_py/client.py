@@ -5,6 +5,7 @@ from .models import (
     CollectionIn,
     CollectionOut,
     GenericError,
+    GenericMessage,
     PatchCollectionIn,
     DocumentIn,
     DocumentOut,
@@ -187,6 +188,7 @@ class Colivara:
         document_url: Optional[str] = None,
         document_base64: Optional[str] = None,
         document_path: Optional[Union[str, Path]] = None,
+        wait: Optional[bool] = False,
     ) -> DocumentOut:
         """
         Create or update a document in a collection.
@@ -201,6 +203,7 @@ class Colivara:
             document_url (Optional[str]): The URL of the document, if available.
             document_base64 (Optional[str]): The base64-encoded string of the document content, if available.
             document_path (Optional[str]): The path to the document file to be uploaded.
+            wait (Optional[bool]): If True, the method will wait for the document to be processed before returning.
         Returns:
             DocumentOut: The created or updated document with its details.
 
@@ -238,12 +241,16 @@ class Colivara:
             collection_name=collection_name,
             url=document_url,
             base64=document_base64,
+            wait=wait,
         ).model_dump()
 
         response = requests.post(request_url, json=payload, headers=self.headers)
 
         if response.status_code == 201:
             return DocumentOut(**response.json())
+        elif response.status_code == 202:
+            status = GenericMessage(**response.json())
+            return status
         elif response.status_code == 400:
             error = GenericError(**response.json())
             raise ValueError(f"Bad request: {error.detail}")
