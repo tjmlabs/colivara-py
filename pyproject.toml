@@ -30,4 +30,5 @@ Changelog = "https://github.com/tjmlabs/colivara-py/releases"
 Issues = "https://github.com/tjmlabs/colivara-py/issues"
 CI = "https://github.com/tjmlabs/colivara-py/actions"
 
-
+[tool.setuptools]
+packages = ["colivara_py"]

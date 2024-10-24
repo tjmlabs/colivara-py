@@ -13,6 +13,7 @@ from colivara_py.models import (
     DocumentIn,
     DocumentInPatch,
     QueryFilter,
+    GenericMessage,
 )
 import responses
 from requests.exceptions import HTTPError
@@ -421,6 +422,51 @@ def test_delete_collection_http_error(api_key):
     )
     with pytest.raises(HTTPError):
         client.delete_collection(collection_name="test_collection")
+
+
+@responses.activate
+def test_upsert_document_async_sync(api_key, tmp_path):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = Colivara(base_url=base_url)
+
+    expected_out = {
+        "detail": "Document is being processed in the background.",
+    }
+
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/documents/upsert-document/",
+        json=expected_out,
+        status=202,
+    )
+
+    # Test with base64 content
+    response = client.upsert_document(
+        name="test_document",
+        metadata={"description": "A test document"},
+        document_base64="dGVzdCBkb2N1bWVudCBjb250ZW50",
+    )
+    assert isinstance(response, GenericMessage)
+
+    # Test with file path
+    test_file = tmp_path / "test_document.txt"
+    test_file.write_text("test document content")
+
+    response = client.upsert_document(
+        name="test_document_from_file",
+        metadata={"description": "A test document from file"},
+        document_path=str(test_file),
+    )
+    assert isinstance(response, GenericMessage)
+
+    # Test with URL
+    response = client.upsert_document(
+        name="test_document_from_url",
+        metadata={"description": "A test document from URL"},
+        document_url="https://pdfobject.com/pdf/sample.pdf",
+    )
+    assert isinstance(response, GenericMessage)
 
 
 @responses.activate
