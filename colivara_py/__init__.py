@@ -1,4 +1,4 @@
-from .client import Colivara
-from .async_client import AsyncColivara
+from .client import ColiVara
+from .async_client import AsyncColiVara
 
-__all__ = ["Colivara", "AsyncColivara"]
+__all__ = ["ColiVara", "AsyncColiVara"]

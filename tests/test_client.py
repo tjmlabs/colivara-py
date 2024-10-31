@@ -1,7 +1,7 @@
 import os
 import pytest
 import base64
-from colivara_py import Colivara, AsyncColivara
+from colivara_py import ColiVara, AsyncColiVara
 from colivara_py.models import (
     CollectionOut,
     DocumentOut,
@@ -26,7 +26,7 @@ def test_colivara_init_no_api_key():
         ValueError,
         match="API key must be provided either through parameter or COLIVARA_API_KEY environment variable.",
     ):
-        Colivara(base_url="https://api.test.com")
+        ColiVara(base_url="https://api.test.com")
 
 
 @pytest.fixture
@@ -38,7 +38,7 @@ def api_key():
 def test_create_collection_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "id": 1,
@@ -63,7 +63,7 @@ def test_create_collection_sync(api_key):
 def test_create_collection_conflict_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     error_detail = {"detail": "Collection already exists."}
 
@@ -80,7 +80,7 @@ def test_create_collection_conflict_sync(api_key):
 def test_create_collection_unexpected_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     # Simulate an unexpected error (e.g., 500 Internal Server Error)
     responses.add(
@@ -98,7 +98,7 @@ def test_create_collection_unexpected_error(api_key):
 def test_create_collection_invalid_name_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     error_detail = {"detail": "Collection name 'all' is not allowed."}
 
@@ -115,7 +115,7 @@ def test_create_collection_invalid_name_sync(api_key):
 def test_get_collections_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = [
         {
@@ -161,7 +161,7 @@ def test_get_collections_sync(api_key):
 def test_list_collections_unexpected_format(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     # Simulate an unexpected response format
     responses.add(
@@ -179,7 +179,7 @@ def test_list_collections_unexpected_format(api_key):
 def test_list_collections_unexpected_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     # Simulate an unexpected error (e.g., 500 Internal Server Error)
     responses.add(
@@ -197,7 +197,7 @@ def test_list_collections_unexpected_error(api_key):
 def test_get_collections_empty_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = []
 
@@ -216,7 +216,7 @@ def test_get_collections_empty_sync(api_key):
 def test_get_collections_noauth_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     error_detail = {"detail": "Unauthorized"}
 
@@ -233,7 +233,7 @@ def test_get_collections_noauth_sync(api_key):
 def test_get_collection_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "id": 1,
@@ -259,7 +259,7 @@ def test_get_collection_sync(api_key):
 def test_get_collection_not_found_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     error_detail = {"detail": "Collection 'test_collection' not found."}
 
@@ -279,7 +279,7 @@ def test_get_collection_not_found_sync(api_key):
 def test_get_collection_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.GET,
         f"{base_url}/v1/collections/test_collection/",
@@ -294,7 +294,7 @@ def test_get_collection_http_error(api_key):
 def test_partial_update_collection_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "id": 1,
@@ -324,7 +324,7 @@ def test_partial_update_collection_sync(api_key):
 def test_partial_update_collection_not_found_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     error_detail = {"detail": "Collection 'test_collection' not found."}
 
@@ -348,7 +348,7 @@ def test_partial_update_collection_not_found_sync(api_key):
 def test_partial_update_collection_missing_params_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     with pytest.raises(Exception) as exc_info:
         client.partial_update_collection(collection_name="test_collection")
@@ -362,7 +362,7 @@ def test_partial_update_collection_missing_params_sync(api_key):
 def test_partial_update_collection_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.PATCH,
         f"{base_url}/v1/collections/test_collection/",
@@ -379,7 +379,7 @@ def test_partial_update_collection_http_error(api_key):
 def test_delete_collection_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     responses.add(
         responses.DELETE, f"{base_url}/v1/collections/test_collection/", status=204
@@ -393,7 +393,7 @@ def test_delete_collection_sync(api_key):
 def test_delete_collection_not_found_sync(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     error_detail = {"detail": "Collection 'test_collection' not found."}
 
@@ -413,7 +413,7 @@ def test_delete_collection_not_found_sync(api_key):
 def test_delete_collection_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.DELETE,
         f"{base_url}/v1/collections/test_collection/",
@@ -428,7 +428,7 @@ def test_delete_collection_http_error(api_key):
 def test_upsert_document_async_sync(api_key, tmp_path):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "detail": "Document is being processed in the background.",
@@ -473,7 +473,7 @@ def test_upsert_document_async_sync(api_key, tmp_path):
 def test_upsert_document_sync(api_key, tmp_path):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "id": 1,
@@ -542,7 +542,7 @@ def test_upsert_document_sync(api_key, tmp_path):
 def test_upsert_document_sync_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     responses.add(
         responses.POST,
@@ -559,7 +559,7 @@ def test_upsert_document_sync_error(api_key):
 def test_upsert_document_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.POST,
         f"{base_url}/v1/documents/upsert-document/",
@@ -620,7 +620,7 @@ def test_upsert_document_sync_invalid_input(
     api_key, input_data, expected_exception, expected_message, monkeypatch
 ):
     os.environ["COLIVARA_API_KEY"] = api_key
-    client = Colivara(base_url="https://api.test.com")
+    client = ColiVara(base_url="https://api.test.com")
 
     # Mock os.access to simulate permission error
     def mock_access(path, mode):
@@ -642,7 +642,7 @@ def test_upsert_document_sync_invalid_input(
 def test_get_document(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "id": 1,
@@ -675,7 +675,7 @@ def test_get_document(api_key):
 def test_get_document_not_found(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     responses.add(
         responses.GET,
@@ -692,7 +692,7 @@ def test_get_document_not_found(api_key):
 def test_get_document_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.GET,
         f"{base_url}/v1/documents/test_document/",
@@ -707,7 +707,7 @@ def test_get_document_http_error(api_key):
 def test_partial_update_document(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "id": 1,
@@ -741,7 +741,7 @@ def test_partial_update_document(api_key):
 def test_partial_update_document_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     responses.add(
         responses.PATCH,
@@ -758,7 +758,7 @@ def test_partial_update_document_error(api_key):
 def test_partial_update_document_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.PATCH,
         f"{base_url}/v1/documents/test_document/",
@@ -773,7 +773,7 @@ def test_partial_update_document_http_error(api_key):
 def test_list_documents(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = [
         {
@@ -812,7 +812,7 @@ def test_list_documents(api_key):
 def test_list_documents_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.GET,
         f"{base_url}/v1/documents/",
@@ -827,7 +827,7 @@ def test_list_documents_http_error(api_key):
 def test_delete_document(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     responses.add(
         responses.DELETE,
@@ -843,7 +843,7 @@ def test_delete_document(api_key):
 def test_delete_document_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     responses.add(
         responses.DELETE,
@@ -860,7 +860,7 @@ def test_delete_document_error(api_key):
 def test_delete_document_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.DELETE,
         f"{base_url}/v1/documents/delete-document/test_document/",
@@ -875,7 +875,7 @@ def test_delete_document_http_error(api_key):
 def test_search_simple(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "query": "what is 1+1?",
@@ -909,7 +909,7 @@ def test_search_simple(api_key):
 def test_search_with_collection(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "query": "what is 1+1?",
@@ -940,7 +940,7 @@ def test_search_with_collection(api_key):
 def test_search_with_filter(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "query": "what is 1+1?",
@@ -978,7 +978,7 @@ def test_search_with_filter(api_key):
 def test_search_service_unavailable(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     error_response = {"detail": "Service is temporarily unavailable"}
 
@@ -996,7 +996,7 @@ def test_search_service_unavailable(api_key):
 def test_search_invalid_filter(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     with pytest.raises(ValueError) as exc_info:
         client.search("what is 1+1?", query_filter={"invalid": "filter"})
@@ -1008,7 +1008,7 @@ def test_search_invalid_filter(api_key):
 def test_search_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.POST,
         f"{client.base_url}/v1/search/",
@@ -1032,7 +1032,7 @@ def test_file_path(tmp_path):
 def test_file_to_imgbase64(api_key, test_file_path):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = [
         {"img_base64": base64.b64encode(b"Test image 1").decode(), "page_number": 1},
@@ -1061,7 +1061,7 @@ def test_file_to_imgbase64(api_key, test_file_path):
 def test_file_to_imgbase64_http_error(api_key, test_file_path):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.POST,
         f"{base_url}/v1/helpers/file-to-imgbase64/",
@@ -1076,7 +1076,7 @@ def test_file_to_imgbase64_http_error(api_key, test_file_path):
 def test_file_to_base64(api_key, test_file_path):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = base64.b64encode(b"Test file content").decode()
 
@@ -1097,7 +1097,7 @@ def test_file_to_base64(api_key, test_file_path):
 def test_create_embedding(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
 
     expected_out = {
         "data": [
@@ -1182,7 +1182,7 @@ def test_create_embedding(api_key):
 def test_create_embedding_http_error(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
-    client = Colivara(base_url=base_url)
+    client = ColiVara(base_url=base_url)
     responses.add(
         responses.POST,
         f"{base_url}/v1/embeddings/",
@@ -1198,9 +1198,9 @@ def test_create_embedding_http_error(api_key):
 
 def test_async_colivara_not_implemented():
     with pytest.raises(
-        NotImplementedError, match="AsyncColivara is not implemented yet."
+        NotImplementedError, match="AsyncColiVara is not implemented yet."
     ):
-        AsyncColivara()
+        AsyncColiVara()
 
 
 def test_patch_collection_in_invalid_name():
