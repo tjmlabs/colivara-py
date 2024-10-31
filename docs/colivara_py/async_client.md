@@ -5,7 +5,7 @@
 
         
 
-        class AsyncColivara:
+        class AsyncColiVara:
 
             # not implemented yet
 
@@ -15,17 +15,17 @@
 
 ## Classes
 
-### AsyncColivara
+### AsyncColiVara
 
 ```python3
-class AsyncColivara(
+class AsyncColiVara(
     base_url: Optional[str] = None,
     api_key: Optional[str] = None
 )
 ```
 
 ??? example "View Source"
-        class AsyncColivara:
+        class AsyncColiVara:
 
             # not implemented yet
 

@@ -1,11 +1,11 @@
 # Module colivara_py
 
 ??? example "View Source"
-        from .client import Colivara
+        from .client import ColiVara
 
-        from .async_client import AsyncColivara
+        from .async_client import AsyncColiVara
 
-        __all__ = ["Colivara", "AsyncColivara"]
+        __all__ = ["ColiVara", "AsyncColiVara"]
 
 ## Sub-modules
 
@@ -15,17 +15,17 @@
 
 ## Classes
 
-### AsyncColivara
+### AsyncColiVara
 
 ```python3
-class AsyncColivara(
+class AsyncColiVara(
     base_url: Optional[str] = None,
     api_key: Optional[str] = None
 )
 ```
 
 ??? example "View Source"
-        class AsyncColivara:
+        class AsyncColiVara:
 
             # not implemented yet
 
@@ -35,23 +35,23 @@ class AsyncColivara(
 
 ------
 
-### Colivara
+### ColiVara
 
 ```python3
-class Colivara(
+class ColiVara(
     base_url: Optional[str] = None,
     api_key: Optional[str] = None
 )
 ```
 
 ??? example "View Source"
-        class Colivara:
+        class ColiVara:
 
             def __init__(self, base_url: Optional[str] = None, api_key: Optional[str] = None):
 
                 """
 
-                Initializes the Colivara client.
+                Initializes the ColiVara client.
 
                 Args:
 
@@ -313,7 +313,9 @@ class Colivara(
 
                 document_path: Optional[Union[str, Path]] = None,
 
-            ) -> DocumentOut:
+                wait: Optional[bool] = False,
+
+            ) -> DocumentOut | GenericMessage:
 
                 """
 
@@ -336,6 +338,8 @@ class Colivara(
                     document_base64 (Optional[str]): The base64-encoded string of the document content, if available.
 
                     document_path (Optional[str]): The path to the document file to be uploaded.
+
+                    wait (Optional[bool]): If True, the method will wait for the document to be processed before returning.
 
                 Returns:
 
@@ -407,6 +411,8 @@ class Colivara(
 
                     base64=document_base64,
 
+                    wait=wait,
+
                 ).model_dump()
 
                 response = requests.post(request_url, json=payload, headers=self.headers)
@@ -414,6 +420,12 @@ class Colivara(
                 if response.status_code == 201:
 
                     return DocumentOut(**response.json())
+
+                elif response.status_code == 202:
+
+                    status = GenericMessage(**response.json())
+
+                    return status
 
                 elif response.status_code == 400:
 
@@ -2143,8 +2155,9 @@ def upsert_document(
     collection_name: str = 'default collection',
     document_url: Optional[str] = None,
     document_base64: Optional[str] = None,
-    document_path: Union[str, pathlib.Path, NoneType] = None
-) -> colivara_py.models.DocumentOut
+    document_path: Union[str, pathlib.Path, NoneType] = None,
+    wait: Optional[bool] = False
+) -> colivara_py.models.DocumentOut | colivara_py.models.GenericMessage
 ```
 
 Create or update a document in a collection.
@@ -2162,6 +2175,7 @@ You can provide either a URL or a base64-encoded string of the document content.
 | document_url | Optional[str] | The URL of the document, if available. | None |
 | document_base64 | Optional[str] | The base64-encoded string of the document content, if available. | None |
 | document_path | Optional[str] | The path to the document file to be uploaded. | None |
+| wait | Optional[bool] | If True, the method will wait for the document to be processed before returning. | None |
 
 **Returns:**
 
@@ -2195,7 +2209,9 @@ You can provide either a URL or a base64-encoded string of the document content.
 
                 document_path: Optional[Union[str, Path]] = None,
 
-            ) -> DocumentOut:
+                wait: Optional[bool] = False,
+
+            ) -> DocumentOut | GenericMessage:
 
                 """
 
@@ -2218,6 +2234,8 @@ You can provide either a URL or a base64-encoded string of the document content.
                     document_base64 (Optional[str]): The base64-encoded string of the document content, if available.
 
                     document_path (Optional[str]): The path to the document file to be uploaded.
+
+                    wait (Optional[bool]): If True, the method will wait for the document to be processed before returning.
 
                 Returns:
 
@@ -2289,6 +2307,8 @@ You can provide either a URL or a base64-encoded string of the document content.
 
                     base64=document_base64,
 
+                    wait=wait,
+
                 ).model_dump()
 
                 response = requests.post(request_url, json=payload, headers=self.headers)
@@ -2296,6 +2316,12 @@ You can provide either a URL or a base64-encoded string of the document content.
                 if response.status_code == 201:
 
                     return DocumentOut(**response.json())
+
+                elif response.status_code == 202:
+
+                    status = GenericMessage(**response.json())
+
+                    return status
 
                 elif response.status_code == 400:
 

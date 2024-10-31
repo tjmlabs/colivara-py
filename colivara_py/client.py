@@ -23,10 +23,10 @@ from pathlib import Path
 from pydantic import ValidationError
 
 
-class Colivara:
+class ColiVara:
     def __init__(self, base_url: Optional[str] = None, api_key: Optional[str] = None):
         """
-        Initializes the Colivara client.
+        Initializes the ColiVara client.
 
         Args:
             base_url: The base URL for the API (optional).

@@ -1348,6 +1348,37 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
         </li>
         <li class="mono">
+        <span class="class_name"><a href="#colivara_py.models.GenericMessage">GenericMessage</a></span>
+        
+          
+  <ul>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.construct">construct</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.from_orm">from_orm</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_construct">model_construct</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_json_schema">model_json_schema</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_parametrized_name">model_parametrized_name</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_rebuild">model_rebuild</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_validate">model_validate</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_validate_json">model_validate_json</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_validate_strings">model_validate_strings</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.parse_file">parse_file</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.parse_obj">parse_obj</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.parse_raw">parse_raw</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.schema">schema</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.schema_json">schema_json</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.update_forward_refs">update_forward_refs</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.validate">validate</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.copy">copy</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.dict">dict</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.json">json</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_copy">model_copy</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_dump">model_dump</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_dump_json">model_dump_json</a></li>
+    <li class="mono"><a href="#colivara_py.models.GenericMessage.model_post_init">model_post_init</a></li>
+  </ul>
+
+        </li>
+        <li class="mono">
         <span class="class_name"><a href="#colivara_py.models.PageOut">PageOut</a></span>
         
           
@@ -1651,6 +1682,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <span class="n">detail</span><span class="p">:</span> <span class="nb">str</span>
 
 
+<span class="k">class</span> <span class="nc">GenericMessage</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">detail</span><span class="p">:</span> <span class="nb">str</span>
+
+
 <span class="k">class</span> <span class="nc">DocumentIn</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
@@ -1660,6 +1695,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <span class="p">)</span>
     <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">base64</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">wait</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;after&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">base64_or_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
@@ -4497,6 +4533,7 @@ __pydantic_private__: Values of private attributes set on the model instance.
     <span class="p">)</span>
     <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">base64</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">wait</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;after&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">base64_or_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
@@ -13713,6 +13750,1315 @@ This is useful if you want to do some validation that requires the entire model 
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericError.model_post_init', this);">Show source &equiv;</a></p>
   <div id="source-colivara_py.models.GenericError.model_post_init" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">model_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">__context</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Override this method to perform additional initialization after `__init__` and `model_construct`.</span>
+<span class="sd">    This is useful if you want to do some validation that requires the entire model to be initialized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+      </div>
+      </div>
+      
+      <div class="item">
+      <p id="colivara_py.models.GenericMessage" class="name">class <span class="ident">GenericMessage</span></p>
+      
+  
+    <div class="desc"><p>Usage docs: https://docs.pydantic.dev/2.9/concepts/models/</p>
+<p>A base class for creating Pydantic models.</p>
+<p>Attributes:
+    <strong>class_vars</strong>: The names of the class variables defined on the model.
+    <strong>private_attributes</strong>: Metadata about the private attributes of the model.
+    <strong>signature</strong>: The synthesized <code>__init__</code> [<code>Signature</code>][inspect.Signature] of the model.</p>
+<pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
+__pydantic_core_schema__: The core schema of the model.
+__pydantic_custom_init__: Whether the model has a custom `__init__` function.
+__pydantic_decorators__: Metadata containing the decorators defined on the model.
+    This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
+__pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
+    __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
+__pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
+__pydantic_post_init__: The name of the post-init method for the model, if defined.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
+
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
+</code></pre></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">GenericMessage</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">detail</span><span class="p">:</span> <span class="nb">str</span>
+</pre></div>
+
+  </div>
+</div>
+
+
+      <div class="class">
+          <h3>Ancestors (in MRO)</h3>
+          <ul class="class_list">
+          <li><a href="/pydantic.main.BaseModel.ext">pydantic.main.BaseModel</a></li>
+          </ul>
+          <h3>Class variables</h3>
+            <div class="item">
+            <p id="colivara_py.models.GenericMessage.model_computed_fields" class="name">var <span class="ident">model_computed_fields</span></p>
+            
+
+            
+  
+  <div class="source_cont">
+</div>
+
+            </div>
+            <div class="item">
+            <p id="colivara_py.models.GenericMessage.model_config" class="name">var <span class="ident">model_config</span></p>
+            
+
+            
+  
+  <div class="source_cont">
+</div>
+
+            </div>
+            <div class="item">
+            <p id="colivara_py.models.GenericMessage.model_fields" class="name">var <span class="ident">model_fields</span></p>
+            
+
+            
+  
+  <div class="source_cont">
+</div>
+
+            </div>
+          <h3>Static methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.construct">
+    <p>def <span class="ident">construct</span>(</p><p>_fields_set: &#39;set[str] | None&#39; = None, **values: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.construct', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.construct" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span><span class="s1">&#39;The `construct` method is deprecated; use `model_construct` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">construct</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">_fields_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `construct` method is deprecated; use `model_construct` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_construct</span><span class="p">(</span><span class="n">_fields_set</span><span class="o">=</span><span class="n">_fields_set</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.from_orm">
+    <p>def <span class="ident">from_orm</span>(</p><p>obj: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.from_orm', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.from_orm" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span>
+    <span class="s1">&#39;The `from_orm` method is deprecated; set &#39;</span>
+    <span class="s2">&quot;`model_config[&#39;from_attributes&#39;]=True` and use `model_validate` instead.&quot;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">from_orm</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `from_orm` method is deprecated; set &#39;</span>
+        <span class="s2">&quot;`model_config[&#39;from_attributes&#39;]=True` and use `model_validate` instead.&quot;</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;from_attributes&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">PydanticUserError</span><span class="p">(</span>
+            <span class="s1">&#39;You must set the config attribute `from_attributes=True` to use from_orm&#39;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_construct">
+    <p>def <span class="ident">model_construct</span>(</p><p>_fields_set: &#39;set[str] | None&#39; = None, **values: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Creates a new instance of the <code>Model</code> class with validated data.</p>
+<p>Creates a new model setting <code>__dict__</code> and <code>__pydantic_fields_set__</code> from trusted or pre-validated data.
+Default values are respected, but no other validation is performed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>model_construct()</code> generally respects the <code>model_config.extra</code> setting on the provided model.
+That is, if <code>model_config.extra == 'allow'</code>, then all extra passed values are added to the model instance's <code>__dict__</code>
+and <code>__pydantic_extra__</code> fields. If <code>model_config.extra == 'ignore'</code> (the default), then all extra passed values are ignored.
+Because no validation is performed with a call to <code>model_construct()</code>, having <code>model_config.extra == 'forbid'</code> does not result in
+an error if extra values are passed, but they will be ignored.</p>
+</div>
+<p>Args:
+    _fields_set: A set of field names that were originally explicitly set during instantiation. If provided,
+        this is directly used for the [<code>model_fields_set</code>][pydantic.BaseModel.model_fields_set] attribute.
+        Otherwise, the field names from the <code>values</code> argument will be used.
+    values: Trusted or pre-validated data dictionary.</p>
+<p>Returns:
+    A new instance of the <code>Model</code> class with validated data.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_construct', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_construct" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">model_construct</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">_fields_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>  <span class="c1"># noqa: C901</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a new instance of the `Model` class with validated data.</span>
+<span class="sd">    Creates a new model setting `__dict__` and `__pydantic_fields_set__` from trusted or pre-validated data.</span>
+<span class="sd">    Default values are respected, but no other validation is performed.</span>
+<span class="sd">    !!! note</span>
+<span class="sd">        `model_construct()` generally respects the `model_config.extra` setting on the provided model.</span>
+<span class="sd">        That is, if `model_config.extra == &#39;allow&#39;`, then all extra passed values are added to the model instance&#39;s `__dict__`</span>
+<span class="sd">        and `__pydantic_extra__` fields. If `model_config.extra == &#39;ignore&#39;` (the default), then all extra passed values are ignored.</span>
+<span class="sd">        Because no validation is performed with a call to `model_construct()`, having `model_config.extra == &#39;forbid&#39;` does not result in</span>
+<span class="sd">        an error if extra values are passed, but they will be ignored.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        _fields_set: A set of field names that were originally explicitly set during instantiation. If provided,</span>
+<span class="sd">            this is directly used for the [`model_fields_set`][pydantic.BaseModel.model_fields_set] attribute.</span>
+<span class="sd">            Otherwise, the field names from the `values` argument will be used.</span>
+<span class="sd">        values: Trusted or pre-validated data dictionary.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A new instance of the `Model` class with validated data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+    <span class="n">fields_values</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">fields_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">alias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">alias</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+            <span class="n">fields_values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">alias</span><span class="p">)</span>
+            <span class="n">fields_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fields_set</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validation_alias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">validation_aliases</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">AliasPath</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">field</span><span class="o">.</span><span class="n">validation_alias</span><span class="o">.</span><span class="n">choices</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validation_alias</span><span class="p">,</span> <span class="n">AliasChoices</span><span class="p">)</span>
+                <span class="k">else</span> <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">validation_alias</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">validation_aliases</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">alias</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                    <span class="n">fields_values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">alias</span><span class="p">)</span>
+                    <span class="n">fields_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">alias</span><span class="p">,</span> <span class="n">AliasPath</span><span class="p">):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">alias</span><span class="o">.</span><span class="n">search_dict_for_path</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">PydanticUndefined</span><span class="p">:</span>
+                        <span class="n">fields_values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                        <span class="n">fields_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                        <span class="k">break</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fields_set</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                <span class="n">fields_values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">fields_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">is_required</span><span class="p">():</span>
+                <span class="n">fields_values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">get_default</span><span class="p">(</span><span class="n">call_default_factory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_fields_set</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_fields_set</span> <span class="o">=</span> <span class="n">fields_set</span>
+    <span class="n">_extra</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">values</span> <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;extra&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;allow&#39;</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">_object_setattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="n">fields_values</span><span class="p">)</span>
+    <span class="n">_object_setattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;__pydantic_fields_set__&#39;</span><span class="p">,</span> <span class="n">_fields_set</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_root_model__</span><span class="p">:</span>
+        <span class="n">_object_setattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;__pydantic_extra__&#39;</span><span class="p">,</span> <span class="n">_extra</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_post_init__</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">model_post_init</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="c1"># update private attributes with values set</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;__pydantic_private__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">__pydantic_private__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">__private_attributes__</span><span class="p">:</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">__pydantic_private__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_root_model__</span><span class="p">:</span>
+        <span class="c1"># Note: if there are any private attributes, cls.__pydantic_post_init__ would exist</span>
+        <span class="c1"># Since it doesn&#39;t, that means that `__pydantic_private__` should be set to None</span>
+        <span class="n">_object_setattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;__pydantic_private__&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_json_schema">
+    <p>def <span class="ident">model_json_schema</span>(</p><p>by_alias: &#39;bool&#39; = True, ref_template: &#39;str&#39; = &#39;#/$defs/{model}&#39;, schema_generator: &#39;type[GenerateJsonSchema]&#39; = &lt;class &#39;pydantic.json_schema.GenerateJsonSchema&#39;&gt;, mode: &#39;JsonSchemaMode&#39; = &#39;validation&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Generates a JSON schema for a model class.</p>
+<p>Args:
+    by_alias: Whether to use attribute aliases or not.
+    ref_template: The reference template.
+    schema_generator: To override the logic used to generate the JSON schema, as a subclass of
+        <code>GenerateJsonSchema</code> with your desired modifications
+    mode: The mode in which to generate the schema.</p>
+<p>Returns:
+    The JSON schema for the given model class.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_json_schema', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_json_schema" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">model_json_schema</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="n">by_alias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">ref_template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REF_TEMPLATE</span><span class="p">,</span>
+    <span class="n">schema_generator</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">GenerateJsonSchema</span><span class="p">]</span> <span class="o">=</span> <span class="n">GenerateJsonSchema</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">JsonSchemaMode</span> <span class="o">=</span> <span class="s1">&#39;validation&#39;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a JSON schema for a model class.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        by_alias: Whether to use attribute aliases or not.</span>
+<span class="sd">        ref_template: The reference template.</span>
+<span class="sd">        schema_generator: To override the logic used to generate the JSON schema, as a subclass of</span>
+<span class="sd">            `GenerateJsonSchema` with your desired modifications</span>
+<span class="sd">        mode: The mode in which to generate the schema.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The JSON schema for the given model class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">model_json_schema</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">by_alias</span><span class="o">=</span><span class="n">by_alias</span><span class="p">,</span> <span class="n">ref_template</span><span class="o">=</span><span class="n">ref_template</span><span class="p">,</span> <span class="n">schema_generator</span><span class="o">=</span><span class="n">schema_generator</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span>
+    <span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_parametrized_name">
+    <p>def <span class="ident">model_parametrized_name</span>(</p><p>params: &#39;tuple[type[Any], ...]&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Compute the class name for parametrizations of generic classes.</p>
+<p>This method can be overridden to achieve a custom naming scheme for generic BaseModels.</p>
+<p>Args:
+    params: Tuple of types of the class. Given a generic class
+        <code>Model</code> with 2 type variables and a concrete model <code>Model[str, int]</code>,
+        the value <code>(str, int)</code> would be passed to <code>params</code>.</p>
+<p>Returns:
+    String representing the new class where <code>params</code> are passed to <code>cls</code> as type variables.</p>
+<p>Raises:
+    TypeError: Raised when trying to generate concrete names for non-generic models.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_parametrized_name', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_parametrized_name" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">model_parametrized_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the class name for parametrizations of generic classes.</span>
+<span class="sd">    This method can be overridden to achieve a custom naming scheme for generic BaseModels.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        params: Tuple of types of the class. Given a generic class</span>
+<span class="sd">            `Model` with 2 type variables and a concrete model `Model[str, int]`,</span>
+<span class="sd">            the value `(str, int)` would be passed to `params`.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        String representing the new class where `params` are passed to `cls` as type variables.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: Raised when trying to generate concrete names for non-generic models.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Generic</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Concrete names should only be generated for generic models.&#39;</span><span class="p">)</span>
+    <span class="c1"># Any strings received should represent forward references, so we handle them specially below.</span>
+    <span class="c1"># If we eventually move toward wrapping them in a ForwardRef in __class_getitem__ in the future,</span>
+    <span class="c1"># we may be able to remove this special case.</span>
+    <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">_repr</span><span class="o">.</span><span class="n">display_as_type</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">]</span>
+    <span class="n">params_component</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">params_component</span><span class="si">}</span><span class="s1">]&#39;</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_rebuild">
+    <p>def <span class="ident">model_rebuild</span>(</p><p>*, force: &#39;bool&#39; = False, raise_errors: &#39;bool&#39; = True, _parent_namespace_depth: &#39;int&#39; = 2, _types_namespace: &#39;dict[str, Any] | None&#39; = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Try to rebuild the pydantic-core schema for the model.</p>
+<p>This may be necessary when one of the annotations is a ForwardRef which could not be resolved during
+the initial attempt to build the schema, and automatic rebuilding fails.</p>
+<p>Args:
+    force: Whether to force the rebuilding of the model schema, defaults to <code>False</code>.
+    raise_errors: Whether to raise errors, defaults to <code>True</code>.
+    _parent_namespace_depth: The depth level of the parent namespace, defaults to 2.
+    _types_namespace: The types namespace, defaults to <code>None</code>.</p>
+<p>Returns:
+    Returns <code>None</code> if the schema is already "complete" and rebuilding was not required.
+    If rebuilding <em>was</em> required, returns <code>True</code> if rebuilding was successful, otherwise <code>False</code>.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_rebuild', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_rebuild" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">model_rebuild</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">raise_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">_parent_namespace_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">_types_namespace</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Try to rebuild the pydantic-core schema for the model.</span>
+<span class="sd">    This may be necessary when one of the annotations is a ForwardRef which could not be resolved during</span>
+<span class="sd">    the initial attempt to build the schema, and automatic rebuilding fails.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        force: Whether to force the rebuilding of the model schema, defaults to `False`.</span>
+<span class="sd">        raise_errors: Whether to raise errors, defaults to `True`.</span>
+<span class="sd">        _parent_namespace_depth: The depth level of the parent namespace, defaults to 2.</span>
+<span class="sd">        _types_namespace: The types namespace, defaults to `None`.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns `None` if the schema is already &quot;complete&quot; and rebuilding was not required.</span>
+<span class="sd">        If rebuilding _was_ required, returns `True` if rebuilding was successful, otherwise `False`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_complete__</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;__pydantic_core_schema__&#39;</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="nb">delattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;__pydantic_core_schema__&#39;</span><span class="p">)</span>  <span class="c1"># delete cached value to ensure full rebuild happens</span>
+        <span class="k">if</span> <span class="n">_types_namespace</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">types_namespace</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">_types_namespace</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_parent_namespace_depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">frame_parent_ns</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">_typing_extra</span><span class="o">.</span><span class="n">parent_frame_namespace</span><span class="p">(</span><span class="n">parent_depth</span><span class="o">=</span><span class="n">_parent_namespace_depth</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+                <span class="p">)</span>
+                <span class="n">cls_parent_ns</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">_model_construction</span><span class="o">.</span><span class="n">unpack_lenient_weakvaluedict</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_parent_namespace__</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+                <span class="p">)</span>
+                <span class="n">types_namespace</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">cls_parent_ns</span><span class="p">,</span> <span class="o">**</span><span class="n">frame_parent_ns</span><span class="p">}</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_parent_namespace__</span> <span class="o">=</span> <span class="n">_model_construction</span><span class="o">.</span><span class="n">build_lenient_weakvaluedict</span><span class="p">(</span><span class="n">types_namespace</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">types_namespace</span> <span class="o">=</span> <span class="n">_model_construction</span><span class="o">.</span><span class="n">unpack_lenient_weakvaluedict</span><span class="p">(</span>
+                    <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_parent_namespace__</span>
+                <span class="p">)</span>
+            <span class="n">types_namespace</span> <span class="o">=</span> <span class="n">_typing_extra</span><span class="o">.</span><span class="n">merge_cls_and_parent_ns</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">types_namespace</span><span class="p">)</span>
+        <span class="c1"># manually override defer_build so complete_model_class doesn&#39;t skip building the model again</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">cls</span><span class="o">.</span><span class="n">model_config</span><span class="p">,</span> <span class="s1">&#39;defer_build&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">_model_construction</span><span class="o">.</span><span class="n">complete_model_class</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="n">_config</span><span class="o">.</span><span class="n">ConfigWrapper</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">raise_errors</span><span class="o">=</span><span class="n">raise_errors</span><span class="p">,</span>
+            <span class="n">types_namespace</span><span class="o">=</span><span class="n">types_namespace</span><span class="p">,</span>
+        <span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_validate">
+    <p>def <span class="ident">model_validate</span>(</p><p>obj: &#39;Any&#39;, *, strict: &#39;bool | None&#39; = None, from_attributes: &#39;bool | None&#39; = None, context: &#39;Any | None&#39; = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Validate a pydantic model instance.</p>
+<p>Args:
+    obj: The object to validate.
+    strict: Whether to enforce types strictly.
+    from_attributes: Whether to extract data from object attributes.
+    context: Additional context to pass to the validator.</p>
+<p>Raises:
+    ValidationError: If the object could not be validated.</p>
+<p>Returns:
+    The validated model instance.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_validate', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_validate" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">model_validate</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">from_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate a pydantic model instance.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        obj: The object to validate.</span>
+<span class="sd">        strict: Whether to enforce types strictly.</span>
+<span class="sd">        from_attributes: Whether to extract data from object attributes.</span>
+<span class="sd">        context: Additional context to pass to the validator.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValidationError: If the object could not be validated.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The validated model instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># `__tracebackhide__` tells pytest and some other tools to omit this function from tracebacks</span>
+    <span class="n">__tracebackhide__</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_validator__</span><span class="o">.</span><span class="n">validate_python</span><span class="p">(</span>
+        <span class="n">obj</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">,</span> <span class="n">from_attributes</span><span class="o">=</span><span class="n">from_attributes</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span>
+    <span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_validate_json">
+    <p>def <span class="ident">model_validate_json</span>(</p><p>json_data: &#39;str | bytes | bytearray&#39;, *, strict: &#39;bool | None&#39; = None, context: &#39;Any | None&#39; = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Usage docs: https://docs.pydantic.dev/2.9/concepts/json/#json-parsing</p>
+<p>Validate the given JSON data against the Pydantic model.</p>
+<p>Args:
+    json_data: The JSON data to validate.
+    strict: Whether to enforce types strictly.
+    context: Extra variables to pass to the validator.</p>
+<p>Returns:
+    The validated Pydantic model.</p>
+<p>Raises:
+    ValidationError: If <code>json_data</code> is not a JSON string or the object could not be validated.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_validate_json', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_validate_json" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">model_validate_json</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="n">json_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Usage docs: https://docs.pydantic.dev/2.9/concepts/json/#json-parsing</span>
+<span class="sd">    Validate the given JSON data against the Pydantic model.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        json_data: The JSON data to validate.</span>
+<span class="sd">        strict: Whether to enforce types strictly.</span>
+<span class="sd">        context: Extra variables to pass to the validator.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The validated Pydantic model.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValidationError: If `json_data` is not a JSON string or the object could not be validated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># `__tracebackhide__` tells pytest and some other tools to omit this function from tracebacks</span>
+    <span class="n">__tracebackhide__</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_validator__</span><span class="o">.</span><span class="n">validate_json</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_validate_strings">
+    <p>def <span class="ident">model_validate_strings</span>(</p><p>obj: &#39;Any&#39;, *, strict: &#39;bool | None&#39; = None, context: &#39;Any | None&#39; = None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Validate the given object with string data against the Pydantic model.</p>
+<p>Args:
+    obj: The object containing string data to validate.
+    strict: Whether to enforce types strictly.
+    context: Extra variables to pass to the validator.</p>
+<p>Returns:
+    The validated Pydantic model.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_validate_strings', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_validate_strings" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">model_validate_strings</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate the given object with string data against the Pydantic model.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        obj: The object containing string data to validate.</span>
+<span class="sd">        strict: Whether to enforce types strictly.</span>
+<span class="sd">        context: Extra variables to pass to the validator.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The validated Pydantic model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># `__tracebackhide__` tells pytest and some other tools to omit this function from tracebacks</span>
+    <span class="n">__tracebackhide__</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pydantic_validator__</span><span class="o">.</span><span class="n">validate_strings</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.parse_file">
+    <p>def <span class="ident">parse_file</span>(</p><p>path: &#39;str | Path&#39;, *, content_type: &#39;str | None&#39; = None, encoding: &#39;str&#39; = &#39;utf8&#39;, proto: &#39;DeprecatedParseProtocol | None&#39; = None, allow_pickle: &#39;bool&#39; = False)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.parse_file', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.parse_file" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span>
+    <span class="s1">&#39;The `parse_file` method is deprecated; load the data from file, then if your data is JSON &#39;</span>
+    <span class="s1">&#39;use `model_validate_json`, otherwise `model_validate` instead.&#39;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">parse_file</span><span class="p">(</span>  <span class="c1"># noqa: D102</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span>
+    <span class="n">proto</span><span class="p">:</span> <span class="n">DeprecatedParseProtocol</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">allow_pickle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `parse_file` method is deprecated; load the data from file, then if your data is JSON &#39;</span>
+        <span class="s1">&#39;use `model_validate_json`, otherwise `model_validate` instead.&#39;</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">.deprecated</span> <span class="kn">import</span> <span class="n">parse</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span>
+        <span class="n">path</span><span class="p">,</span>
+        <span class="n">proto</span><span class="o">=</span><span class="n">proto</span><span class="p">,</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="n">content_type</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+        <span class="n">allow_pickle</span><span class="o">=</span><span class="n">allow_pickle</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">parse_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.parse_obj">
+    <p>def <span class="ident">parse_obj</span>(</p><p>obj: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.parse_obj', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.parse_obj" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span><span class="s1">&#39;The `parse_obj` method is deprecated; use `model_validate` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">parse_obj</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `parse_obj` method is deprecated; use `model_validate` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.parse_raw">
+    <p>def <span class="ident">parse_raw</span>(</p><p>b: &#39;str | bytes&#39;, *, content_type: &#39;str | None&#39; = None, encoding: &#39;str&#39; = &#39;utf8&#39;, proto: &#39;DeprecatedParseProtocol | None&#39; = None, allow_pickle: &#39;bool&#39; = False)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.parse_raw', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.parse_raw" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span>
+    <span class="s1">&#39;The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, &#39;</span>
+    <span class="s1">&#39;otherwise load the data then use `model_validate` instead.&#39;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">parse_raw</span><span class="p">(</span>  <span class="c1"># noqa: D102</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span>
+    <span class="n">proto</span><span class="p">:</span> <span class="n">DeprecatedParseProtocol</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">allow_pickle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, &#39;</span>
+        <span class="s1">&#39;otherwise load the data then use `model_validate` instead.&#39;</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">.deprecated</span> <span class="kn">import</span> <span class="n">parse</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">load_str_bytes</span><span class="p">(</span>
+            <span class="n">b</span><span class="p">,</span>
+            <span class="n">proto</span><span class="o">=</span><span class="n">proto</span><span class="p">,</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="n">content_type</span><span class="p">,</span>
+            <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+            <span class="n">allow_pickle</span><span class="o">=</span><span class="n">allow_pickle</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">json</span>
+        <span class="c1"># try to match V1</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">):</span>
+            <span class="n">type_str</span> <span class="o">=</span> <span class="s1">&#39;value_error.unicodedecode&#39;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>
+            <span class="n">type_str</span> <span class="o">=</span> <span class="s1">&#39;value_error.jsondecode&#39;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">type_str</span> <span class="o">=</span> <span class="s1">&#39;value_error&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">type_str</span> <span class="o">=</span> <span class="s1">&#39;type_error&#39;</span>
+        <span class="c1"># ctx is missing here, but since we&#39;ve added `input` to the error, we&#39;re not pretending it&#39;s the same</span>
+        <span class="n">error</span><span class="p">:</span> <span class="n">pydantic_core</span><span class="o">.</span><span class="n">InitErrorDetails</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># The type: ignore on the next line is to ignore the requirement of LiteralString</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">pydantic_core</span><span class="o">.</span><span class="n">PydanticCustomError</span><span class="p">(</span><span class="n">type_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)),</span>  <span class="c1"># type: ignore</span>
+            <span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;__root__&#39;</span><span class="p">,),</span>
+            <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">b</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">raise</span> <span class="n">pydantic_core</span><span class="o">.</span><span class="n">ValidationError</span><span class="o">.</span><span class="n">from_exception_data</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="p">[</span><span class="n">error</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.schema">
+    <p>def <span class="ident">schema</span>(</p><p>by_alias: &#39;bool&#39; = True, ref_template: &#39;str&#39; = &#39;#/$defs/{model}&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.schema', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.schema" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span><span class="s1">&#39;The `schema` method is deprecated; use `model_json_schema` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">schema</span><span class="p">(</span>  <span class="c1"># noqa: D102</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">by_alias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">ref_template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REF_TEMPLATE</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># noqa UP006</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `schema` method is deprecated; use `model_json_schema` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_json_schema</span><span class="p">(</span><span class="n">by_alias</span><span class="o">=</span><span class="n">by_alias</span><span class="p">,</span> <span class="n">ref_template</span><span class="o">=</span><span class="n">ref_template</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.schema_json">
+    <p>def <span class="ident">schema_json</span>(</p><p>*, by_alias: &#39;bool&#39; = True, ref_template: &#39;str&#39; = &#39;#/$defs/{model}&#39;, **dumps_kwargs: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.schema_json', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.schema_json" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span>
+    <span class="s1">&#39;The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead.&#39;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">schema_json</span><span class="p">(</span>  <span class="c1"># noqa: D102</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">by_alias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">ref_template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REF_TEMPLATE</span><span class="p">,</span> <span class="o">**</span><span class="n">dumps_kwargs</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead.&#39;</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+    <span class="kn">from</span> <span class="nn">.deprecated.json</span> <span class="kn">import</span> <span class="n">pydantic_encoder</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">model_json_schema</span><span class="p">(</span><span class="n">by_alias</span><span class="o">=</span><span class="n">by_alias</span><span class="p">,</span> <span class="n">ref_template</span><span class="o">=</span><span class="n">ref_template</span><span class="p">),</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">pydantic_encoder</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">dumps_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.update_forward_refs">
+    <p>def <span class="ident">update_forward_refs</span>(</p><p>**localns: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.update_forward_refs', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.update_forward_refs" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span>
+    <span class="s1">&#39;The `update_forward_refs` method is deprecated; use `model_rebuild` instead.&#39;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">update_forward_refs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">localns</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `update_forward_refs` method is deprecated; use `model_rebuild` instead.&#39;</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">localns</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;`localns` arguments are not longer accepted.&#39;</span><span class="p">)</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">model_rebuild</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.validate">
+    <p>def <span class="ident">validate</span>(</p><p>value: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.validate', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.validate" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@classmethod</span>
+<span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span><span class="s1">&#39;The `validate` method is deprecated; use `model_validate` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `validate` method is deprecated; use `model_validate` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+          <h3>Instance variables</h3>
+            <div class="item">
+            <p id="colivara_py.models.GenericMessage.model_extra" class="name">var <span class="ident">model_extra</span></p>
+            
+
+            
+  
+    <div class="desc"><p>Get extra fields set during validation.</p>
+<p>Returns:
+    A dictionary of extra fields, or <code>None</code> if <code>config.extra</code> is not set to <code>"allow"</code>.</p></div>
+  <div class="source_cont">
+</div>
+
+            </div>
+            <div class="item">
+            <p id="colivara_py.models.GenericMessage.model_fields_set" class="name">var <span class="ident">model_fields_set</span></p>
+            
+
+            
+  
+    <div class="desc"><p>Returns the set of fields that have been explicitly set on this model instance.</p>
+<p>Returns:
+    A set of strings representing the fields that have been set,
+        i.e. that were not filled from defaults.</p></div>
+  <div class="source_cont">
+</div>
+
+            </div>
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.copy">
+    <p>def <span class="ident">copy</span>(</p><p>self, *, include: &#39;AbstractSetIntStr | MappingIntStrAny | None&#39; = None, exclude: &#39;AbstractSetIntStr | MappingIntStrAny | None&#39; = None, update: &#39;Dict[str, Any] | None&#39; = None, deep: &#39;bool&#39; = False)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Returns a copy of the model.</p>
+<div class="admonition warning">
+<p class="admonition-title">Deprecated</p>
+<p>This method is now deprecated; use <code>model_copy</code> instead.</p>
+</div>
+<p>If you need <code>include</code> or <code>exclude</code>, use:</p>
+<pre><code class="language-py">data = self.model_dump(include=include, exclude=exclude, round_trip=True)
+data = {**data, **(update or {})}
+copied = self.model_validate(data)
+</code></pre>
+<p>Args:
+    include: Optional set or mapping specifying which fields to include in the copied model.
+    exclude: Optional set or mapping specifying which fields to exclude in the copied model.
+    update: Optional dictionary of field-value pairs to override field values in the copied model.
+    deep: If True, the values of fields that are Pydantic models will be deep-copied.</p>
+<p>Returns:
+    A copy of the model with included, excluded and updated fields as specified.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.copy', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.copy" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span>
+    <span class="s1">&#39;The `copy` method is deprecated; use `model_copy` instead. &#39;</span>
+    <span class="s1">&#39;See the docstring of `BaseModel.copy` for details about how to handle `include` and `exclude`.&#39;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">copy</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">include</span><span class="p">:</span> <span class="n">AbstractSetIntStr</span> <span class="o">|</span> <span class="n">MappingIntStrAny</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">AbstractSetIntStr</span> <span class="o">|</span> <span class="n">MappingIntStrAny</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">update</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># noqa UP006</span>
+    <span class="n">deep</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a copy of the model.</span>
+<span class="sd">    !!! warning &quot;Deprecated&quot;</span>
+<span class="sd">        This method is now deprecated; use `model_copy` instead.</span>
+<span class="sd">    If you need `include` or `exclude`, use:</span>
+<span class="sd">    ```py</span>
+<span class="sd">    data = self.model_dump(include=include, exclude=exclude, round_trip=True)</span>
+<span class="sd">    data = {**data, **(update or {})}</span>
+<span class="sd">    copied = self.model_validate(data)</span>
+<span class="sd">    ```</span>
+<span class="sd">    Args:</span>
+<span class="sd">        include: Optional set or mapping specifying which fields to include in the copied model.</span>
+<span class="sd">        exclude: Optional set or mapping specifying which fields to exclude in the copied model.</span>
+<span class="sd">        update: Optional dictionary of field-value pairs to override field values in the copied model.</span>
+<span class="sd">        deep: If True, the values of fields that are Pydantic models will be deep-copied.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A copy of the model with included, excluded and updated fields as specified.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `copy` method is deprecated; use `model_copy` instead. &#39;</span>
+        <span class="s1">&#39;See the docstring of `BaseModel.copy` for details about how to handle `include` and `exclude`.&#39;</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">.deprecated</span> <span class="kn">import</span> <span class="n">copy_internals</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">copy_internals</span><span class="o">.</span><span class="n">_iter</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">to_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">by_alias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span> <span class="n">exclude_unset</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">),</span>
+        <span class="o">**</span><span class="p">(</span><span class="n">update</span> <span class="ow">or</span> <span class="p">{}),</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_private__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">private</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">private</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_private__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">PydanticUndefined</span><span class="p">}</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_extra__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">extra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_extra__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_extra__</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>  <span class="c1"># k was in the exclude</span>
+                <span class="n">extra</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_extra__</span><span class="p">:</span>  <span class="c1"># k must have come from extra</span>
+                <span class="n">extra</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="c1"># new `__pydantic_fields_set__` can have unset optional fields with a set value in `update` kwarg</span>
+    <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+        <span class="n">fields_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_fields_set__</span> <span class="o">|</span> <span class="n">update</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fields_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_fields_set__</span><span class="p">)</span>
+    <span class="c1"># removing excluded fields from `__pydantic_fields_set__`</span>
+    <span class="k">if</span> <span class="n">exclude</span><span class="p">:</span>
+        <span class="n">fields_set</span> <span class="o">-=</span> <span class="nb">set</span><span class="p">(</span><span class="n">exclude</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">copy_internals</span><span class="o">.</span><span class="n">_copy_and_set_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">fields_set</span><span class="p">,</span> <span class="n">extra</span><span class="p">,</span> <span class="n">private</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.dict">
+    <p>def <span class="ident">dict</span>(</p><p>self, *, include: &#39;IncEx | None&#39; = None, exclude: &#39;IncEx | None&#39; = None, by_alias: &#39;bool&#39; = False, exclude_unset: &#39;bool&#39; = False, exclude_defaults: &#39;bool&#39; = False, exclude_none: &#39;bool&#39; = False)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.dict', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.dict" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span><span class="s1">&#39;The `dict` method is deprecated; use `model_dump` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dict</span><span class="p">(</span>  <span class="c1"># noqa: D102</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">include</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">by_alias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_unset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_defaults</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># noqa UP006</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The `dict` method is deprecated; use `model_dump` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span>
+        <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span>
+        <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span>
+        <span class="n">by_alias</span><span class="o">=</span><span class="n">by_alias</span><span class="p">,</span>
+        <span class="n">exclude_unset</span><span class="o">=</span><span class="n">exclude_unset</span><span class="p">,</span>
+        <span class="n">exclude_defaults</span><span class="o">=</span><span class="n">exclude_defaults</span><span class="p">,</span>
+        <span class="n">exclude_none</span><span class="o">=</span><span class="n">exclude_none</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.json">
+    <p>def <span class="ident">json</span>(</p><p>self, *, include: &#39;IncEx | None&#39; = None, exclude: &#39;IncEx | None&#39; = None, by_alias: &#39;bool&#39; = False, exclude_unset: &#39;bool&#39; = False, exclude_defaults: &#39;bool&#39; = False, exclude_none: &#39;bool&#39; = False, encoder: &#39;Callable[[Any], Any] | None&#39; = PydanticUndefined, models_as_dict: &#39;bool&#39; = PydanticUndefined, **dumps_kwargs: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.json', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.json" class="source">
+    <div class="codehilite"><pre><span></span><span class="nd">@typing_extensions</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span><span class="s1">&#39;The `json` method is deprecated; use `model_dump_json` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">json</span><span class="p">(</span>  <span class="c1"># noqa: D102</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">include</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">by_alias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_unset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_defaults</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoder</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">PydanticUndefined</span><span class="p">,</span>  <span class="c1"># type: ignore[assignment]</span>
+    <span class="n">models_as_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">PydanticUndefined</span><span class="p">,</span>  <span class="c1"># type: ignore[assignment]</span>
+    <span class="o">**</span><span class="n">dumps_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">&#39;The `json` method is deprecated; use `model_dump_json` instead.&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">PydanticDeprecatedSince20</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">encoder</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">PydanticUndefined</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The `encoder` argument is no longer supported; use field serializers instead.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">models_as_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">PydanticUndefined</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The `models_as_dict` argument is no longer supported; use a model serializer instead.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dumps_kwargs</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;`dumps_kwargs` keyword arguments are no longer supported.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_dump_json</span><span class="p">(</span>
+        <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span>
+        <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span>
+        <span class="n">by_alias</span><span class="o">=</span><span class="n">by_alias</span><span class="p">,</span>
+        <span class="n">exclude_unset</span><span class="o">=</span><span class="n">exclude_unset</span><span class="p">,</span>
+        <span class="n">exclude_defaults</span><span class="o">=</span><span class="n">exclude_defaults</span><span class="p">,</span>
+        <span class="n">exclude_none</span><span class="o">=</span><span class="n">exclude_none</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_copy">
+    <p>def <span class="ident">model_copy</span>(</p><p>self, *, update: &#39;dict[str, Any] | None&#39; = None, deep: &#39;bool&#39; = False)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Usage docs: https://docs.pydantic.dev/2.9/concepts/serialization/#model_copy</p>
+<p>Returns a copy of the model.</p>
+<p>Args:
+    update: Values to change/add in the new model. Note: the data is not validated
+        before creating the new model. You should trust this data.
+    deep: Set to <code>True</code> to make a deep copy of the model.</p>
+<p>Returns:
+    New model instance.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_copy', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_copy" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">model_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">deep</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Usage docs: https://docs.pydantic.dev/2.9/concepts/serialization/#model_copy</span>
+<span class="sd">    Returns a copy of the model.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        update: Values to change/add in the new model. Note: the data is not validated</span>
+<span class="sd">            before creating the new model. You should trust this data.</span>
+<span class="sd">        deep: Set to `True` to make a deep copy of the model.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        New model instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">copied</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__deepcopy__</span><span class="p">()</span> <span class="k">if</span> <span class="n">deep</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;extra&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;allow&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">update</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_fields</span><span class="p">:</span>
+                    <span class="n">copied</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">copied</span><span class="o">.</span><span class="n">__pydantic_extra__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">copied</span><span class="o">.</span><span class="n">__pydantic_extra__</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">copied</span><span class="o">.</span><span class="n">__pydantic_extra__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">copied</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+        <span class="n">copied</span><span class="o">.</span><span class="n">__pydantic_fields_set__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">copied</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_dump">
+    <p>def <span class="ident">model_dump</span>(</p><p>self, *, mode: &#34;Literal[&#39;json&#39;, &#39;python&#39;] | str&#34; = &#39;python&#39;, include: &#39;IncEx | None&#39; = None, exclude: &#39;IncEx | None&#39; = None, context: &#39;Any | None&#39; = None, by_alias: &#39;bool&#39; = False, exclude_unset: &#39;bool&#39; = False, exclude_defaults: &#39;bool&#39; = False, exclude_none: &#39;bool&#39; = False, round_trip: &#39;bool&#39; = False, warnings: &#34;bool | Literal[&#39;none&#39;, &#39;warn&#39;, &#39;error&#39;]&#34; = True, serialize_as_any: &#39;bool&#39; = False)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Usage docs: https://docs.pydantic.dev/2.9/concepts/serialization/#modelmodel_dump</p>
+<p>Generate a dictionary representation of the model, optionally specifying which fields to include or exclude.</p>
+<p>Args:
+    mode: The mode in which <code>to_python</code> should run.
+        If mode is 'json', the output will only contain JSON serializable types.
+        If mode is 'python', the output may contain non-JSON-serializable Python objects.
+    include: A set of fields to include in the output.
+    exclude: A set of fields to exclude from the output.
+    context: Additional context to pass to the serializer.
+    by_alias: Whether to use the field's alias in the dictionary key if defined.
+    exclude_unset: Whether to exclude fields that have not been explicitly set.
+    exclude_defaults: Whether to exclude fields that are set to their default value.
+    exclude_none: Whether to exclude fields that have a value of <code>None</code>.
+    round_trip: If True, dumped values should be valid as input for non-idempotent types such as Json[T].
+    warnings: How to handle serialization errors. False/"none" ignores them, True/"warn" logs errors,
+        "error" raises a [<code>PydanticSerializationError</code>][pydantic_core.PydanticSerializationError].
+    serialize_as_any: Whether to serialize fields with duck-typing serialization behavior.</p>
+<p>Returns:
+    A dictionary representation of the model.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_dump', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_dump" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">model_dump</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;python&#39;</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span><span class="p">,</span>
+    <span class="n">include</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">by_alias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_unset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_defaults</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">round_trip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">warnings</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">serialize_as_any</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Usage docs: https://docs.pydantic.dev/2.9/concepts/serialization/#modelmodel_dump</span>
+<span class="sd">    Generate a dictionary representation of the model, optionally specifying which fields to include or exclude.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        mode: The mode in which `to_python` should run.</span>
+<span class="sd">            If mode is &#39;json&#39;, the output will only contain JSON serializable types.</span>
+<span class="sd">            If mode is &#39;python&#39;, the output may contain non-JSON-serializable Python objects.</span>
+<span class="sd">        include: A set of fields to include in the output.</span>
+<span class="sd">        exclude: A set of fields to exclude from the output.</span>
+<span class="sd">        context: Additional context to pass to the serializer.</span>
+<span class="sd">        by_alias: Whether to use the field&#39;s alias in the dictionary key if defined.</span>
+<span class="sd">        exclude_unset: Whether to exclude fields that have not been explicitly set.</span>
+<span class="sd">        exclude_defaults: Whether to exclude fields that are set to their default value.</span>
+<span class="sd">        exclude_none: Whether to exclude fields that have a value of `None`.</span>
+<span class="sd">        round_trip: If True, dumped values should be valid as input for non-idempotent types such as Json[T].</span>
+<span class="sd">        warnings: How to handle serialization errors. False/&quot;none&quot; ignores them, True/&quot;warn&quot; logs errors,</span>
+<span class="sd">            &quot;error&quot; raises a [`PydanticSerializationError`][pydantic_core.PydanticSerializationError].</span>
+<span class="sd">        serialize_as_any: Whether to serialize fields with duck-typing serialization behavior.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary representation of the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_serializer__</span><span class="o">.</span><span class="n">to_python</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+        <span class="n">by_alias</span><span class="o">=</span><span class="n">by_alias</span><span class="p">,</span>
+        <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span>
+        <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">exclude_unset</span><span class="o">=</span><span class="n">exclude_unset</span><span class="p">,</span>
+        <span class="n">exclude_defaults</span><span class="o">=</span><span class="n">exclude_defaults</span><span class="p">,</span>
+        <span class="n">exclude_none</span><span class="o">=</span><span class="n">exclude_none</span><span class="p">,</span>
+        <span class="n">round_trip</span><span class="o">=</span><span class="n">round_trip</span><span class="p">,</span>
+        <span class="n">warnings</span><span class="o">=</span><span class="n">warnings</span><span class="p">,</span>
+        <span class="n">serialize_as_any</span><span class="o">=</span><span class="n">serialize_as_any</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_dump_json">
+    <p>def <span class="ident">model_dump_json</span>(</p><p>self, *, indent: &#39;int | None&#39; = None, include: &#39;IncEx | None&#39; = None, exclude: &#39;IncEx | None&#39; = None, context: &#39;Any | None&#39; = None, by_alias: &#39;bool&#39; = False, exclude_unset: &#39;bool&#39; = False, exclude_defaults: &#39;bool&#39; = False, exclude_none: &#39;bool&#39; = False, round_trip: &#39;bool&#39; = False, warnings: &#34;bool | Literal[&#39;none&#39;, &#39;warn&#39;, &#39;error&#39;]&#34; = True, serialize_as_any: &#39;bool&#39; = False)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Usage docs: https://docs.pydantic.dev/2.9/concepts/serialization/#modelmodel_dump_json</p>
+<p>Generates a JSON representation of the model using Pydantic's <code>to_json</code> method.</p>
+<p>Args:
+    indent: Indentation to use in the JSON output. If None is passed, the output will be compact.
+    include: Field(s) to include in the JSON output.
+    exclude: Field(s) to exclude from the JSON output.
+    context: Additional context to pass to the serializer.
+    by_alias: Whether to serialize using field aliases.
+    exclude_unset: Whether to exclude fields that have not been explicitly set.
+    exclude_defaults: Whether to exclude fields that are set to their default value.
+    exclude_none: Whether to exclude fields that have a value of <code>None</code>.
+    round_trip: If True, dumped values should be valid as input for non-idempotent types such as Json[T].
+    warnings: How to handle serialization errors. False/"none" ignores them, True/"warn" logs errors,
+        "error" raises a [<code>PydanticSerializationError</code>][pydantic_core.PydanticSerializationError].
+    serialize_as_any: Whether to serialize fields with duck-typing serialization behavior.</p>
+<p>Returns:
+    A JSON string representation of the model.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_dump_json', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_dump_json" class="source">
+    <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">model_dump_json</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">indent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">IncEx</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">by_alias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_unset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_defaults</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">round_trip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">warnings</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">serialize_as_any</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Usage docs: https://docs.pydantic.dev/2.9/concepts/serialization/#modelmodel_dump_json</span>
+<span class="sd">    Generates a JSON representation of the model using Pydantic&#39;s `to_json` method.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        indent: Indentation to use in the JSON output. If None is passed, the output will be compact.</span>
+<span class="sd">        include: Field(s) to include in the JSON output.</span>
+<span class="sd">        exclude: Field(s) to exclude from the JSON output.</span>
+<span class="sd">        context: Additional context to pass to the serializer.</span>
+<span class="sd">        by_alias: Whether to serialize using field aliases.</span>
+<span class="sd">        exclude_unset: Whether to exclude fields that have not been explicitly set.</span>
+<span class="sd">        exclude_defaults: Whether to exclude fields that are set to their default value.</span>
+<span class="sd">        exclude_none: Whether to exclude fields that have a value of `None`.</span>
+<span class="sd">        round_trip: If True, dumped values should be valid as input for non-idempotent types such as Json[T].</span>
+<span class="sd">        warnings: How to handle serialization errors. False/&quot;none&quot; ignores them, True/&quot;warn&quot; logs errors,</span>
+<span class="sd">            &quot;error&quot; raises a [`PydanticSerializationError`][pydantic_core.PydanticSerializationError].</span>
+<span class="sd">        serialize_as_any: Whether to serialize fields with duck-typing serialization behavior.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A JSON string representation of the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pydantic_serializer__</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">indent</span><span class="o">=</span><span class="n">indent</span><span class="p">,</span>
+        <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span>
+        <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">by_alias</span><span class="o">=</span><span class="n">by_alias</span><span class="p">,</span>
+        <span class="n">exclude_unset</span><span class="o">=</span><span class="n">exclude_unset</span><span class="p">,</span>
+        <span class="n">exclude_defaults</span><span class="o">=</span><span class="n">exclude_defaults</span><span class="p">,</span>
+        <span class="n">exclude_none</span><span class="o">=</span><span class="n">exclude_none</span><span class="p">,</span>
+        <span class="n">round_trip</span><span class="o">=</span><span class="n">round_trip</span><span class="p">,</span>
+        <span class="n">warnings</span><span class="o">=</span><span class="n">warnings</span><span class="p">,</span>
+        <span class="n">serialize_as_any</span><span class="o">=</span><span class="n">serialize_as_any</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="colivara_py.models.GenericMessage.model_post_init">
+    <p>def <span class="ident">model_post_init</span>(</p><p>self, _BaseModel__context: &#39;Any&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Override this method to perform additional initialization after <code>__init__</code> and <code>model_construct</code>.
+This is useful if you want to do some validation that requires the entire model to be initialized.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-colivara_py.models.GenericMessage.model_post_init', this);">Show source &equiv;</a></p>
+  <div id="source-colivara_py.models.GenericMessage.model_post_init" class="source">
     <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">model_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">__context</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Override this method to perform additional initialization after `__init__` and `model_construct`.</span>
 <span class="sd">    This is useful if you want to do some validation that requires the entire model to be initialized.</span>
