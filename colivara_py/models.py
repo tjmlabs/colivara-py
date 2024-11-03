@@ -76,7 +76,6 @@ class DocumentOut(BaseModel):
     name: str
     metadata: dict = Field(default_factory=dict)
     url: Optional[str] = None
-    base64: Optional[str] = None
     num_pages: int
     collection_name: str
     pages: Optional[List[PageOut]] = None
