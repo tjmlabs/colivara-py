@@ -480,8 +480,8 @@ def test_upsert_document_sync(api_key, tmp_path):
         "name": "test_document",
         "metadata": {"description": "A test document"},
         "collection_name": "default collection",
-        "url": None,
-        "base64": "dGVzdCBkb2N1bWVudCBjb250ZW50",
+        # aws s3 url
+        "url": "https://colivara.s3.amazonaws.com/documents/test_document.pdf",
         "num_pages": 1,
     }
 
@@ -503,7 +503,9 @@ def test_upsert_document_sync(api_key, tmp_path):
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
     assert document.collection_name == "default collection"
-    assert document.base64 == "dGVzdCBkb2N1bWVudCBjb250ZW50"
+    assert (
+        document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
+    )
     assert document.num_pages == 1
 
     # Test with file path
@@ -520,7 +522,9 @@ def test_upsert_document_sync(api_key, tmp_path):
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
     assert document.collection_name == "default collection"
-    assert document.base64 == "dGVzdCBkb2N1bWVudCBjb250ZW50"
+    assert (
+        document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
+    )
     assert document.num_pages == 1
 
     # Test with URL
@@ -534,7 +538,9 @@ def test_upsert_document_sync(api_key, tmp_path):
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
     assert document.collection_name == "default collection"
-    assert document.base64 == "dGVzdCBkb2N1bWVudCBjb250ZW50"
+    assert (
+        document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
+    )
     assert document.num_pages == 1
 
 
@@ -649,8 +655,7 @@ def test_get_document(api_key):
         "name": "test_document",
         "metadata": {"description": "A test document"},
         "collection_name": "default collection",
-        "url": None,
-        "base64": "dGVzdCBkb2N1bWVudCBjb250ZW50",
+        "url": "https://colivara.s3.amazonaws.com/documents/test_document.pdf",
         "num_pages": 1,
     }
 
@@ -667,7 +672,9 @@ def test_get_document(api_key):
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
     assert document.collection_name == "default collection"
-    assert document.base64 == "dGVzdCBkb2N1bWVudCBjb250ZW50"
+    assert (
+        document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
+    )
     assert document.num_pages == 1
 
 
@@ -714,8 +721,7 @@ def test_partial_update_document(api_key):
         "name": "updated_document",
         "metadata": {"description": "An updated test document"},
         "collection_name": "default collection",
-        "url": None,
-        "base64": "dGVzdCBkb2N1bWVudCBjb250ZW50",
+        "url": "https://colivara.s3.amazonaws.com/documents/test_document.pdf",
         "num_pages": 1,
     }
 
@@ -781,8 +787,7 @@ def test_list_documents(api_key):
             "name": "document1",
             "metadata": {"description": "First document"},
             "collection_name": "default collection",
-            "url": None,
-            "base64": "dGVzdCBkb2N1bWVudCBjb250ZW50",
+            "url": "https://colivara.s3.amazonaws.com/documents/document1.pdf",
             "num_pages": 1,
         },
         {
@@ -790,8 +795,7 @@ def test_list_documents(api_key):
             "name": "document2",
             "metadata": {"description": "Second document"},
             "collection_name": "default collection",
-            "url": None,
-            "base64": "YW5vdGhlciB0ZXN0IGRvY3VtZW50",
+            "url": "https://colivara.s3.amazonaws.com/documents/document2.pdf",
             "num_pages": 2,
         },
     ]
