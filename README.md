@@ -77,7 +77,7 @@ We use uv, but you can use the pip interface if you prefer:
 
 ```bash
 cd colivara-py
-uv .venv
+uv venv
 source .venv/bin/activate
 ```
 Now install the dependencies and test dependencies:
