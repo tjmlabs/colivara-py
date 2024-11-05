@@ -35,6 +35,7 @@ class CollectionOut(BaseModel):
     id: int
     name: str
     metadata: dict
+    num_documents: int
 
 
 class GenericError(BaseModel):
