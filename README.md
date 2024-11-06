@@ -30,14 +30,15 @@ rag_client = ColiVara(
     # This is the default and can be omitted
     base_url="https://api.colivara.com"
 )
-# Create a new collection
+# Create a new collection (optional)
 new_collection = rag_client.create_collection(name="my_collection", metadata={"description": "A sample collection"})
 print(f"Created collection: {new_collection.name}")
 
 # Upload a document to the collection
 document = rag_client.upsert_document(
     name="sample_document",
-    collection_name="my_collection",
+    # optional, defaults to "default collection"
+    collection_name="my_collection", 
     url="https://example.com/sample.pdf",
     metadata={"author": "John Doe"}
 )
