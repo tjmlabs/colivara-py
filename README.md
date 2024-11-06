@@ -91,7 +91,7 @@ pytest
 
 To build the documenation locally:
 ```bash
-pdocs server colivara_py #to test  
+pdocs server colivara_py #to see the documentation locally.  
 pdocs as_html colivara_py --overwrite #to generate HTML.
 pdocs as_markdown colivara_py #to generate markdown.
 ```
