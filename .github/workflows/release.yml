@@ -104,7 +104,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           make_latest: true
           generate_release_notes: false
-          token: ${{ secrets.PAT_TOKEN }}
 
 
   test:
