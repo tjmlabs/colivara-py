@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/tjmlabs/colivara-py/blob/main/LICENSE)
 [![Tests](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml/badge.svg)](https://github.com/tjmlabs/colivara-py/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/tjmlabs/ColiVara/branch/main/graph/badge.svg)](https://codecov.io/gh/tjmlabs/ColiVara)
 
-The official Python SDK for the ColiVara API
+The official Python SDK for the ColiVara API. ColiVara is a document search and retrieval API that uses advanced machine learning techniques to index and search documents. This SDK allows you to interact with the API to create collections, upload documents, search for documents, and generate embeddings.
 
 ## Installation
 
