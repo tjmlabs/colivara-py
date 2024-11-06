@@ -95,3 +95,8 @@ pdocs server colivara_py #to test
 pdocs as_html colivara_py --overwrite #to generate HTML.
 pdocs as_markdown colivara_py #to generate markdown.
 ```
+
+## License
+This SDK is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). The API is licensed under Functional Source License, Version 1.1, Apache 2.0 Future License. See the [LICENSE.md](LICENSE.md) file for details.
+
+For commercial licensing, please contact us at [tjmlabs.com](https://tjmlabs.com). We are happy to work with you to provide a license that meets your needs.
