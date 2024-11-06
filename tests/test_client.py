@@ -44,6 +44,7 @@ def test_create_collection_sync(api_key):
         "id": 1,
         "name": "test_collection",
         "metadata": {"description": "A test collection"},
+        "num_documents": 0,
     }
 
     responses.add(
@@ -57,6 +58,7 @@ def test_create_collection_sync(api_key):
     assert collection.id == 1
     assert collection.name == "test_collection"
     assert collection.metadata == {"description": "A test collection"}
+    assert collection.num_documents == 0
 
 
 @responses.activate
@@ -122,11 +124,13 @@ def test_get_collections_sync(api_key):
             "id": 1,
             "name": "test_collection",
             "metadata": {"description": "A test collection"},
+            "num_documents": 2,
         },
         {
             "id": 2,
             "name": "another_test_collection",
             "metadata": {"description": "Another test collection"},
+            "num_documents": 3,
         },
     ]
 
@@ -149,12 +153,14 @@ def test_get_collections_sync(api_key):
     assert first_collection.id == 1
     assert first_collection.name == "test_collection"
     assert first_collection.metadata == {"description": "A test collection"}
+    assert first_collection.num_documents == 2
 
     # Check the properties of the second collection in the list
     second_collection = collections[1]
     assert second_collection.id == 2
     assert second_collection.name == "another_test_collection"
     assert second_collection.metadata == {"description": "Another test collection"}
+    assert second_collection.num_documents == 3
 
 
 @responses.activate
@@ -239,6 +245,7 @@ def test_get_collection_sync(api_key):
         "id": 1,
         "name": "test_collection",
         "metadata": {"description": "A test collection"},
+        "num_documents": 2,
     }
 
     responses.add(
@@ -253,6 +260,7 @@ def test_get_collection_sync(api_key):
     assert collection.id == 1
     assert collection.name == "test_collection"
     assert collection.metadata == {"description": "A test collection"}
+    assert collection.num_documents == 2
 
 
 @responses.activate
@@ -300,6 +308,7 @@ def test_partial_update_collection_sync(api_key):
         "id": 1,
         "name": "updated_collection",
         "metadata": {"description": "An updated collection"},
+        "num_documents": 5,
     }
 
     responses.add(
@@ -318,6 +327,7 @@ def test_partial_update_collection_sync(api_key):
     assert collection.id == 1
     assert collection.name == "updated_collection"
     assert collection.metadata == {"description": "An updated collection"}
+    assert collection.num_documents == 5
 
 
 @responses.activate
