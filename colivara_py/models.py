@@ -50,8 +50,8 @@ class DocumentIn(BaseModel):
     name: str
     metadata: dict = Field(default_factory=dict)
     collection_name: str = Field(
-        "default collection",
-        description="""The name of the collection to which the document belongs. If not provided, the document will be added to the default collection. Use 'all' to access all collections belonging to the user.""",
+        "default_collection",
+        description="""The name of the collection to which the document belongs. If not provided, the document will be added to the default_collection. Use 'all' to access all collections belonging to the user.""",
     )
     url: Optional[str] = None
     base64: Optional[str] = None
@@ -86,8 +86,8 @@ class DocumentInPatch(BaseModel):
     name: Optional[str] = None
     metadata: Optional[dict] = Field(default_factory=dict)
     collection_name: Optional[str] = Field(
-        "default collection",
-        description="""The name of the collection to which the document belongs. If not provided, the document will be added to the default collection. Use 'all' to access all collections belonging to the user.""",
+        "default_collection",
+        description="""The name of the collection to which the document belongs. If not provided, the document will be added to the default_collection. Use 'all' to access all collections belonging to the user.""",
     )
     url: Optional[str] = None
     base64: Optional[str] = None
