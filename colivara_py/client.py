@@ -184,7 +184,7 @@ class ColiVara:
         self,
         name: str,
         metadata: Optional[Dict[str, Any]] = None,
-        collection_name: str = "default collection",
+        collection_name: str = "default_collection",
         document_url: Optional[str] = None,
         document_base64: Optional[str] = None,
         document_path: Optional[Union[str, Path]] = None,
@@ -199,7 +199,7 @@ class ColiVara:
         Args:
             name (str): The name of the document.
             metadata (Optional[Dict[str, Any]]): Additional metadata for the document.
-            collection_name (str): The name of the collection to add the document to. Defaults to "default collection".
+            collection_name (str): The name of the collection to add the document to. Defaults to "default_collection".
             document_url (Optional[str]): The URL of the document, if available.
             document_base64 (Optional[str]): The base64-encoded string of the document content, if available.
             document_path (Optional[str]): The path to the document file to be uploaded.
@@ -260,7 +260,7 @@ class ColiVara:
     def get_document(
         self,
         document_name: str,
-        collection_name: str = "default collection",
+        collection_name: str = "default_collection",
         expand: Optional[str] = None,
     ) -> DocumentOut:
         """
@@ -269,7 +269,7 @@ class ColiVara:
         Args:
             document_name (str): The name of the document to retrieve.
             collection_name (str): The name of the collection containing the document.
-                                   Defaults to "default collection".
+                                   Defaults to "default_collection".
             expand (Optional[str]): A comma-separated list of fields to expand in the response.
                                     Currently, only "pages" is supported, the document's pages will be included if provided.
 
@@ -342,14 +342,14 @@ class ColiVara:
             response.raise_for_status()
 
     def list_documents(
-        self, collection_name: str = "default collection", expand: Optional[str] = None
+        self, collection_name: str = "default_collection", expand: Optional[str] = None
     ) -> List[DocumentOut]:
         """
         Fetch a list of documents for a given collection.
 
         Args:
             collection_name (str): The name of the collection to fetch documents from.
-                                   Defaults to "default collection". Use "all" to fetch documents from all collections.
+                                   Defaults to "default_collection". Use "all" to fetch documents from all collections.
             expand (Optional[str]): A comma-separated string specifying additional fields to include in the response.
                                     If "pages" is included, the pages of each document will be included.
 
@@ -370,7 +370,7 @@ class ColiVara:
             response.raise_for_status()
 
     def delete_document(
-        self, document_name: str, collection_name: str = "default collection"
+        self, document_name: str, collection_name: str = "default_collection"
     ) -> None:
         """
         Delete a document by its name.
@@ -378,7 +378,7 @@ class ColiVara:
         Args:
             document_name (str): The name of the document to be deleted.
             collection_name (str): The name of the collection containing the document.
-                                   Defaults to "default collection". Use "all" to access all collections belonging to the user.
+                                   Defaults to "default_collection". Use "all" to access all collections belonging to the user.
 
         Raises:
             requests.HTTPError: If the API request fails.

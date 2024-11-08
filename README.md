@@ -37,7 +37,7 @@ print(f"Created collection: {new_collection.name}")
 # Upload a document to the collection
 document = rag_client.upsert_document(
     name="sample_document",
-    # optional, defaults to "default collection"
+    # optional, defaults to "default_collection"
     collection_name="my_collection", 
     url="https://example.com/sample.pdf",
     metadata={"author": "John Doe"}

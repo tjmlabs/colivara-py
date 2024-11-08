@@ -489,7 +489,7 @@ def test_upsert_document_sync(api_key, tmp_path):
         "id": 1,
         "name": "test_document",
         "metadata": {"description": "A test document"},
-        "collection_name": "default collection",
+        "collection_name": "default_collection",
         # aws s3 url
         "url": "https://colivara.s3.amazonaws.com/documents/test_document.pdf",
         "num_pages": 1,
@@ -512,7 +512,7 @@ def test_upsert_document_sync(api_key, tmp_path):
     assert document.id == 1
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
-    assert document.collection_name == "default collection"
+    assert document.collection_name == "default_collection"
     assert (
         document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
     )
@@ -531,7 +531,7 @@ def test_upsert_document_sync(api_key, tmp_path):
     assert document.id == 1
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
-    assert document.collection_name == "default collection"
+    assert document.collection_name == "default_collection"
     assert (
         document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
     )
@@ -547,7 +547,7 @@ def test_upsert_document_sync(api_key, tmp_path):
     assert document.id == 1
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
-    assert document.collection_name == "default collection"
+    assert document.collection_name == "default_collection"
     assert (
         document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
     )
@@ -664,7 +664,7 @@ def test_get_document(api_key):
         "id": 1,
         "name": "test_document",
         "metadata": {"description": "A test document"},
-        "collection_name": "default collection",
+        "collection_name": "default_collection",
         "url": "https://colivara.s3.amazonaws.com/documents/test_document.pdf",
         "num_pages": 1,
     }
@@ -681,7 +681,7 @@ def test_get_document(api_key):
     assert document.id == 1
     assert document.name == "test_document"
     assert document.metadata == {"description": "A test document"}
-    assert document.collection_name == "default collection"
+    assert document.collection_name == "default_collection"
     assert (
         document.url == "https://colivara.s3.amazonaws.com/documents/test_document.pdf"
     )
@@ -730,7 +730,7 @@ def test_partial_update_document(api_key):
         "id": 1,
         "name": "updated_document",
         "metadata": {"description": "An updated test document"},
-        "collection_name": "default collection",
+        "collection_name": "default_collection",
         "url": "https://colivara.s3.amazonaws.com/documents/test_document.pdf",
         "num_pages": 1,
     }
@@ -796,7 +796,7 @@ def test_list_documents(api_key):
             "id": 1,
             "name": "document1",
             "metadata": {"description": "First document"},
-            "collection_name": "default collection",
+            "collection_name": "default_collection",
             "url": "https://colivara.s3.amazonaws.com/documents/document1.pdf",
             "num_pages": 1,
         },
@@ -804,7 +804,7 @@ def test_list_documents(api_key):
             "id": 2,
             "name": "document2",
             "metadata": {"description": "Second document"},
-            "collection_name": "default collection",
+            "collection_name": "default_collection",
             "url": "https://colivara.s3.amazonaws.com/documents/document2.pdf",
             "num_pages": 2,
         },
