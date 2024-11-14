@@ -1,26 +1,15 @@
-import os
-import requests
-from typing import Optional, Dict, Any, List, Union
-from .models import (
-    CollectionIn,
-    CollectionOut,
-    GenericError,
-    GenericMessage,
-    PatchCollectionIn,
-    DocumentIn,
-    DocumentOut,
-    DocumentInPatch,
-    QueryIn,
-    QueryOut,
-    QueryFilter,
-    FileOut,
-    EmbeddingsOut,
-    TaskEnum,
-    EmbeddingsIn,
-)
 import base64
+import os
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Union
+
+import requests
 from pydantic import ValidationError
+
+from .models import (CollectionIn, CollectionOut, DocumentIn, DocumentInPatch,
+                     DocumentOut, EmbeddingsIn, EmbeddingsOut, FileOut,
+                     GenericError, GenericMessage, PatchCollectionIn,
+                     QueryFilter, QueryIn, QueryOut, TaskEnum)
 
 
 class ColiVara:
@@ -469,6 +458,73 @@ class ColiVara:
 
         response = requests.post(
             request_url, json=query_in.model_dump(), headers=self.headers
+        )
+
+        if response.status_code == 200:
+            return QueryOut(**response.json())
+        elif response.status_code == 503:
+            error = GenericError(**response.json())
+            raise ValueError(f"Service unavailable: {error.detail}")
+        else:
+            response.raise_for_status()
+
+    def filter(
+        self,
+        query_filter: Dict[str, Any],
+        expand: Optional[str] = None,
+    ) -> QueryOut:
+        """
+        Filter for documents and collections that meet the criteria of the filter.
+
+        Args:
+            query_filter (Dict[str, Any]): A dictionary specifying the filter criteria.
+                The filter can be used to narrow down the search based on specific criteria.
+                The dictionary should contain the following keys:
+                - "on": "document" or "collection"
+                - "key": str or List[str]
+                - "value": Optional[Union[str, int, float, bool]]
+                - "lookup": One of "key_lookup", "contains", "contained_by", "has_key", "has_keys", "has_any_keys"
+            expand (Optional[str]): A comma-separated list of fields to expand in the response.
+                Currently, only "pages" is supported, the document's pages will be included if provided.
+
+
+        Returns:
+            DocumentOut: The retrieved documents with their details.
+            CollectionOut: The retrieved collections with their details.
+
+        Raises:
+            ValueError: If the query_filter is invalid.
+            requests.HTTPError: If the API request fails.
+
+        Example:
+            # Simple filter
+            results = client.filter({
+                "on": "document",
+                "key": "category",
+                "value": "AI",
+                "lookup": "contains"
+            })
+
+            # Filter with a list of keys
+            results = client.filter({
+                "on": "collection",
+                "key": ["tag1", "tag2"],
+                "lookup": "has_keys"
+            })
+        """
+
+        request_url = f"{self.base_url}/v1/filter/"
+
+        try:
+            filter_obj = QueryFilter(**query_filter)
+            payload = filter_obj.model_dump()
+        except ValidationError as e:
+            raise ValueError(f"Invalid query_filter: {str(e)}")
+
+        params = {"expand": expand}
+
+        response = requests.post(
+            request_url, json=payload, params=params, headers=self.headers
         )
 
         if response.status_code == 200:
