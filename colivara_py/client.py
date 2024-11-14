@@ -472,7 +472,7 @@ class ColiVara:
         self,
         query_filter: Dict[str, Any],
         expand: Optional[str] = None,
-    ) -> QueryOut:
+    ) -> List[Union[DocumentOut, CollectionOut]]:
         """
         Filter for documents and collections that meet the criteria of the filter.
 
@@ -528,7 +528,10 @@ class ColiVara:
         )
 
         if response.status_code == 200:
-            return QueryOut(**response.json())
+            if query_filter["on"] == "document":
+                return [DocumentOut(**doc) for doc in response.json()]
+            else:
+                return [CollectionOut(**col) for col in response.json()]
         elif response.status_code == 503:
             error = GenericError(**response.json())
             raise ValueError(f"Service unavailable: {error.detail}")
