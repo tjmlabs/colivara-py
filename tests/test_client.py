@@ -1,3 +1,4 @@
+import tempfile
 import os
 import pytest
 import base64
@@ -1159,6 +1160,31 @@ def test_create_embedding(api_key):
         [0.10986328125, -0.08251953125, 0.005767822265625]
     ]
     assert embedding_result.model == "vidore/colQwen-v1.2"
+
+    with tempfile.NamedTemporaryFile(
+        suffix=".png", delete=False
+    ) as f1, tempfile.NamedTemporaryFile(suffix=".png", delete=False) as f2:
+        # Write some dummy data if needed
+        f1.write(b"test data")
+        f2.write(b"test data")
+
+        responses.add(
+            responses.POST, f"{base_url}/v1/embeddings/", json=expected_out, status=200
+        )
+        embedding_result = client.create_embedding([f1.name, f2.name], task="image")
+
+        assert isinstance(embedding_result, EmbeddingsOut)
+        assert (
+            len(embedding_result.data) == 1
+        )  # In this case, we're using the same mock response
+        assert embedding_result.data[0]["embedding"] == [
+            [0.10986328125, -0.08251953125, 0.005767822265625]
+        ]
+        assert embedding_result.model == "vidore/colQwen-v1.2"
+
+        # Clean up
+        os.unlink(f1.name)
+        os.unlink(f2.name)
 
     # Test error handling
     responses.add(
