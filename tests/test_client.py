@@ -1,25 +1,18 @@
 import tempfile
-import os
-import pytest
 import base64
-from colivara_py import ColiVara, AsyncColiVara
-from colivara_py.models import (
-    CollectionOut,
-    DocumentOut,
-    QueryOut,
-    PageOutQuery,
-    FileOut,
-    EmbeddingsOut,
-    PatchCollectionIn,
-    DocumentIn,
-    DocumentInPatch,
-    QueryFilter,
-    GenericMessage,
-)
-import responses
-from requests.exceptions import HTTPError
-from pydantic import ValidationError
+import os
 from pathlib import Path
+
+import pytest
+import responses
+from pydantic import ValidationError
+from requests.exceptions import HTTPError
+
+from colivara_py import AsyncColiVara, ColiVara
+from colivara_py.models import (CollectionOut, DocumentIn, DocumentInPatch,
+                                DocumentOut, EmbeddingsOut, FileOut,
+                                GenericMessage, PageOutQuery,
+                                PatchCollectionIn, QueryFilter, QueryOut)
 
 
 def test_colivara_init_no_api_key():
@@ -990,6 +983,113 @@ def test_search_with_filter(api_key):
 
 
 @responses.activate
+def test_filter_documents(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    expected_out = [
+        {
+            "id": 1,
+            "name": "Test Document Fixture",
+            "metadata": {"important": True},
+            "url": "https://www.example.com",
+            "num_pages": 1,
+            "collection_name": "Test Collection Fixture",
+        }
+    ]
+
+    responses.add(
+        responses.POST, f"{client.base_url}/v1/filter/", json=expected_out, status=200
+    )
+
+    query_filter = {
+        "on": "document",
+        "key": "important",
+        "value": True,
+    }
+    result = client.filter(query_filter=query_filter)
+    assert isinstance(result, list)
+    assert len(result) == 1
+
+
+@responses.activate
+def test_filter_documents_expand(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    expected_out = [
+        {
+            "id": 1,
+            "name": "Test Document Fixture",
+            "metadata": {"important": True},
+            "url": "https://www.example.com",
+            "num_pages": 1,
+            "collection_name": "Test Collection Fixture",
+            "pages": [
+                {
+                    "document_name": "Test Document Fixture",
+                    "img_base64": "base64_string",
+                    "page_number": 1,
+                }
+            ],
+        }
+    ]
+
+    responses.add(
+        responses.POST,
+        f"{client.base_url}/v1/filter/?expand=pages",
+        json=expected_out,
+        status=200,
+    )
+
+    query_filter = {
+        "on": "document",
+        "key": "important",
+        "value": True,
+    }
+    result = client.filter(query_filter=query_filter, expand="pages")
+    assert isinstance(result, list)
+    assert len(result) == 1
+
+
+@responses.activate
+def test_filter_collections(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    expected_out = [
+        {
+            "id": 1,
+            "name": "test_collection",
+            "metadata": {"description": "A test collection"},
+            "num_documents": 2,
+        },
+        {
+            "id": 2,
+            "name": "another_test_collection",
+            "metadata": {"description": "Another test collection"},
+            "num_documents": 3,
+        },
+    ]
+
+    responses.add(
+        responses.POST, f"{client.base_url}/v1/filter/", json=expected_out, status=200
+    )
+
+    query_filter = {
+        "on": "collection",
+        "key": "important",
+        "value": True,
+    }
+    result = client.filter(query_filter=query_filter, expand="pages")
+    assert isinstance(result, list)
+    assert len(result) == 2
+
+
+@responses.activate
 def test_search_service_unavailable(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
@@ -1008,6 +1108,31 @@ def test_search_service_unavailable(api_key):
 
 
 @responses.activate
+def test_filter_service_unavailable(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    error_response = {"detail": "Service is temporarily unavailable"}
+
+    responses.add(
+        responses.POST, f"{client.base_url}/v1/filter/", json=error_response, status=503
+    )
+
+    with pytest.raises(ValueError) as exc_info:
+        client.filter(
+            query_filter={
+                "on": "document",
+                "key": "category",
+                "value": "AI",
+                "lookup": "contains",
+            }
+        )
+
+    assert "Service unavailable" in str(exc_info.value)
+
+
+@responses.activate
 def test_search_invalid_filter(api_key):
     os.environ["COLIVARA_API_KEY"] = api_key
     base_url = "https://api.test.com"
@@ -1015,6 +1140,18 @@ def test_search_invalid_filter(api_key):
 
     with pytest.raises(ValueError) as exc_info:
         client.search("what is 1+1?", query_filter={"invalid": "filter"})
+
+    assert "Invalid query_filter" in str(exc_info.value)
+
+
+@responses.activate
+def test_filter_invalid_filter(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    with pytest.raises(ValueError) as exc_info:
+        client.filter(query_filter={"invalid": "filter"})
 
     assert "Invalid query_filter" in str(exc_info.value)
 
@@ -1032,6 +1169,28 @@ def test_search_http_error(api_key):
     )
     with pytest.raises(HTTPError):
         client.search("what is 1+1?")
+
+
+@responses.activate
+def test_filter_http_error(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+    responses.add(
+        responses.POST,
+        f"{client.base_url}/v1/filter/",
+        json={"error": "Internal Server Error"},
+        status=500,
+    )
+    with pytest.raises(HTTPError):
+        client.filter(
+            query_filter={
+                "on": "document",
+                "key": "category",
+                "value": "AI",
+                "lookup": "contains",
+            }
+        )
 
 
 @pytest.fixture
