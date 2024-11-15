@@ -623,6 +623,11 @@ class ColiVara:
             raise ValueError("Task must be a string or TaskEnum.")
 
         try:
+            # if the task is in image, and we got a path, we will convert the file to base64
+            if task == TaskEnum.image:
+                for i, d in enumerate(input_data):
+                    if Path(d).is_file():
+                        input_data[i] = self.file_to_base64(d)
             payload = EmbeddingsIn(input_data=input_data, task=task).model_dump()
         except ValidationError as e:
             raise ValueError(f"Invalid input data: {str(e)}")
