@@ -169,6 +169,40 @@ class ColiVara:
         else:
             response.raise_for_status()
 
+    def add_webhook(
+        self,
+        url: str,
+    ) -> GenericMessage:
+        """
+        Add a webhook to the service.
+
+        This endpoint allows the user to add a webhook to the service. The webhook will be called when a document is upserted
+        with the upsertion status.
+
+        Events are document upsert successful, document upsert failed.
+
+        Args:
+            url: The URL of the webhook to be added.
+
+        Returns:
+            GenericMessage: A message indicating the status of the webhook addition.
+
+        Raises:
+            requests.HTTPError: If the API request fails.
+        """
+        request_url = f"{self.base_url}/v1/documents/webhook/"
+        payload = {"url": url}
+
+        response = requests.post(request_url, json=payload, headers=self.headers)
+
+        if response.status_code == 200:
+            return GenericMessage(**response.json())
+        elif response.status_code == 400:
+            error = GenericError(**response.json())
+            raise ValueError(f"Bad request: {error.detail}")
+        else:
+            response.raise_for_status()
+
     def upsert_document(
         self,
         name: str,

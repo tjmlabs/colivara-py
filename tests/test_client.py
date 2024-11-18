@@ -1,6 +1,6 @@
-import tempfile
 import base64
 import os
+import tempfile
 from pathlib import Path
 
 import pytest
@@ -11,7 +11,7 @@ from requests.exceptions import HTTPError
 from colivara_py import AsyncColiVara, ColiVara
 from colivara_py.models import (CollectionOut, DocumentIn, DocumentInPatch,
                                 DocumentOut, EmbeddingsOut, FileOut,
-                                GenericMessage, PageOutQuery,
+                                GenericError, GenericMessage, PageOutQuery,
                                 PatchCollectionIn, QueryFilter, QueryOut)
 
 
@@ -426,6 +426,65 @@ def test_delete_collection_http_error(api_key):
     )
     with pytest.raises(HTTPError):
         client.delete_collection(collection_name="test_collection")
+
+
+@responses.activate
+def test_add_webhook(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    # mock the response for the add webhook request
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/documents/webhook/",
+        json={"detail": "Webhook added successfully."},
+        status=200,
+    )
+
+    webhook_url = "https://webhook.site/1234"
+    response = client.add_webhook(webhook_url)
+    assert isinstance(response, GenericMessage)
+
+
+@responses.activate
+def test_add_webhook_error(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    # mock the response for the add webhook request,
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/documents/webhook/",
+        json={"detail": "Error adding webhook: "},
+        status=400,
+    )
+
+    webhook_url = "https://webhook.site/1234"
+
+    with pytest.raises(ValueError):
+        client.add_webhook(webhook_url)
+
+
+@responses.activate
+def test_add_webhook_unexpected_error(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    # mock the response for the add webhook request,
+    responses.add(
+        responses.POST,
+        f"{base_url}/v1/documents/webhook/",
+        json={"detail": "Error adding webhook: "},
+        status=500,
+    )
+
+    webhook_url = "https://webhook.site/1234"
+
+    with pytest.raises(HTTPError):
+        client.add_webhook(webhook_url)
 
 
 @responses.activate
