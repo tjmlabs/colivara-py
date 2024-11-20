@@ -5,11 +5,12 @@ from typing import Any, Dict, List, Optional, Union
 
 import requests
 from pydantic import ValidationError
+from svix.webhooks import Webhook
 
 from .models import (CollectionIn, CollectionOut, DocumentIn, DocumentInPatch,
                      DocumentOut, EmbeddingsIn, EmbeddingsOut, FileOut,
                      GenericError, GenericMessage, PatchCollectionIn,
-                     QueryFilter, QueryIn, QueryOut, TaskEnum)
+                     QueryFilter, QueryIn, QueryOut, TaskEnum, WebhookOut)
 
 
 class ColiVara:
@@ -172,7 +173,7 @@ class ColiVara:
     def add_webhook(
         self,
         url: str,
-    ) -> GenericMessage:
+    ) -> WebhookOut:
         """
         Add a webhook to the service.
 
@@ -185,7 +186,7 @@ class ColiVara:
             url: The URL of the webhook to be added.
 
         Returns:
-            GenericMessage: A message indicating the status of the webhook addition.
+            WebhookOut: The added webhook endpoint id, associated app id, and webhook secret.
 
         Raises:
             requests.HTTPError: If the API request fails.
@@ -196,12 +197,35 @@ class ColiVara:
         response = requests.post(request_url, json=payload, headers=self.headers)
 
         if response.status_code == 200:
-            return GenericMessage(**response.json())
+            return WebhookOut(**response.json())
         elif response.status_code == 400:
             error = GenericError(**response.json())
             raise ValueError(f"Bad request: {error.detail}")
         else:
             response.raise_for_status()
+
+    def validate_webhook(
+        self, webhook_secret: str, payload: str, headers: Dict[str, Any]
+    ) -> bool:
+        """
+        Validates a webhook request.
+
+        This endpoint allows the user to validate a webhook request given the webhook secret, payload, and headers.
+
+        Args:
+            webhook_secret: The webhook secret to validate the request.
+            payload: The payload of the webhook request.
+            headers: The headers of the webhook request.
+
+        Returns:
+            bool: True if the request is valid, False otherwise
+        """
+        try:
+            wh = Webhook(webhook_secret)
+            wh.verify(payload, headers)
+            return True
+        except Exception as e:
+            return False
 
     def upsert_document(
         self,

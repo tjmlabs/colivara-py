@@ -12,6 +12,7 @@ classifiers = [
 dependencies = [
     "pydantic==2.9.2",
     "requests==2.32.3",
+    "svix==1.40.0",
 ]
 
 [build-system]

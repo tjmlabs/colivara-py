@@ -2,6 +2,7 @@ import base64
 import os
 import tempfile
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 import pytest
 import responses
@@ -11,8 +12,9 @@ from requests.exceptions import HTTPError
 from colivara_py import AsyncColiVara, ColiVara
 from colivara_py.models import (CollectionOut, DocumentIn, DocumentInPatch,
                                 DocumentOut, EmbeddingsOut, FileOut,
-                                GenericError, GenericMessage, PageOutQuery,
-                                PatchCollectionIn, QueryFilter, QueryOut)
+                                GenericMessage, PageOutQuery,
+                                PatchCollectionIn, QueryFilter, QueryOut,
+                                WebhookOut)
 
 
 def test_colivara_init_no_api_key():
@@ -438,13 +440,17 @@ def test_add_webhook(api_key):
     responses.add(
         responses.POST,
         f"{base_url}/v1/documents/webhook/",
-        json={"detail": "Webhook added successfully."},
+        json={
+            "app_id": "test_app_id",
+            "endpoint_id": "test_endpoint_id",
+            "webhook_secret": "test_webhook_secret",
+        },
         status=200,
     )
 
     webhook_url = "https://webhook.site/1234"
     response = client.add_webhook(webhook_url)
-    assert isinstance(response, GenericMessage)
+    assert isinstance(response, WebhookOut)
 
 
 @responses.activate
@@ -485,6 +491,60 @@ def test_add_webhook_unexpected_error(api_key):
 
     with pytest.raises(HTTPError):
         client.add_webhook(webhook_url)
+
+
+@responses.activate
+def test_validate_webhook(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    # Mock webhook verify
+    with patch("colivara_py.client.Webhook") as MockWebhook:
+        # Create a mock instance of SvixAsync
+        mock_webhook = MagicMock()
+        MockWebhook.return_value = mock_webhook
+
+        # Set return values for the mocked methods
+        mock_webhook.verify.return_value = True
+
+        # call the validate_webhook method
+        # These were all sent from the server
+        headers = {
+            "svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
+            "svix-timestamp": "1614265330",
+            "svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
+        }
+        payload = '{"test": 2432232314}'
+        out = client.validate_webhook("test_webhook_secre", payload, headers)
+        assert out == True
+
+
+@responses.activate
+def test_validate_webhook_failure(api_key):
+    os.environ["COLIVARA_API_KEY"] = api_key
+    base_url = "https://api.test.com"
+    client = ColiVara(base_url=base_url)
+
+    # Mock webhook verify
+    with patch("colivara_py.client.Webhook") as MockWebhook:
+        # Create a mock instance of SvixAsync
+        mock_webhook = MagicMock()
+        MockWebhook.return_value = mock_webhook
+
+        # make the mocked method throw an exception
+        mock_webhook.verify.side_effect = Exception("Error verifying webhook")
+
+        # call the validate_webhook method
+        # These were all sent from the server
+        headers = {
+            "svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
+            "svix-timestamp": "1614265330",
+            "svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
+        }
+        payload = '{"test": 2432232314}'
+        out = client.validate_webhook("test_webhook_secre", payload, headers)
+        assert out == False
 
 
 @responses.activate

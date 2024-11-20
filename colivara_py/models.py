@@ -1,7 +1,8 @@
-from typing import Optional, List, Union
-from pydantic import BaseModel, model_validator, Field
-from typing_extensions import Self
 from enum import Enum
+from typing import List, Optional, Union
+
+from pydantic import BaseModel, Field, model_validator
+from typing_extensions import Self
 
 
 class CollectionIn(BaseModel):
@@ -44,6 +45,12 @@ class GenericError(BaseModel):
 
 class GenericMessage(BaseModel):
     detail: str
+
+
+class WebhookOut(BaseModel):
+    app_id: str
+    endpoint_id: str
+    webhook_secret: str
 
 
 class DocumentIn(BaseModel):
