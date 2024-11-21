@@ -5,11 +5,26 @@ from typing import Any, Dict, List, Optional, Union
 
 import requests
 from pydantic import ValidationError
+from svix.webhooks import Webhook
 
-from .models import (CollectionIn, CollectionOut, DocumentIn, DocumentInPatch,
-                     DocumentOut, EmbeddingsIn, EmbeddingsOut, FileOut,
-                     GenericError, GenericMessage, PatchCollectionIn,
-                     QueryFilter, QueryIn, QueryOut, TaskEnum)
+from .models import (
+    CollectionIn,
+    CollectionOut,
+    DocumentIn,
+    DocumentInPatch,
+    DocumentOut,
+    EmbeddingsIn,
+    EmbeddingsOut,
+    FileOut,
+    GenericError,
+    GenericMessage,
+    PatchCollectionIn,
+    QueryFilter,
+    QueryIn,
+    QueryOut,
+    TaskEnum,
+    WebhookOut,
+)
 
 
 class ColiVara:
@@ -168,6 +183,63 @@ class ColiVara:
             raise Exception(f"Collection '{collection_name}' not found.")
         else:
             response.raise_for_status()
+
+    def add_webhook(
+        self,
+        url: str,
+    ) -> WebhookOut:
+        """
+        Add a webhook to the service.
+
+        This endpoint allows the user to add a webhook to the service. The webhook will be called when a document is upserted
+        with the upsertion status.
+
+        Events are document upsert successful, document upsert failed.
+
+        Args:
+            url: The URL of the webhook to be added.
+
+        Returns:
+            WebhookOut: The added webhook endpoint id, associated app id, and webhook secret.
+
+        Raises:
+            requests.HTTPError: If the API request fails.
+        """
+        request_url = f"{self.base_url}/v1/webhook/"
+        payload = {"url": url}
+
+        response = requests.post(request_url, json=payload, headers=self.headers)
+
+        if response.status_code == 200:
+            return WebhookOut(**response.json())
+        elif response.status_code == 400:
+            error = GenericError(**response.json())
+            raise ValueError(f"Bad request: {error.detail}")
+        else:
+            response.raise_for_status()
+
+    def validate_webhook(
+        self, webhook_secret: str, payload: str, headers: Dict[str, Any]
+    ) -> bool:
+        """
+        Validates a webhook request.
+
+        This endpoint allows the user to validate a webhook request given the webhook secret, payload, and headers.
+
+        Args:
+            webhook_secret: The webhook secret to validate the request.
+            payload: The payload of the webhook request.
+            headers: The headers of the webhook request.
+
+        Returns:
+            bool: True if the request is valid, False otherwise
+        """
+        try:
+            wh = Webhook(webhook_secret)
+            wh.verify(payload, headers)
+            return True
+        except Exception:
+            return False
 
     def upsert_document(
         self,
