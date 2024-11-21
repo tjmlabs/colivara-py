@@ -7,10 +7,24 @@ import requests
 from pydantic import ValidationError
 from svix.webhooks import Webhook
 
-from .models import (CollectionIn, CollectionOut, DocumentIn, DocumentInPatch,
-                     DocumentOut, EmbeddingsIn, EmbeddingsOut, FileOut,
-                     GenericError, GenericMessage, PatchCollectionIn,
-                     QueryFilter, QueryIn, QueryOut, TaskEnum, WebhookOut)
+from .models import (
+    CollectionIn,
+    CollectionOut,
+    DocumentIn,
+    DocumentInPatch,
+    DocumentOut,
+    EmbeddingsIn,
+    EmbeddingsOut,
+    FileOut,
+    GenericError,
+    GenericMessage,
+    PatchCollectionIn,
+    QueryFilter,
+    QueryIn,
+    QueryOut,
+    TaskEnum,
+    WebhookOut,
+)
 
 
 class ColiVara:
@@ -191,7 +205,7 @@ class ColiVara:
         Raises:
             requests.HTTPError: If the API request fails.
         """
-        request_url = f"{self.base_url}/v1/documents/webhook/"
+        request_url = f"{self.base_url}/v1/webhook/"
         payload = {"url": url}
 
         response = requests.post(request_url, json=payload, headers=self.headers)
@@ -224,7 +238,7 @@ class ColiVara:
             wh = Webhook(webhook_secret)
             wh.verify(payload, headers)
             return True
-        except Exception as e:
+        except Exception:
             return False
 
     def upsert_document(

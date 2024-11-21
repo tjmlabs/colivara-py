@@ -10,11 +10,20 @@ from pydantic import ValidationError
 from requests.exceptions import HTTPError
 
 from colivara_py import AsyncColiVara, ColiVara
-from colivara_py.models import (CollectionOut, DocumentIn, DocumentInPatch,
-                                DocumentOut, EmbeddingsOut, FileOut,
-                                GenericMessage, PageOutQuery,
-                                PatchCollectionIn, QueryFilter, QueryOut,
-                                WebhookOut)
+from colivara_py.models import (
+    CollectionOut,
+    DocumentIn,
+    DocumentInPatch,
+    DocumentOut,
+    EmbeddingsOut,
+    FileOut,
+    GenericMessage,
+    PageOutQuery,
+    PatchCollectionIn,
+    QueryFilter,
+    QueryOut,
+    WebhookOut,
+)
 
 
 def test_colivara_init_no_api_key():
@@ -439,7 +448,7 @@ def test_add_webhook(api_key):
     # mock the response for the add webhook request
     responses.add(
         responses.POST,
-        f"{base_url}/v1/documents/webhook/",
+        f"{base_url}/v1/webhook/",
         json={
             "app_id": "test_app_id",
             "endpoint_id": "test_endpoint_id",
@@ -462,7 +471,7 @@ def test_add_webhook_error(api_key):
     # mock the response for the add webhook request,
     responses.add(
         responses.POST,
-        f"{base_url}/v1/documents/webhook/",
+        f"{base_url}/v1/webhook/",
         json={"detail": "Error adding webhook: "},
         status=400,
     )
@@ -482,7 +491,7 @@ def test_add_webhook_unexpected_error(api_key):
     # mock the response for the add webhook request,
     responses.add(
         responses.POST,
-        f"{base_url}/v1/documents/webhook/",
+        f"{base_url}/v1/webhook/",
         json={"detail": "Error adding webhook: "},
         status=500,
     )
@@ -517,7 +526,7 @@ def test_validate_webhook(api_key):
         }
         payload = '{"test": 2432232314}'
         out = client.validate_webhook("test_webhook_secre", payload, headers)
-        assert out == True
+        assert out
 
 
 @responses.activate
@@ -544,7 +553,7 @@ def test_validate_webhook_failure(api_key):
         }
         payload = '{"test": 2432232314}'
         out = client.validate_webhook("test_webhook_secre", payload, headers)
-        assert out == False
+        assert not out
 
 
 @responses.activate
