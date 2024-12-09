@@ -250,6 +250,7 @@ class ColiVara:
         document_base64: Optional[str] = None,
         document_path: Optional[Union[str, Path]] = None,
         wait: Optional[bool] = False,
+        use_proxy: Optional[bool] = False,
     ) -> DocumentOut | GenericMessage:
         """
         Create or update a document in a collection.
@@ -303,6 +304,7 @@ class ColiVara:
             url=document_url,
             base64=document_base64,
             wait=wait,
+            use_proxy=use_proxy,
         ).model_dump()
 
         response = requests.post(request_url, json=payload, headers=self.headers)
@@ -362,6 +364,7 @@ class ColiVara:
         collection_name: Optional[str] = None,
         document_url: Optional[str] = None,
         document_base64: Optional[str] = None,
+        use_proxy: Optional[bool] = False,
     ) -> DocumentOut:
         """
         Partially update a document.
@@ -390,6 +393,7 @@ class ColiVara:
             collection_name=collection_name,
             url=document_url,
             base64=document_base64,
+            use_proxy=use_proxy,
         ).model_dump(exclude_none=True)
 
         response = requests.patch(request_url, json=payload, headers=self.headers)
