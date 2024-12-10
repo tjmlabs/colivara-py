@@ -63,6 +63,7 @@ class DocumentIn(BaseModel):
     url: Optional[str] = None
     base64: Optional[str] = None
     wait: Optional[bool] = False
+    use_proxy: Optional[bool] = False
 
     @model_validator(mode="after")
     def base64_or_url(self) -> Self:
@@ -98,6 +99,7 @@ class DocumentInPatch(BaseModel):
     )
     url: Optional[str] = None
     base64: Optional[str] = None
+    use_proxy: Optional[bool] = False
 
     @model_validator(mode="after")
     def at_least_one_field(self) -> Self:
