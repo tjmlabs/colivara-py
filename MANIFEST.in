@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+include colivara_py/py.typed
+include requirements.txt
+recursive-include colivara_py *.py
+recursive-include colivara_py *.pyi

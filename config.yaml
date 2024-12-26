@@ -1,0 +1,17 @@
+# Generator Configuration for colivara-py
+packageName: colivara_py
+projectName: colivara-py
+packageUrl: "https://github.com/tjmlabs/colivara-py" # changed
+packageTitle: 'Colivara Python SDK'
+infoName: "Abdulhaleem"
+infoEmail: "abdulhaleem@tjmlabs.com"
+licenceName: "Apache-2.0"
+python:
+  packageName: colivara_py
+  projectName: colivara-py
+  useNose: false
+  pythonVersion: ">=3.10"
+  recursionLimit: 1000
+gitHost: github.com
+gitUserId: HalemoGPA
+gitRepoId: colivara-py #changed
