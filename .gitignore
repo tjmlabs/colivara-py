@@ -69,3 +69,4 @@ draft.py
 .DS_Store
 test_image.png
 uv.lock
+.ruff_cache/
