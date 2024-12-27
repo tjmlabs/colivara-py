@@ -44,3 +44,4 @@ git_push.sh
 config.yaml
 .gitlab-ci.yml
 tox.ini
+py.typed

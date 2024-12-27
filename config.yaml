@@ -2,7 +2,6 @@
 packageName: colivara_py
 projectName: colivara-py
 packageUrl: "https://github.com/tjmlabs/colivara-py" 
-packageVersion: "1.5.1"
 packageTitle: 'Colivara Python SDK'
 infoName: "TJM Labs"
 infoEmail: "founders@colivara.com"
