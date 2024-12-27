@@ -414,9 +414,12 @@ class ColiVara:
                 key=filter_key, value=filter_value, lookup=filter_lookup, on=on
             )
 
-            return self.filter_api.api_views_filter(
+            result =  self.filter_api.api_views_filter(
                 query_filter=filter_model, expand=expand
             )
+
+            # Return the actual instance instead of the Response object
+            return result.actual_instance
 
         except ApiException as e:
             # Handle any API exceptions and pass them to a custom error handler

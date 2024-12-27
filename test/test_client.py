@@ -252,7 +252,7 @@ def test_filter_with_complete_params(client, mock_api_response):
         "on": "document",
     }
     result = client.filter(query_filter, expand="test-expand")
-    assert result == mock_api_response
+    assert result == mock_api_response.actual_instance
 
 
 def test_filter_missing_required_key(client):
