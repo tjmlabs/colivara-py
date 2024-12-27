@@ -17,7 +17,6 @@ from colivara_py.exceptions import ApiException
 
 from colivara_py.models import (
     QueryFilter,
-    Response,
     Key,
     Value,
     FileOut,
@@ -364,7 +363,7 @@ class ColiVara:
 
     def filter(
         self, query_filter: Dict[str, Any], expand: Optional[str] = None
-    ) -> Response:
+    ) -> list[CollectionOut] | list[DocumentOut] | None:
         """
         Filter for documents and collections that meet the criteria of the filter.
 
