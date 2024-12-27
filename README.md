@@ -156,7 +156,7 @@ If the OpenAPI specification is updated, regenerate the SDK as follows:
     twine upload dist/*
     ```
 
-3. Update the version in `setup.py` when making significant changes.
+3. Update the version in `setup.py` when making significant changes. (You can update all the configs through config.yaml)
 
 ---
 
