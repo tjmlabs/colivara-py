@@ -1,5 +1,6 @@
 # colivara-py
 
+
 [![PyPI](https://img.shields.io/pypi/v/colivara-py.svg)](https://pypi.org/project/colivara-py/)
 [![Changelog](https://img.shields.io/github/v/release/tjmlabs/colivara-py?include_prereleases&label=changelog)](https://github.com/tjmlabs/colivara-py/releases)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/tjmlabs/colivara-py/blob/main/LICENSE)
@@ -9,27 +10,33 @@ The official Python SDK for the ColiVara API. ColiVara is a document search and 
 
 ## Installation
 
-Install this library using `pip`:
+Install `colivara-py` using pip:
+
 ```bash
 pip install colivara-py
 ```
+
+---
+
 ## Usage
 
-Please see the [ColiVara API documentation](https://docs.colivara.com) for more information on how to use this library.
+Refer to the [ColiVara API documentation](https://docs.colivara.com) for detailed guidance on how to use this library.
 
-You will need to either self-host the API (see the [ColiVara API repo](https://github.com/tjmlabs/ColiVara)) or use the hosted version at https://colivara.com. You will also need an API key, which you can obtain by signing up at [ColiVara](https://colivara.com) or from your self-hosted API.
+### Requirements
+- You need access to the ColiVara API, which you can self-host (see [ColiVara API repo](https://github.com/tjmlabs/ColiVara)) or use the hosted version at [colivara.com](https://colivara.com).
+- Obtain an API key by signing up at [ColiVara](https://colivara.com) or from your self-hosted API.
+
+### Example Code
 
 ```python
 import os
 from colivara_py import ColiVara
 
-
 rag_client = ColiVara(
-     # This is the default and can be omitted
-    api_key=os.environ.get("COLIVARA_API_KEY"),
-    # This is the default and can be omitted
-    base_url="https://api.colivara.com"
+    api_key=os.environ.get("COLIVARA_API_KEY"),  # Default is `None`
+    base_url="https://api.colivara.com"  # Default is `https://api.colivara.com`
 )
+
 # Create a new collection (optional)
 new_collection = rag_client.create_collection(name="my_collection", metadata={"description": "A sample collection"})
 print(f"Created collection: {new_collection.name}")
@@ -37,8 +44,7 @@ print(f"Created collection: {new_collection.name}")
 # Upload a document to the collection
 document = rag_client.upsert_document(
     name="sample_document",
-    # optional, defaults to "default_collection"
-    collection_name="my_collection", 
+    collection_name="my_collection",  # Defaults to "default_collection"
     url="https://example.com/sample.pdf",
     metadata={"author": "John Doe"}
 )
@@ -54,7 +60,7 @@ for result in search_results.results:
     print(f"Page {result.page_number} of {result.document_name}: Score {result.normalized_score}")
 
 # List documents in a collection
-documents = client.list_documents(collection_name="my_collection")
+documents = rag_client.list_documents(collection_name="my_collection")
 for doc in documents:
     print(f"Document: {doc.name}, Pages: {doc.num_pages}")
 
@@ -70,34 +76,112 @@ rag_client.delete_document("sample_document", collection_name="my_collection")
 print("Document deleted")
 ```
 
+---
+
 ## Development
 
-To contribute to this library, first checkout the code. Then create a new virtual environment:
+### Setting up the Development Environment
 
-We use uv, but you can use the pip interface if you prefer:
+1. Clone the repository and navigate to the project directory:
 
-```bash
-cd colivara-py
-uv venv
-source .venv/bin/activate
-```
-Now install the dependencies and test dependencies:
-```bash
-uv sync --extra dev-dependencies
-```
-To run the tests:
-```bash
-pytest
-```
+    ```bash
+    cd colivara-py
+    ```
 
-To build the documenation locally:
-```bash
-pdocs server colivara_py #to see the documentation locally.  
-pdocs as_html colivara_py --overwrite #to generate HTML.
-pdocs as_markdown colivara_py #to generate markdown.
-```
+2. Create a virtual environment:
+
+    ```bash
+    uv venv
+    ```
+
+3. Activate the virtual environment:
+
+    **macOS/Linux:**
+    ```bash
+    source .venv/bin/activate
+    ```
+
+    **Windows:**
+    ```bash
+    .venv\Scripts\activate
+    ```
+
+4. Install the development dependencies:
+
+    ```bash
+    uv sync --extra dev-dependencies
+    ```
+
+5. Run tests:
+
+    ```bash
+    pytest
+    ```
+
+### Regenerating the SDK
+
+If the OpenAPI specification is updated, regenerate the SDK as follows:
+
+1. Install the OpenAPI generator (on macOS, use Homebrew):
+
+    ```bash
+    brew install openapi-generator
+    ```
+
+2. Verify the installation:
+
+    ```bash
+    openapi-generator version
+    ```
+
+3. Run the OpenAPI generator from the project directory:
+
+    ```bash
+    openapi-generator generate -i https://api.colivara.com/v1/openapi.json -g python -c config.yaml --ignore-file-override .openapi-generator-ignore --template-dir ./templates
+    ```
+
+
+---
+
+## Updating the SDK and Documentation
+
+Follow these steps for major changes to the OpenAPI spec:
+
+1. Regenerate the SDK using the OpenAPI generator.  
+2. Update the client interface in `colivara_py/client.py`. if needed
+3. Modify tests in the `tests` directory to reflect the changes. if needed.
+4. Run tests to ensure functionality.  
+
+
+---
+
+## Building Documentation Locally
+
+Generate and view the SDK documentation:
+
+1. To serve the documentation locally:
+
+    ```bash
+    pdocs server colivara_py
+    ```
+
+2. To generate documentation as HTML:
+
+    ```bash
+    pdocs as_html colivara_py --overwrite
+    ```
+
+3. To generate documentation as Markdown:
+
+    ```bash
+    pdocs as_markdown colivara_py
+    ```
+
+---
 
 ## License
-This SDK is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). The API is licensed under Functional Source License, Version 1.1, Apache 2.0 Future License. See the [LICENSE.md](LICENSE.md) file for details.
 
-For commercial licensing, please contact us at [tjmlabs.com](https://tjmlabs.com). We are happy to work with you to provide a license that meets your needs.
+This SDK is licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). The ColiVara API is licensed under the Functional Source License, Version 1.1, Apache 2.0 Future License. See [LICENSE.md](LICENSE.md) for details.
+
+For commercial licensing, contact us via [tjmlabs.com](https://tjmlabs.com). We’re happy to work with you to provide a license tailored to your needs.
+

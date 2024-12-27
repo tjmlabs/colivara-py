@@ -1,0 +1,19 @@
+[run]
+omit =
+    */configuration.py
+    */rest.py
+    */api_client.py
+    */api/*.py
+    */models/*.py
+    */__init__.py
+    .venv/*
+    */exceptions.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    pass
+    raise ImportError

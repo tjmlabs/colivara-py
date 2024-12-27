@@ -1,109 +1,84 @@
-import base64
 import os
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
-
-import requests
-from pydantic import ValidationError
+from typing import Any, Dict, List, Optional, Union, cast
+import base64
 from svix.webhooks import Webhook
 
-from .models import (
-    CollectionIn,
-    CollectionOut,
-    DocumentIn,
-    DocumentInPatch,
-    DocumentOut,
-    EmbeddingsIn,
-    EmbeddingsOut,
-    FileOut,
-    GenericError,
-    GenericMessage,
-    PatchCollectionIn,
+from colivara_py.api.collections_api import CollectionsApi
+from colivara_py.api.documents_api import DocumentsApi
+from colivara_py.api.embeddings_api import EmbeddingsApi
+from colivara_py.api.filter_api import FilterApi
+from colivara_py.api.health_api import HealthApi
+from colivara_py.api.helpers_api import HelpersApi
+from colivara_py.api.search_api import SearchApi
+from colivara_py.api.webhook_api import WebhookApi
+from colivara_py.configuration import Configuration
+from colivara_py.api_client import ApiClient
+from colivara_py.exceptions import ApiException
+
+from colivara_py.models import (
     QueryFilter,
-    QueryIn,
-    QueryOut,
-    TaskEnum,
+    Key,
+    Value,
+    FileOut,
+    EmbeddingsOut,
+    CollectionOut,
+    PatchCollectionIn,
     WebhookOut,
+    DocumentOut,
+    GenericMessage,
+    TaskEnum,
+    DocumentIn,
+    CollectionIn,
+    QueryIn,
+    DocumentInPatch,
+    WebhookIn,
+    EmbeddingsIn,
+    QueryOut,
 )
+
+from pathlib import Path
+from pydantic import StrictStr
 
 
 class ColiVara:
-    def __init__(self, base_url: Optional[str] = None, api_key: Optional[str] = None):
+    """
+    ColiVara SDK Wrapper Class
+
+    A user-friendly wrapper for interacting with the ColiVara API.
+    """
+
+    def __init__(
+        self, api_key: Optional[str] = None, base_url: str = "https://api.colivara.com"
+    ):
         """
-        Initializes the ColiVara client.
+        Initialize the ColiVara SDK.
 
-        Args:
-            base_url: The base URL for the API (optional).
-            api_key: The API key for authentication (optional).
-
-        Raises:
-            ValueError: If the API key is not provided.
+        :param api_key: API key for authentication. Defaults to the COLIVARA_API_KEY environment variable.
+        :param base_url: Base URL of the API.
         """
-
-        self.base_url = base_url or "https://api.colivara.com"
         self.api_key = api_key or os.getenv("COLIVARA_API_KEY")
         if not self.api_key:
             raise ValueError(
-                "API key must be provided either through parameter or COLIVARA_API_KEY environment variable."
+                "API key must be provided or set in the COLIVARA_API_KEY environment variable."
             )
-        self.headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json",
-        }
 
-    def create_collection(
-        self, name: str, metadata: Optional[Dict[str, Any]] = {}
-    ) -> CollectionOut:
-        """
-        Creates a new collection.
+        # Custom Configuration
+        self.config = Configuration(host=base_url)
+        self.config.verify_ssl = False
+        self.api_client = ApiClient(self.config)
 
-        Args:
-            name: The name of the new collection.
-            metadata: The metadata for the new collection (optional).
+        # Explicitly add Authorization header
+        self.api_client.default_headers["Authorization"] = f"Bearer {self.api_key}"
 
-        Returns:
-            The created CollectionOut object.
-
-        Raises:
-            Exception: If there's a conflict or an unexpected error occurs.
-        """
-
-        url = f"{self.base_url}/v1/collections/"
-        payload = CollectionIn(name=name, metadata=metadata).model_dump()
-        response = requests.post(url, json=payload, headers=self.headers)
-        if response.status_code == 201:
-            return CollectionOut(**response.json())
-        elif response.status_code == 409:
-            error = GenericError(**response.json())
-            raise Exception(f"Conflict error: {error.detail}")
-        else:
-            response.raise_for_status()
-
-    def list_collections(self) -> List[CollectionOut]:
-        """
-        Lists all collections.
-
-        Returns:
-            A list of CollectionOut objects.
-
-        Raises:
-            ValueError: If the response format is unexpected.
-            Exception: If an unexpected error occurs.
-        """
-
-        url = f"{self.base_url}/v1/collections/"
-        response = requests.get(url, headers=self.headers)
-        response.raise_for_status()
-
-        if response.status_code == 200:
-            collections_data = response.json()
-            # Handle potential empty list
-            if isinstance(collections_data, list):
-                return [CollectionOut(**collection) for collection in collections_data]
-            else:
-                raise ValueError(f"Unexpected response format: {collections_data}")
-        else:
-            response.raise_for_status()
+        # Initialize all API modules
+        self.collections_api = CollectionsApi(self.api_client)
+        self.documents_api = DocumentsApi(self.api_client)
+        self.embeddings_api = EmbeddingsApi(self.api_client)
+        self.filter_api = FilterApi(self.api_client)
+        self.health_api = HealthApi(self.api_client)
+        self.helpers_api = HelpersApi(self.api_client)
+        self.search_api = SearchApi(self.api_client)
+        self.webhook_api = WebhookApi(self.api_client)
 
     def get_collection(self, collection_name: str) -> CollectionOut:
         """
@@ -118,15 +93,26 @@ class ColiVara:
         Raises:
             Exception: If the collection is not found or an unexpected error occurs.
         """
+        try:
+            return self.collections_api.api_views_get_collection(collection_name)
+        except ApiException as e:
+            self._handle_error(e)
 
-        url = f"{self.base_url}/v1/collections/{collection_name}/"
-        response = requests.get(url, headers=self.headers)
-        if response.status_code == 200:
-            return CollectionOut(**response.json())
-        elif response.status_code == 404:
-            raise Exception(f"Collection '{collection_name}' not found.")
-        else:
-            response.raise_for_status()
+    def create_collection(
+        self, name: str, metadata: Optional[Dict[str, Any]] = None
+    ) -> CollectionOut:
+        """
+        Create a new collection.
+
+        :param name: Name of the collection.
+        :param metadata: Optional metadata for the collection.
+        :return: Response from the API.
+        """
+        body = CollectionIn(name=name, metadata=metadata or {})
+        try:
+            return self.collections_api.api_views_create_collection(body)
+        except ApiException as e:
+            self._handle_error(e)
 
     def partial_update_collection(
         self,
@@ -148,21 +134,29 @@ class ColiVara:
         Raises:
             Exception: If the collection is not found or there's a problem with the update.
         """
+        body = PatchCollectionIn(name=name, metadata=metadata)
+        try:
+            return self.collections_api.api_views_partial_update_collection(
+                collection_name, body
+            )
+        except ApiException as e:
+            self._handle_error(e)
 
-        url = f"{self.base_url}/v1/collections/{collection_name}/"
+    def list_collections(self) -> List[CollectionOut]:
+        """
+        Lists all collections.
 
-        # Create a CollectionIn object with sane defaults and only updated fields
-        updated_data = PatchCollectionIn(name=name, metadata=metadata)
+        Returns:
+            A list of CollectionOut objects.
 
-        payload = updated_data.model_dump()
-        response = requests.patch(url, json=payload, headers=self.headers)
-
-        if response.status_code == 200:
-            return CollectionOut(**response.json())
-        elif response.status_code == 404:
-            raise Exception(f"Collection '{collection_name}' not found.")
-        else:
-            response.raise_for_status()
+        Raises:
+            ValueError: If the response format is unexpected.
+            Exception: If an unexpected error occurs.
+        """
+        try:
+            return self.collections_api.api_views_list_collections()
+        except ApiException as e:
+            self._handle_error(e)
 
     def delete_collection(self, collection_name: str) -> None:
         """
@@ -174,72 +168,10 @@ class ColiVara:
         Raises:
             Exception: If the collection is not found or an unexpected error occurs.
         """
-
-        url = f"{self.base_url}/v1/collections/{collection_name}/"
-        response = requests.delete(url, headers=self.headers)
-        if response.status_code == 204:
-            return
-        elif response.status_code == 404:
-            raise Exception(f"Collection '{collection_name}' not found.")
-        else:
-            response.raise_for_status()
-
-    def add_webhook(
-        self,
-        url: str,
-    ) -> WebhookOut:
-        """
-        Add a webhook to the service.
-
-        This endpoint allows the user to add a webhook to the service. The webhook will be called when a document is upserted
-        with the upsertion status.
-
-        Events are document upsert successful, document upsert failed.
-
-        Args:
-            url: The URL of the webhook to be added.
-
-        Returns:
-            WebhookOut: The added webhook endpoint id, associated app id, and webhook secret.
-
-        Raises:
-            requests.HTTPError: If the API request fails.
-        """
-        request_url = f"{self.base_url}/v1/webhook/"
-        payload = {"url": url}
-
-        response = requests.post(request_url, json=payload, headers=self.headers)
-
-        if response.status_code == 200:
-            return WebhookOut(**response.json())
-        elif response.status_code == 400:
-            error = GenericError(**response.json())
-            raise ValueError(f"Bad request: {error.detail}")
-        else:
-            response.raise_for_status()
-
-    def validate_webhook(
-        self, webhook_secret: str, payload: str, headers: Dict[str, Any]
-    ) -> bool:
-        """
-        Validates a webhook request.
-
-        This endpoint allows the user to validate a webhook request given the webhook secret, payload, and headers.
-
-        Args:
-            webhook_secret: The webhook secret to validate the request.
-            payload: The payload of the webhook request.
-            headers: The headers of the webhook request.
-
-        Returns:
-            bool: True if the request is valid, False otherwise
-        """
         try:
-            wh = Webhook(webhook_secret)
-            wh.verify(payload, headers)
-            return True
-        except Exception:
-            return False
+            return self.collections_api.api_views_delete_collection(collection_name)
+        except ApiException as e:
+            self._handle_error(e)
 
     def upsert_document(
         self,
@@ -251,7 +183,7 @@ class ColiVara:
         document_path: Optional[Union[str, Path]] = None,
         wait: Optional[bool] = False,
         use_proxy: Optional[bool] = False,
-    ) -> DocumentOut | GenericMessage:
+    ) -> Union[DocumentOut, GenericMessage]:
         """
         Create or update a document in a collection.
 
@@ -275,7 +207,6 @@ class ColiVara:
             PermissionError: If there's no read permission for the specified file.
             requests.HTTPError: If the API request fails.
         """
-        # if user sent us a document_path, we will read the file and convert it to base64
         if document_path:
             try:
                 path = Path(document_path).resolve()
@@ -295,9 +226,7 @@ class ColiVara:
             raise ValueError(
                 "Either document_url, document_base64, or document_path must be provided."
             )
-
-        request_url = f"{self.base_url}/v1/documents/upsert-document/"
-        payload = DocumentIn(
+        body = DocumentIn(
             name=name,
             metadata=metadata or {},
             collection_name=collection_name,
@@ -305,36 +234,27 @@ class ColiVara:
             base64=document_base64,
             wait=wait,
             use_proxy=use_proxy,
-        ).model_dump()
-
-        response = requests.post(request_url, json=payload, headers=self.headers)
-
-        if response.status_code == 201:
-            return DocumentOut(**response.json())
-        elif response.status_code == 202:
-            status = GenericMessage(**response.json())
-            return status
-        elif response.status_code == 400:
-            error = GenericError(**response.json())
-            raise ValueError(f"Bad request: {error.detail}")
-        else:
-            response.raise_for_status()
+        )
+        try:
+            return self.documents_api.api_views_upsert_document(body)
+        except ApiException as e:
+            self._handle_error(e)
 
     def get_document(
         self,
         document_name: str,
-        collection_name: str = "default_collection",
-        expand: Optional[str] = None,
+        collection_name: Optional[str] = None,
+        expand: Optional[StrictStr] = None,
     ) -> DocumentOut:
         """
         Retrieve a specific document from the user documents.
 
         Args:
             document_name (str): The name of the document to retrieve.
-            collection_name (str): The name of the collection containing the document.
-                                   Defaults to "default_collection".
+            collection_name (Optional[str]): The name of the collection containing the document.
+                             Defaults to None.
             expand (Optional[str]): A comma-separated list of fields to expand in the response.
-                                    Currently, only "pages" is supported, the document's pages will be included if provided.
+                        Currently, only "pages" is supported, the document's pages will be included if provided.
 
         Returns:
             DocumentOut: The retrieved document with its details.
@@ -343,18 +263,12 @@ class ColiVara:
             requests.HTTPError: If the API request fails.
             ValueError: If the document or collection is not found.
         """
-        request_url = f"{self.base_url}/v1/documents/{document_name}/"
-        params = {"collection_name": collection_name, "expand": expand}
-
-        response = requests.get(request_url, params=params, headers=self.headers)
-
-        if response.status_code == 200:
-            return DocumentOut(**response.json())
-        elif response.status_code == 404:
-            error = GenericError(**response.json())
-            raise ValueError(f"Document not found: {error.detail}")
-        else:
-            response.raise_for_status()
+        try:
+            return self.documents_api.api_views_get_document(
+                document_name, collection_name, expand
+            )
+        except ApiException as e:
+            self._handle_error(e)
 
     def partial_update_document(
         self,
@@ -378,6 +292,7 @@ class ColiVara:
             collection_name (Optional[str]): The name of the collection to move the document to, if changing.
             document_url (Optional[str]): The new URL of the document, if changing.
             document_base64 (Optional[str]): The new base64-encoded string of the document content, if changing.
+            use_proxy (Optional[bool]): Whether to use a proxy for the document URL.
 
         Returns:
             DocumentOut: The updated document with its details.
@@ -386,25 +301,20 @@ class ColiVara:
             requests.HTTPError: If the API request fails.
             ValueError: If the document is not found or the update is invalid.
         """
-        request_url = f"{self.base_url}/v1/documents/{document_name}/"
-        payload = DocumentInPatch(
+        body = DocumentInPatch(
             name=name,
             metadata=metadata,
             collection_name=collection_name,
             url=document_url,
             base64=document_base64,
             use_proxy=use_proxy,
-        ).model_dump(exclude_none=True)
-
-        response = requests.patch(request_url, json=payload, headers=self.headers)
-
-        if response.status_code == 200:
-            return DocumentOut(**response.json())
-        elif response.status_code in [404, 409]:
-            error = GenericError(**response.json())
-            raise ValueError(f"Update failed: {error.detail}")
-        else:
-            response.raise_for_status()
+        )
+        try:
+            return self.documents_api.api_views_partial_update_document(
+                document_name, body
+            )
+        except ApiException as e:
+            self._handle_error(e)
 
     def list_documents(
         self, collection_name: str = "default_collection", expand: Optional[str] = None
@@ -424,19 +334,14 @@ class ColiVara:
         Raises:
             requests.HTTPError: If the API request fails.
         """
-        request_url = f"{self.base_url}/v1/documents/"
-        params = {"collection_name": collection_name, "expand": expand}
+        try:
+            return self.documents_api.api_views_list_documents(
+                collection_name=collection_name, expand=expand
+            )
+        except ApiException as e:
+            self._handle_error(e)
 
-        response = requests.get(request_url, params=params, headers=self.headers)
-
-        if response.status_code == 200:
-            return [DocumentOut(**doc) for doc in response.json()]
-        else:
-            response.raise_for_status()
-
-    def delete_document(
-        self, document_name: str, collection_name: str = "default_collection"
-    ) -> None:
+    def delete_document(self, document_name: str, collection_name: str) -> None:
         """
         Delete a document by its name.
 
@@ -449,23 +354,123 @@ class ColiVara:
             requests.HTTPError: If the API request fails.
             ValueError: If the document does not exist or does not belong to the authenticated user.
         """
-        request_url = f"{self.base_url}/v1/documents/delete-document/{document_name}/"
-        params = {"collection_name": collection_name}
+        try:
+            return self.documents_api.api_views_delete_document(
+                document_name, collection_name
+            )
+        except ApiException as e:
+            self._handle_error(e)
 
-        response = requests.delete(request_url, params=params, headers=self.headers)
+    def filter(
+        self, query_filter: Dict[str, Any], expand: Optional[str] = None
+    ) -> list[CollectionOut] | list[DocumentOut] | None:
+        """
+        Filter for documents and collections that meet the criteria of the filter.
 
-        if response.status_code == 204:
-            return
-        elif response.status_code in [404, 409]:
-            error = GenericError(**response.json())
-            raise ValueError(f"Deletion failed: {error.detail}")
-        else:
-            response.raise_for_status()
+        Args:
+            query_filter (Dict[str, Any]): A dictionary specifying the filter criteria.
+                The filter can be used to narrow down the search based on specific criteria.
+                The dictionary should contain the following keys:
+                - "on": "document" or "collection"
+                - "key": str or List[str]
+                - "value": Optional[Union[str, int, float, bool]]
+                - "lookup": One of "key_lookup", "contains", "contained_by", "has_key", "has_keys", "has_any_keys"
+            expand (Optional[str]): A comma-separated list of fields to expand in the response.
+                Currently, only "pages" is supported, the document's pages will be included if provided.
+
+
+        Returns:
+            DocumentOut: The retrieved documents with their details.
+            CollectionOut: The retrieved collections with their details.
+
+        Raises:
+            ValueError: If the query_filter is invalid.
+            requests.HTTPError: If the API request fails.
+
+        Example:
+            # Simple filter
+            results = client.filter({
+                "on": "document",
+                "key": "category",
+                "value": "AI",
+                "lookup": "contains"
+            })
+
+            # Filter with a list of keys
+            results = client.filter({
+                "on": "collection",
+                "key": ["tag1", "tag2"],
+                "lookup": "has_keys"
+            })
+        """
+        try:
+            filter_key = Key(query_filter["key"])
+            filter_value = Value(query_filter["value"])
+            filter_lookup = query_filter["lookup"]
+            on = query_filter.get("on", "document")
+
+            filter_model = QueryFilter(
+                key=filter_key, value=filter_value, lookup=filter_lookup, on=on
+            )
+
+            result =  self.filter_api.api_views_filter(
+                query_filter=filter_model, expand=expand
+            )
+
+            # Return the actual instance instead of the Response object
+            return result.actual_instance
+
+        except ApiException as e:
+            # Handle any API exceptions and pass them to a custom error handler
+            self._handle_error(e)
+        except KeyError as e:
+            # Handle missing keys in the query_filter dictionary
+            raise ValueError(f"Missing required key: {e}")
+        except Exception as e:
+            # General exception handling
+            raise Exception(f"An unexpected error occurred: {e}")
+
+    def file_to_base64(self, file_path: str) -> str:
+        """
+        Converts a file to a base64 encoded string.
+
+        Args:
+            file_path: The path to the file to be converted.
+
+        Returns:
+            A base64 encoded string of the file.
+
+        Raises:
+            Exception: If there's an error during the file conversion process.
+        """
+        # Read the file
+        with open(file_path, "rb") as file:
+            file_content = file.read()
+        # Encode the file content to base64
+        base64_content = base64.b64encode(file_content).decode("utf-8")
+        return base64_content
+
+    def file_to_imgbase64(self, file_path: str) -> List[FileOut]:
+        """
+        Convert a file to base64-encoded strings for its image representations.
+
+        :param file_path: Path to the file to be converted.
+        :return: A list of FileOut objects containing base64-encoded strings of images.
+        """
+        with open(file_path, "rb") as file:
+            file_content = file.read()
+
+        try:
+            # The response is already a List[FileOut], so we can return it directly
+            response = self.helpers_api.api_views_file_to_imgbase64(file_content)
+            return response
+        except ApiException as e:
+            self._handle_error(e)
 
     def search(
         self,
         query: str,
-        collection_name: str = "all",
+        collection_name: str,
         top_k: int = 3,
         query_filter: Optional[Dict[str, Any]] = None,
     ) -> QueryOut:
@@ -516,154 +521,32 @@ class ColiVara:
                 "lookup": "has_any_keys"
             })
         """
-        request_url = f"{self.base_url}/v1/search/"
-        payload = {
-            "query": query,
-            "collection_name": collection_name,
-            "top_k": top_k,
-        }
-        filter_obj = None
+        query_filter_obj = None
         if query_filter:
-            try:
-                filter_obj = QueryFilter(**query_filter)
-                payload["query_filter"] = filter_obj.model_dump()
-            except ValidationError as e:
-                raise ValueError(f"Invalid query_filter: {str(e)}")
+            filter_key = Key(query_filter["key"])
+            filter_value = Value(query_filter["value"])
+            filter_lookup = query_filter["lookup"]
+            on = query_filter.get("on", "document")
 
-        query_in = QueryIn(**payload)  # type: ignore
-
-        response = requests.post(
-            request_url, json=query_in.model_dump(), headers=self.headers
-        )
-
-        if response.status_code == 200:
-            return QueryOut(**response.json())
-        elif response.status_code == 503:
-            error = GenericError(**response.json())
-            raise ValueError(f"Service unavailable: {error.detail}")
-        else:
-            response.raise_for_status()
-
-    def filter(
-        self,
-        query_filter: Dict[str, Any],
-        expand: Optional[str] = None,
-    ) -> List[Union[DocumentOut, CollectionOut]]:
-        """
-        Filter for documents and collections that meet the criteria of the filter.
-
-        Args:
-            query_filter (Dict[str, Any]): A dictionary specifying the filter criteria.
-                The filter can be used to narrow down the search based on specific criteria.
-                The dictionary should contain the following keys:
-                - "on": "document" or "collection"
-                - "key": str or List[str]
-                - "value": Optional[Union[str, int, float, bool]]
-                - "lookup": One of "key_lookup", "contains", "contained_by", "has_key", "has_keys", "has_any_keys"
-            expand (Optional[str]): A comma-separated list of fields to expand in the response.
-                Currently, only "pages" is supported, the document's pages will be included if provided.
-
-
-        Returns:
-            DocumentOut: The retrieved documents with their details.
-            CollectionOut: The retrieved collections with their details.
-
-        Raises:
-            ValueError: If the query_filter is invalid.
-            requests.HTTPError: If the API request fails.
-
-        Example:
-            # Simple filter
-            results = client.filter({
-                "on": "document",
-                "key": "category",
-                "value": "AI",
-                "lookup": "contains"
-            })
-
-            # Filter with a list of keys
-            results = client.filter({
-                "on": "collection",
-                "key": ["tag1", "tag2"],
-                "lookup": "has_keys"
-            })
-        """
-
-        request_url = f"{self.base_url}/v1/filter/"
-
-        try:
-            filter_obj = QueryFilter(**query_filter)
-            payload = filter_obj.model_dump()
-        except ValidationError as e:
-            raise ValueError(f"Invalid query_filter: {str(e)}")
-
-        params = {"expand": expand}
-
-        response = requests.post(
-            request_url, json=payload, params=params, headers=self.headers
-        )
-
-        if response.status_code == 200:
-            if query_filter["on"] == "document":
-                return [DocumentOut(**doc) for doc in response.json()]
-            else:
-                return [CollectionOut(**col) for col in response.json()]
-        elif response.status_code == 503:
-            error = GenericError(**response.json())
-            raise ValueError(f"Service unavailable: {error.detail}")
-        else:
-            response.raise_for_status()
-
-    def file_to_imgbase64(self, file_path: str) -> List[FileOut]:
-        """
-        Converts a file to a list of base64 encoded images.
-
-        Args:
-            file_path: The path to the file to be converted.
-
-        Returns:
-            A list of FileOut objects containing the base64 encoded strings of the images.
-
-        Raises:
-            Exception: If there's an error during the file conversion process.
-        """
-        url = f"{self.base_url}/v1/helpers/file-to-imgbase64/"
-
-        with open(file_path, "rb") as file:
-            files = {"file": file}
-            response = requests.post(
-                url, files=files, headers={"Authorization": f"Bearer {self.api_key}"}
+            query_filter_obj = QueryFilter(
+                key=filter_key, value=filter_value, lookup=filter_lookup, on=on
             )
 
-        if response.status_code == 200:
-            return [FileOut(**item) for item in response.json()]
-        else:
-            response.raise_for_status()
-
-    def file_to_base64(self, file_path: str) -> str:
-        """
-        Converts a file to a base64 encoded string.
-
-        Args:
-            file_path: The path to the file to be converted.
-
-        Returns:
-            A base64 encoded string of the file.
-
-        Raises:
-            Exception: If there's an error during the file conversion process.
-        """
-        # Read the file
-        with open(file_path, "rb") as file:
-            file_content = file.read()
-        # Encode the file content to base64
-        base64_content = base64.b64encode(file_content).decode("utf-8")
-        return base64_content
+        body = QueryIn(
+            query=query,
+            collection_name=collection_name,
+            top_k=top_k,
+            query_filter=query_filter_obj,
+        )
+        try:
+            return self.search_api.api_views_search(body)
+        except ApiException as e:
+            self._handle_error(e)
 
     def create_embedding(
         self,
         input_data: Union[str, List[str]],
-        task: Union[str, TaskEnum] = TaskEnum.query,
+        task: Union[str, TaskEnum] = TaskEnum.QUERY,
     ) -> EmbeddingsOut:
         """
         Creates embeddings for the given input data.
@@ -683,9 +566,6 @@ class ColiVara:
             client.create_embedding("what is 1+1?", task="query")
             client.create_embedding(["image1.jpg", "image2.jpg"], task="image")
         """
-        url = f"{self.base_url}/v1/embeddings/"
-
-        # Ensure input_data is a list
         if isinstance(input_data, str):
             input_data = [input_data]
 
@@ -695,26 +575,113 @@ class ColiVara:
                 task = TaskEnum(task.lower())
             except ValueError:
                 raise ValueError(f"Invalid task: {task}. Must be 'query' or 'image'.")
-        elif not isinstance(task, TaskEnum):
-            raise ValueError("Task must be a string or TaskEnum.")
-
         try:
             # if the task is in image, and we got a path, we will convert the file to base64
-            if task == TaskEnum.image:
+            if task == TaskEnum.IMAGE:
                 for i, d in enumerate(input_data):
                     if Path(d).is_file():
                         input_data[i] = self.file_to_base64(d)
-            payload = EmbeddingsIn(input_data=input_data, task=task).model_dump()
-        except ValidationError as e:
+        except ApiException as e:
             raise ValueError(f"Invalid input data: {str(e)}")
 
-        response = requests.post(url, json=payload, headers=self.headers)
+        body = EmbeddingsIn(input_data=input_data, task=task)
+        try:
+            return self.embeddings_api.api_views_embeddings(body)
+        except ApiException as e:
+            self._handle_error(e)
 
-        if response.status_code == 200:
-            data = response.json()
-            return EmbeddingsOut(**data)
-        elif response.status_code == 503:
-            error = GenericError(**response.json())
-            raise Exception(f"Service Unavailable: {error.detail}")
-        else:
-            response.raise_for_status()
+    def add_webhook(self, url: str) -> WebhookOut:
+        """
+        Add a webhook to the service.
+
+        This endpoint allows the user to add a webhook to the service. The webhook will be called when a document is upserted
+        with the upsertion status.
+
+        Events are document upsert successful, document upsert failed.
+
+        Args:
+            url: The URL of the webhook to be added.
+
+        Returns:
+            WebhookOut: The added webhook endpoint id, associated app id, and webhook secret.
+
+        Raises:
+            requests.HTTPError: If the API request fails.
+        """
+        body = WebhookIn(url=url)
+        try:
+            return self.webhook_api.api_views_add_webhook(body)
+        except ApiException as e:
+            self._handle_error(e)
+
+    def validate_webhook(
+        self, webhook_secret: str, payload: str, headers: Dict[str, Any]
+    ) -> bool:
+        """
+        Validates a webhook request.
+
+        This endpoint allows the user to validate a webhook request given the webhook secret, payload, and headers.
+
+        Args:
+            webhook_secret: The webhook secret to validate the request.
+            payload: The payload of the webhook request.
+            headers: The headers of the webhook request.
+
+        Returns:
+            bool: True if the request is valid, False otherwise
+        """
+        try:
+            wh = Webhook(webhook_secret)
+            wh.verify(payload, headers)
+            return True
+        except Exception:
+            return False
+
+    def check_health(self) -> None:
+        """
+        Check the health of the API.
+
+        :return: Health status of the API.
+        """
+        try:
+            return self.health_api.api_views_health()
+        except ApiException as e:
+            self._handle_error(e)
+
+    def _handle_error(self, error: ApiException):
+        """
+        Handle API exceptions.
+
+        :param error: The API exception to handle.
+        :raise: Re-raises the error with additional context.
+        """
+        error_message = f"API Error: {error.status} - {error.reason}"
+        if hasattr(error, "body") and error.body:
+            body = cast(Union[str, bytes], error.body)
+            error_message += f"\nResponse Body: {body.decode('utf-8') if isinstance(body, bytes) else body}"
+        if hasattr(error, "status") and error.status:
+            if error.status == 400:
+                error_message += "\nBad Request: The server could not understand the request due to invalid syntax."
+            elif error.status == 401:
+                error_message += (
+                    "\nUnauthorized: Access is denied due to invalid credentials."
+                )
+            elif error.status == 403:
+                error_message += (
+                    "\nForbidden: You do not have permission to access this resource."
+                )
+            elif error.status == 404:
+                error_message += (
+                    "\nNot Found: The requested resource could not be found."
+                )
+            elif error.status == 409:
+                error_message += "\nConflict: The request could not be completed due to a conflict with the current state of the resource."
+            elif error.status == 429:
+                error_message += "\nToo Many Requests: You have sent too many requests in a given amount of time."
+            elif error.status == 500:
+                error_message += "\nInternal Server Error: The server encountered an unexpected condition."
+            elif error.status == 503:
+                error_message += "\nService Unavailable: The server is not ready to handle the request."
+            else:
+                error_message += f"\nUnexpected Error: {error.status}"
+        raise RuntimeError(error_message) from error
