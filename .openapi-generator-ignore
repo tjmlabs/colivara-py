@@ -28,7 +28,6 @@ draft.py
 README.md
 setup.cfg
 requirements.txt
-colivara_py/__init__.py
 MANIFEST.in
 test-requirements.txt
 .travis.yml

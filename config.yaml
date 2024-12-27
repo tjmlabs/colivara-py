@@ -1,12 +1,12 @@
 # Generator Configuration for colivara-py
 packageName: colivara_py
 projectName: colivara-py
-packageUrl: "https://github.com/tjmlabs/colivara-py" # changed
-packageVersion: "1.0.1"
+packageUrl: "https://github.com/tjmlabs/colivara-py" 
+packageVersion: "1.5.1"
 packageTitle: 'Colivara Python SDK'
-infoName: "Abdulhaleem"
-infoEmail: "abdulhaleem@tjmlabs.com"
-infoUrl: "https://tjmlabs.com"
+infoName: "TJM Labs"
+infoEmail: "founders@colivara.com"
+infoUrl: "https://colivara.com"
 licenceName: "Apache-2.0"
 licenseUrl: "https://www.apache.org/licenses/LICENSE-2.0.html"
 summary: "Colivara - Visual Document Search and Retrieval SDK"
@@ -16,8 +16,8 @@ description: |
   using ColQwen2 as a backend model. It works exactly like RAG from the end-user standpoint -
   but uses vision models instead of chunking and text-processing for documents.
 gitHost: github.com
-gitUserId: HalemoGPA
-gitRepoId: colivara-py #changed
-templateDir: ./templates   # Point to your templates directory
+gitUserId: Jonathan-Adly
+gitRepoId: colivara-py 
+templateDir: ./templates   
 pythonVersion: "3.10"
 

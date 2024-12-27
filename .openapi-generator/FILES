@@ -1,3 +1,4 @@
+colivara_py/__init__.py
 colivara_py/api/__init__.py
 colivara_py/api/collections_api.py
 colivara_py/api/documents_api.py

@@ -1,0 +1,46 @@
+# coding: utf-8
+
+# flake8: noqa
+
+{{{packageDescription}}}
+
+__version__ = "{{{packageVersion}}}"
+
+{{>partial_header}}
+
+
+# import apis into sdk package
+{{#apiInfo}}{{#apis}}from {{apiPackage}}.{{classVarName}} import {{classname}}
+{{/apis}}{{/apiInfo}}
+# import ApiClient
+from {{packageName}}.api_client import ApiClient
+from {{packageName}}.configuration import Configuration
+# import models into sdk package
+{{#models}}{{#model}}from {{modelPackage}}.{{classFilename}} import {{classname}}
+{{/model}}{{/models}}
+
+from colivara_py.client import ColiVara
+
+
+class Colivara(ColiVara):
+    """
+    Case-insensitive alias for the `ColiVara` class.
+
+    This class is functionally identical to `ColiVara` and exists for case-insensitivity.
+    """
+
+    pass
+
+
+class colivara(ColiVara):
+    """
+    Case-insensitive alias for the `ColiVara` class.
+
+    This class is functionally identical to `ColiVara` and exists for case-insensitivity.
+    """
+
+    pass
+
+
+# Expose all classes for import
+__all__ = ["ColiVara", "Colivara", "colivara"]
