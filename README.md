@@ -140,22 +140,6 @@ If the OpenAPI specification is updated, regenerate the SDK as follows:
     openapi-generator generate -i https://api.colivara.com/v1/openapi.json -g python -c config.yaml --ignore-file-override .openapi-generator-ignore --template-dir ./templates
     ```
 
-### Publishing the Package
-
-1. Ensure you have the required tools:
-
-    ```bash
-    pip install setuptools wheel twine
-    ```
-
-2. Build and upload the package to PyPI:
-
-    ```bash
-    python setup.py sdist bdist_wheel
-    twine upload dist/*
-    ```
-
-3. Update the version in `setup.py` when making significant changes. (You can update all the configs through config.yaml)
 
 ---
 
@@ -167,7 +151,6 @@ Follow these steps for major changes to the OpenAPI spec:
 2. Update the client interface in `colivara_py/client.py`. if needed
 3. Modify tests in the `tests` directory to reflect the changes. if needed.
 4. Run tests to ensure functionality.  
-5. Update the README to document changes in the client interface.  
 
 
 ---
