@@ -91,7 +91,7 @@ print("Document deleted")
 2. Create a virtual environment:
 
     ```bash
-    python -m venv .venv
+    uv venv
     ```
 
 3. Activate the virtual environment:
@@ -109,8 +109,7 @@ print("Document deleted")
 4. Install the development dependencies:
 
     ```bash
-    pip install -r requirements.txt
-    pip install -r test-requirements.txt
+    uv sync --extra dev-dependencies
     ```
 
 5. Run tests:
@@ -165,11 +164,11 @@ If the OpenAPI specification is updated, regenerate the SDK as follows:
 Follow these steps for major changes to the OpenAPI spec:
 
 1. Regenerate the SDK using the OpenAPI generator.  
-2. Update the client interface in `colivara_py/client.py`.  
-3. Modify tests in the `tests` directory to reflect the changes.  
+2. Update the client interface in `colivara_py/client.py`. if needed
+3. Modify tests in the `tests` directory to reflect the changes. if needed.
 4. Run tests to ensure functionality.  
 5. Update the README to document changes in the client interface.  
-6. Publish the updated package to PyPI.
+
 
 ---
 

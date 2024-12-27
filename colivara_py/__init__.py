@@ -2,10 +2,6 @@
 
 # flake8: noqa
 
-
-
-__version__ = "1.5.1"
-
 """
     ColiVara
 
@@ -31,8 +27,16 @@ from colivara_py.api.search_api import SearchApi
 from colivara_py.api.webhook_api import WebhookApi
 
 # import ApiClient
+from colivara_py.api_response import ApiResponse
 from colivara_py.api_client import ApiClient
 from colivara_py.configuration import Configuration
+from colivara_py.exceptions import OpenApiException
+from colivara_py.exceptions import ApiTypeError
+from colivara_py.exceptions import ApiValueError
+from colivara_py.exceptions import ApiKeyError
+from colivara_py.exceptions import ApiAttributeError
+from colivara_py.exceptions import ApiException
+
 # import models into sdk package
 from colivara_py.models.collection_in import CollectionIn
 from colivara_py.models.collection_out import CollectionOut

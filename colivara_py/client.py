@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 import base64
 from svix.webhooks import Webhook
 
@@ -408,7 +408,7 @@ class ColiVara:
             filter_key = Key(query_filter["key"])
             filter_value = Value(query_filter["value"])
             filter_lookup = query_filter["lookup"]
-            on = query_filter.get("on", None)
+            on = query_filter.get("on", "document")
 
             filter_model = QueryFilter(
                 key=filter_key, value=filter_value, lookup=filter_lookup, on=on
@@ -519,13 +519,14 @@ class ColiVara:
                 "lookup": "has_any_keys"
             })
         """
+        query_filter_obj = None
         if query_filter:
             filter_key = Key(query_filter["key"])
             filter_value = Value(query_filter["value"])
             filter_lookup = query_filter["lookup"]
-            on = query_filter.get("on", None)
+            on = query_filter.get("on", "document")
 
-            query_filter = QueryFilter(
+            query_filter_obj = QueryFilter(
                 key=filter_key, value=filter_value, lookup=filter_lookup, on=on
             )
 
@@ -533,7 +534,7 @@ class ColiVara:
             query=query,
             collection_name=collection_name,
             top_k=top_k,
-            query_filter=query_filter,
+            query_filter=query_filter_obj,
         )
         try:
             return self.search_api.api_views_search(body)
@@ -654,7 +655,8 @@ class ColiVara:
         """
         error_message = f"API Error: {error.status} - {error.reason}"
         if hasattr(error, "body") and error.body:
-            error_message += f"\nResponse Body: {error.body.decode('utf-8') if isinstance(error.body, bytes) else error.body}"
+            body = cast(Union[str, bytes], error.body)
+            error_message += f"\nResponse Body: {body.decode('utf-8') if isinstance(body, bytes) else body}"
         if hasattr(error, "status") and error.status:
             if error.status == 400:
                 error_message += "\nBad Request: The server could not understand the request due to invalid syntax."

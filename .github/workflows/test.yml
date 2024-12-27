@@ -1,0 +1,44 @@
+name: Test
+
+on: [pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: pip
+        cache-dependency-path: pyproject.toml
+    - name: Install dependencies
+      run: |
+        pip install uv
+        uv sync --extra dev-dependencies
+    - name: Run tests
+      run: |
+        source .venv/bin/activate
+        python -m pytest
+
+    - name: mypy
+      run: |
+        source .venv/bin/activate
+        mypy .
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+          fail_ci_if_error: true
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true

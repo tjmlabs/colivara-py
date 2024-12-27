@@ -27,11 +27,11 @@ colivara_py/rest.py
 draft.py 
 README.md
 setup.cfg
+setup.py
 requirements.txt
 MANIFEST.in
 test-requirements.txt
 .travis.yml
-pyproject.toml
 LICENSE
 .gitignore
 tox.ini 
@@ -43,3 +43,4 @@ docs/
 git_push.sh
 config.yaml
 .gitlab-ci.yml
+tox.ini

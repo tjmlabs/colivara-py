@@ -37,4 +37,4 @@ colivara_py/models/value.py
 colivara_py/models/webhook_in.py
 colivara_py/models/webhook_out.py
 colivara_py/py.typed
-setup.py
+pyproject.toml
