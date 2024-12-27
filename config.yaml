@@ -2,16 +2,22 @@
 packageName: colivara_py
 projectName: colivara-py
 packageUrl: "https://github.com/tjmlabs/colivara-py" # changed
+packageVersion: "1.0.1"
 packageTitle: 'Colivara Python SDK'
 infoName: "Abdulhaleem"
 infoEmail: "abdulhaleem@tjmlabs.com"
+infoUrl: "https://tjmlabs.com"
 licenceName: "Apache-2.0"
-python:
-  packageName: colivara_py
-  projectName: colivara-py
-  useNose: false
-  pythonVersion: ">=3.10"
-  recursionLimit: 1000
+licenseUrl: "https://www.apache.org/licenses/LICENSE-2.0.html"
+summary: "Colivara - Visual Document Search and Retrieval SDK"
+description: |
+  Colivara is a suite of services that allows you to store, search, and retrieve documents
+  based on their visual embeddings. It is a web-first implementation of the ColPali paper
+  using ColQwen2 as a backend model. It works exactly like RAG from the end-user standpoint -
+  but uses vision models instead of chunking and text-processing for documents.
 gitHost: github.com
 gitUserId: HalemoGPA
 gitRepoId: colivara-py #changed
+templateDir: ./templates   # Point to your templates directory
+pythonVersion: "3.10"
+

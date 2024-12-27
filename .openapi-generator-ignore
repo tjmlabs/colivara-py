@@ -26,7 +26,6 @@ colivara_py/configuration.py
 colivara_py/rest.py 
 draft.py 
 README.md
-setup.py
 setup.cfg
 requirements.txt
 colivara_py/__init__.py
@@ -44,3 +43,4 @@ docs/
 .github/
 git_push.sh
 config.yaml
+.gitlab-ci.yml
