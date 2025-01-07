@@ -34,6 +34,8 @@ from colivara_py.models import (
     WebhookIn,
     EmbeddingsIn,
     QueryOut,
+    SearchImageIn,
+    SearchImageOut,
 )
 
 from pathlib import Path
@@ -413,7 +415,7 @@ class ColiVara:
                 key=filter_key, value=filter_value, lookup=filter_lookup, on=on
             )
 
-            result =  self.filter_api.api_views_filter(
+            result = self.filter_api.api_views_filter(
                 query_filter=filter_model, expand=expand
             )
 
@@ -540,6 +542,108 @@ class ColiVara:
         )
         try:
             return self.search_api.api_views_search(body)
+        except ApiException as e:
+            self._handle_error(e)
+
+    def search_image(
+        self,
+        collection_name: str,
+        image_path: Optional[Union[str, Path]] = None,
+        image_base64: Optional[str] = None,
+        top_k: int = 3,
+        query_filter: Optional[Dict[str, Any]] = None,
+    ) -> SearchImageOut:
+        """
+        Search for pages similar to a given image.
+
+        This method allows you to search for pages similar to a given image across all documents
+        in the specified collection. You can provide either a path to an image file or a base64-encoded
+        string of the image content.
+
+        Args:
+            collection_name (str): The name of the collection to search in.
+            image_path (Optional[Union[str, Path]]): Path to the image file to search with.
+            image_base64 (Optional[str]): Base64-encoded string of the image content.
+            top_k (int): The number of top results to return. Defaults to 3.
+            query_filter (Optional[Dict[str, Any]]): An optional filter to apply to the search results.
+                The filter can be used to narrow down the search based on specific criteria.
+                It should be a dictionary with the following possible keys:
+                - "on": "document" or "collection"
+                - "key": str or List[str]
+                - "value": Optional[Union[str, int, float, bool]]
+                - "lookup": One of "key_lookup", "contains", "contained_by", "has_key", "has_keys", "has_any_keys"
+
+        Returns:
+            SearchImageOut: The search results, including a list of similar pages.
+
+        Raises:
+            ValueError: If neither image_path nor image_base64 is provided, or if the image file can't be read.
+            FileNotFoundError: If the specified image file does not exist.
+            PermissionError: If there's no read permission for the specified file.
+            ApiException: If the API request fails.
+
+        Examples:
+            # Search with image file
+            results = client.search_image("my_collection", image_path="path/to/image.jpg")
+
+            # Search with base64-encoded image
+            results = client.search_image("my_collection", image_base64="base64_encoded_string")
+
+            # Search with filter
+            results = client.search_image(
+                "my_collection",
+                image_path="path/to/image.jpg",
+                query_filter={
+                    "on": "document",
+                    "key": "category",
+                    "value": "landscape",
+                    "lookup": "contains"
+                }
+            )
+        """
+        # Handle image input
+        img_base64 = image_base64
+        if image_path:
+            try:
+                path = Path(image_path).resolve()
+                if not path.is_file():
+                    raise ValueError(f"The specified path is not a file: {path}")
+                if not os.access(path, os.R_OK):
+                    raise PermissionError(f"No read permission for file: {path}")
+                with open(path, "rb") as file:
+                    img_base64 = base64.b64encode(file.read()).decode("utf-8")
+            except FileNotFoundError:
+                raise FileNotFoundError(
+                    f"The specified file does not exist: {image_path}"
+                )
+            except Exception as e:
+                raise ValueError(f"Error reading file: {str(e)}")
+
+        if not img_base64:
+            raise ValueError("Either image_path or image_base64 must be provided.")
+
+        # Handle query filter
+        query_filter_obj = None
+        if query_filter:
+            filter_key = Key(query_filter["key"])
+            filter_value = Value(query_filter["value"])
+            filter_lookup = query_filter["lookup"]
+            on = query_filter.get("on", "document")
+
+            query_filter_obj = QueryFilter(
+                key=filter_key, value=filter_value, lookup=filter_lookup, on=on
+            )
+
+        # Create search request body
+        body = SearchImageIn(
+            img_base64=img_base64,
+            collection_name=collection_name,
+            top_k=top_k,
+            query_filter=query_filter_obj,
+        )
+
+        try:
+            return self.search_api.api_views_search_image(body)
         except ApiException as e:
             self._handle_error(e)
 
