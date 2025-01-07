@@ -855,3 +855,146 @@ def test_upsert_document_with_metadata(
         metadata=metadata,
     )
     assert result == mock_api_response
+
+
+# Search Image Tests
+
+
+def test_search_image_with_path(client, mock_api_response):
+    """Test search_image with image path"""
+    client.search_api.api_views_search_image = MagicMock(return_value=mock_api_response)
+
+    with (
+        patch("pathlib.Path.is_file", return_value=True),
+        patch("pathlib.Path.resolve", return_value=Path("test.jpg")),
+        patch("os.access", return_value=True),
+        patch("builtins.open", mock_open(read_data=b"test image content")),
+    ):
+        result = client.search_image(
+            collection_name="test-collection",
+            image_path="test.jpg",
+            top_k=5,
+        )
+
+        assert result == mock_api_response
+        client.search_api.api_views_search_image.assert_called_once()
+        call_args = client.search_api.api_views_search_image.call_args[0][0]
+        assert call_args.img_base64 == base64.b64encode(b"test image content").decode(
+            "utf-8"
+        )
+        assert call_args.collection_name == "test-collection"
+        assert call_args.top_k == 5
+
+
+def test_search_image_with_base64(client, mock_api_response):
+    """Test search_image with base64 string"""
+    client.search_api.api_views_search_image = MagicMock(return_value=mock_api_response)
+
+    test_base64 = base64.b64encode(b"test image content").decode("utf-8")
+    result = client.search_image(
+        collection_name="test-collection",
+        image_base64=test_base64,
+    )
+
+    assert result == mock_api_response
+    client.search_api.api_views_search_image.assert_called_once()
+    call_args = client.search_api.api_views_search_image.call_args[0][0]
+    assert call_args.img_base64 == test_base64
+    assert call_args.collection_name == "test-collection"
+    assert call_args.top_k == 3  # default value
+
+
+def test_search_image_with_filter(client, mock_api_response):
+    """Test search_image with filter"""
+    client.search_api.api_views_search_image = MagicMock(return_value=mock_api_response)
+
+    test_base64 = base64.b64encode(b"test image content").decode("utf-8")
+    result = client.search_image(
+        collection_name="test-collection",
+        image_base64=test_base64,
+        query_filter={
+            "key": "test",
+            "value": "test",
+            "lookup": "contains",
+            "on": "document",
+        },
+    )
+
+    assert result == mock_api_response
+    client.search_api.api_views_search_image.assert_called_once()
+    call_args = client.search_api.api_views_search_image.call_args[0][0]
+    # Compare the actual instance value instead of the Key object
+    assert call_args.query_filter.key.actual_instance == "test"
+    assert call_args.query_filter.value.actual_instance == "test"
+    assert call_args.query_filter.lookup.value == "contains"
+    assert call_args.query_filter.on.value == "document"
+
+
+def test_search_image_with_invalid_filter(client):
+    """Test search_image with invalid filter"""
+    invalid_filter = {
+        "key": "test",
+        "value": "test",
+        "lookup": "invalid",
+        "on": "invalid",
+    }
+
+    with pytest.raises(Exception) as exc_info:
+        client.search_image(
+            collection_name="test-collection",
+            image_base64="test_base64",
+            query_filter=invalid_filter,
+        )
+    assert "validation errors for QueryFilter" in str(exc_info.value)
+
+
+def test_search_image_no_input(client):
+    """Test search_image with no image input"""
+    with pytest.raises(
+        ValueError, match="Either image_path or image_base64 must be provided"
+    ):
+        client.search_image(collection_name="test-collection")
+
+
+def test_search_image_file_not_found(client):
+    """Test search_image with non-existent file"""
+    with (
+        patch("pathlib.Path.is_file", return_value=False),
+        patch("pathlib.Path.resolve", return_value=Path("nonexistent.jpg")),
+    ):
+        with pytest.raises(
+            ValueError, match=r"The specified path is not a file: .*nonexistent\.jpg"
+        ):
+            client.search_image(
+                collection_name="test-collection",
+                image_path="nonexistent.jpg",
+            )
+
+
+def test_search_image_no_read_permission(client):
+    """Test search_image with file that has no read permission"""
+    with (
+        patch("pathlib.Path.is_file", return_value=True),
+        patch("pathlib.Path.resolve", return_value=Path("test.jpg")),
+        patch("os.access", return_value=False),
+    ):
+        with pytest.raises(
+            ValueError,
+            match=r"Error reading file: No read permission for file: test\.jpg",
+        ):
+            client.search_image(
+                collection_name="test-collection",
+                image_path="test.jpg",
+            )
+
+
+def test_search_image_api_exception(client):
+    """Test search_image when API raises an exception"""
+    error = ApiException(status=500, reason="Search Error")
+    client.search_api.api_views_search_image = MagicMock(side_effect=error)
+
+    with pytest.raises(RuntimeError, match="API Error: 500 - Search Error"):
+        client.search_image(
+            collection_name="test-collection",
+            image_base64="test_base64",
+        )

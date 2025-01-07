@@ -59,6 +59,16 @@ search_results = rag_client.search(
 for result in search_results.results:
     print(f"Page {result.page_number} of {result.document_name}: Score {result.normalized_score}")
 
+
+# Search using images
+image_search_results = rag_client.search_image(
+    collection_name="my_collection",
+    image_path="path/to/image.jpg",  # Alternatively, use image_base64="base64_encoded_string"
+    top_k=3
+)
+for result in image_search_results.results:
+    print(f"Page {result.page_number} of {result.document_name}: Score {result.normalized_score}")
+
 # List documents in a collection
 documents = rag_client.list_documents(collection_name="my_collection")
 for doc in documents:

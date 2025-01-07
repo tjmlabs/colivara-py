@@ -35,6 +35,8 @@ from colivara_py.models.query_filter import QueryFilter
 from colivara_py.models.query_in import QueryIn
 from colivara_py.models.query_out import QueryOut
 from colivara_py.models.response import Response
+from colivara_py.models.search_image_in import SearchImageIn
+from colivara_py.models.search_image_out import SearchImageOut
 from colivara_py.models.task_enum import TaskEnum
 from colivara_py.models.value import Value
 from colivara_py.models.webhook_in import WebhookIn
