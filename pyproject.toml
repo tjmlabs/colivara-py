@@ -47,4 +47,4 @@ Issues = "https://github.com/tjmlabs/colivara-py/issues"
 CI = "https://github.com/tjmlabs/colivara-py/actions"
 
 [tool.setuptools]
-packages = ["colivara_py"]
+packages = ["colivara_py", "colivara_py.api", "colivara_py.models"]
