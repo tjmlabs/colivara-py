@@ -18,12 +18,11 @@ dependencies = [
 ]
 
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.uv.workspace]
 members = ["colivara-py"]
-
 
 [tool.uv]
 dev-dependencies = [
@@ -37,8 +36,6 @@ dev-dependencies = [
    "setuptools>=75.6.0",
    "Pygments>=2.18.0"
 ]
-
-
 
 [project.urls]
 Homepage = "https://github.com/tjmlabs/colivara-py"
