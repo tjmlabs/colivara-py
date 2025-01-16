@@ -38,11 +38,11 @@ rag_client = ColiVara(api_key="your_api_key")
 new_collection = rag_client.create_collection(name="my_collection", metadata={"description": "A sample collection"})
 print(f"Created collection: {new_collection.name}")
 
-# Upload a document to the collection
+# Upload a document to the collection (jpg, md, png, pdf, docx, etc... supported)
 document = rag_client.upsert_document(
     name="sample_document",
     collection_name="my_collection",  # Defaults to "default_collection"
-    document_url="https://example.com/sample.pdf",
+    document_url="https://example.com/sample.pdf", # Alternatively, use document_path="path/to/document.pdf" 
     metadata={"author": "John Doe"}
 )
 print(f"Uploaded document: {document.name}")
