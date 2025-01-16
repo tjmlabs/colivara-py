@@ -32,20 +32,17 @@ Refer to the [ColiVara API documentation](https://docs.colivara.com) for detaile
 import os
 from colivara_py import ColiVara
 
-rag_client = ColiVara(
-    api_key=os.environ.get("COLIVARA_API_KEY"),  # Default is `None`
-    base_url="https://api.colivara.com"  # Default is `https://api.colivara.com`
-)
+rag_client = ColiVara(api_key="your_api_key")
 
 # Create a new collection (optional)
 new_collection = rag_client.create_collection(name="my_collection", metadata={"description": "A sample collection"})
 print(f"Created collection: {new_collection.name}")
 
-# Upload a document to the collection
+# Upload a document to the collection (jpg, md, png, pdf, docx, etc... supported)
 document = rag_client.upsert_document(
     name="sample_document",
     collection_name="my_collection",  # Defaults to "default_collection"
-    url="https://example.com/sample.pdf",
+    document_url="https://example.com/sample.pdf", # Alternatively, use document_path="path/to/document.pdf" 
     metadata={"author": "John Doe"}
 )
 print(f"Uploaded document: {document.name}")
